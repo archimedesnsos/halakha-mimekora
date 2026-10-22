@@ -1,0 +1,8 @@
+*.gdoc
+*.gsheet
+*.gslides
+_backup_archive/
+__pycache__/
+*.pyc
+*.bak
+*.tmp
