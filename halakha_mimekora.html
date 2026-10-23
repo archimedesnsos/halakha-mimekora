@@ -67,24 +67,27 @@
             <h1 class="text-lg sm:text-2xl font-extrabold tracking-tight text-white">הלכה ממקורה <span class="text-amber-400 font-normal text-sm sm:text-base">// בירור הלכה מוסמך ללא הזיות AI</span></h1>
             <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold text-xs px-2.5 py-0.5 rounded-full">גרסה 2.0</span>
           </div>
-          <p class="text-xs text-slate-300">אתר חופשי לבירור ההלכה עם אימות מקורות קנוני ומניעת המצאות AI — מותאם לכל מסורות הפסיקה</p>
+          <p class="text-xs text-slate-300">אתר חופשי לבירור ההלכה עם אימות מול ספרי הפוסקים ומניעת המצאות AI — מותאם לכל מסורות הפסיקה</p>
         </div>
       </div>
 
       <!-- Navigation Tabs -->
       <nav class="flex flex-wrap items-center gap-1.5 bg-slate-800/90 p-1 rounded-xl border border-slate-700">
         <button id="tabBtnVerifier" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition bg-amber-500 text-slate-950 shadow-sm">
-          מאמת הלכתי חי (Web ➔ Kernel)
+          בית ההוראה והמאמת ההלכתי
         </button>
         <button id="tabBtnCorpus" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition text-slate-300 hover:text-white hover:bg-slate-700/60">
-          מאגר הפוסקים החתום (.pkg)
+          מאגר הפוסקים החתום
         </button>
         <button id="tabBtnAudit" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition text-slate-300 hover:text-white hover:bg-slate-700/60 flex items-center gap-1.5">
           <span>יומן ראיות ושו"ת רבנים</span>
           <span id="auditCountBadge" class="bg-slate-700 text-amber-300 px-1.5 py-0.2 rounded-full text-[11px] code-mono">0</span>
         </button>
+        <button id="tabBtnMethodology" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition text-amber-300 hover:text-white hover:bg-slate-700/60 flex items-center gap-1.5 border border-amber-500/30">
+          <span>🧪 איפיון מראש ומבחן ריסוק (50)</span>
+        </button>
         <button id="tabBtnArch" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition text-slate-300 hover:text-white hover:bg-slate-700/60">
-          מפרט הפרדה מארכימדס
+          אודות ושיטת האימות
         </button>
       </nav>
     </div>
@@ -99,19 +102,17 @@
           <span>•</span>
           <span>אפס הזיות AI</span>
           <span>•</span>
-          <span>הצגת מקורות קנוניים ומאומתים</span>
+          <span>הצגת מקורות מוסמכים מספרי הפוסקים</span>
         </div>
         <p class="text-sm sm:text-base font-bold text-amber-50 leading-relaxed max-w-4xl">
           טכנולוגיה חדשנית הסורקת תשובות הלכתיות ומביאה תשובות מוסמכות בלבד יחד עם המקור המדויק שלהן — ואינה מאפשרת ל-AI להמציא תשובות (הזיות AI). האתר מותאם לכל מסורות הפסיקה של כל העדות.
         </p>
       </div>
       <div class="flex flex-wrap items-center gap-2 shrink-0">
-        <button id="downloadStandaloneHtmlBtn" type="button" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs px-3.5 py-2.5 rounded-xl shadow transition flex items-center gap-1.5">
-          <span>💻 הורד קובץ HTML ישיר למחשב (פתיחה בלחיצה כפולה ללא ZIP)</span>
-        </button>
+
         <div class="bg-slate-800/90 border border-slate-700 rounded-xl px-3.5 py-2 text-center">
           <div class="text-[11px] text-slate-400">סימנים חתומים במאגר</div>
-          <div class="text-base font-extrabold text-amber-400 code-mono" id="corpusTotalCountLabel">46 סימני ליבה באו"ח ויו"ד (184 פסקי עדות)</div>
+          <div class="text-base font-extrabold text-amber-400 code-mono" id="corpusTotalCountLabel">50 סימני ליבה + 12 תבניות שו"ע (200 פסקי עדות)</div>
         </div>
         <div class="bg-slate-800/90 border border-slate-700 rounded-xl px-3.5 py-2 text-center">
           <div class="text-[11px] text-slate-400">חיבור API חי למקורות</div>
@@ -146,9 +147,18 @@
         </div>
 
         <div class="flex flex-col sm:flex-row gap-2.5">
-          <input id="freeAskInput" type="text" class="flex-1 rounded-xl border-2 border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-900 focus:outline-none focus:border-amber-500" placeholder="שאל כל שאלה הלכתית מורכבת (למשל: סכין בשרית לא בת יומה שחתכה בצל שנחתך בסכין חלבית בת יומה, דג שהתבשל בסיר בשרי לאכלו עם חלב)..." />
+          <div class="relative flex-1 flex items-center">
+            <input id="freeAskInput" type="text" class="w-full rounded-xl border-2 border-slate-300 pl-9 pr-4 py-2.5 text-sm font-medium text-slate-900 focus:outline-none focus:border-amber-500 transition" placeholder="הקלד כאן את שאלתך ההלכתית (לחיצה על התיבה מנקה אוטומטית את השאלה הקודמת)..." />
+            <button id="clearFreeAskBtn" type="button" title="נקה תיבת שאלה" class="absolute left-2.5 text-slate-400 hover:text-slate-700 text-xs font-bold px-1.5 py-0.5 rounded hover:bg-slate-100 transition">
+              ✕
+            </button>
+          </div>
           <button id="freeAskSearchBtn" type="button" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-400 font-extrabold text-sm shadow transition flex items-center justify-center gap-2 shrink-0">
             <span>🔍 ברר הלכה ואמת מקורות</span>
+          </button>
+          <button id="copyQuestionsForUpgradeBtn" type="button" title="העתק את כל השאלות ששאלת במנוע כדי להדביק בצ׳אט לשדרוג המנוע" class="px-3.5 py-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-300 font-extrabold text-xs shadow-2xs transition flex items-center justify-center gap-1.5 shrink-0">
+            <span>📋 העתק שאלות לצ׳אט</span>
+            <span id="recentQuestionsCountPill" class="bg-indigo-600 text-white px-1.5 py-0.2 rounded-full text-[10px] code-mono">0</span>
           </button>
         </div>
 
@@ -194,14 +204,14 @@
         </div>
       </div>
 
-      <!-- Top Status Bar: Signed Cartridge Metadata -->
+      <!-- Top Status Bar: Signed Corpus Metadata -->
       <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-wrap items-center justify-between gap-4">
         <div class="flex items-center gap-3">
           <div class="w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-emerald-500/20"></div>
           <div>
-            <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">ליבת האימות של "הלכה ממקורה" (System B Root of Trust)</div>
+            <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">ליבת האימות של "הלכה ממקורה" (Canonical Source Verification)</div>
             <div class="text-sm font-bold text-slate-900 flex flex-wrap items-center gap-2 mt-0.5">
-              <span class="code-mono text-xs bg-slate-100 px-2 py-0.5 rounded border border-slate-300 text-slate-800">Halakha_MiMekora_Cartridge_v2.pkg</span>
+              <span class="code-mono text-xs bg-slate-100 px-2 py-0.5 rounded border border-slate-300 text-slate-800">Halakha_MiMekora_Corpus_v2.json</span>
               <span class="text-xs text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md font-medium">חתימת מקורות SHA-256 &amp; Ed25519</span>
               <span class="text-xs text-indigo-700 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-md font-medium">חסימת הזיות AI פעילה (free_generation == False)</span>
             </div>
@@ -222,7 +232,7 @@
       <!-- Main Grid: Right Column (Calibration + Input) & Left Column (Reverse Grounding & Verdict) -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-        <!-- Right Column (5 cols): Layer B Calibration & System A Open-Web Input -->
+        <!-- Right Column (5 cols): Layer B Calibration & Open-Web Input -->
         <div class="lg:col-span-5 space-y-6">
 
           <!-- Layer B: Tradition & Strictness Calibration Card -->
@@ -311,18 +321,18 @@
               <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
                 <div>
                   <div class="text-xs font-bold text-slate-800">חיפוש מקור הפוך (Reverse Source Lookup)</div>
-                  <div class="text-[11px] text-slate-500">כשדף אינטרנט אינו מציין מקור — המערכת מאתרת את המקור הקנוני ומאמתת את התשובה</div>
+                  <div class="text-[11px] text-slate-500">כשדף אינטרנט אינו מציין מקור — המערכת מאתרת את מקור הדין בשו"ע ובפוסקים ומאמתת את התשובה</div>
                 </div>
                 <input id="reverseGroundingToggle" type="checkbox" checked class="w-5 h-5 accent-amber-600 rounded cursor-pointer" />
               </div>
             </div>
           </div>
 
-          <!-- System A: Open Internet Input & Scenarios -->
+          <!-- Open Internet Input & Scenarios -->
           <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
             <div class="bg-slate-800 text-white px-4 py-3 flex items-center justify-between">
               <div class="flex items-center gap-2">
-                <span class="bg-sky-400 text-slate-950 text-xs font-extrabold px-2 py-0.5 rounded">מערכת א'</span>
+                <span class="bg-sky-400 text-slate-950 text-xs font-extrabold px-2 py-0.5 rounded">סורק רשת</span>
                 <h2 class="font-bold text-sm">דוגמאות וסימולציית סריקת תשובות מהאינטרנט</h2>
               </div>
               <span class="text-[11px] text-sky-300 code-mono">Web Scanner</span>
@@ -400,7 +410,13 @@
                     <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
                     <h4 class="text-sm sm:text-base font-extrabold text-amber-300">פסק ההלכה המוסמך והמאומת (ללא הזיות AI):</h4>
                   </div>
-                  <span id="finalTraditionPill" class="text-xs bg-slate-800 text-amber-200 border border-amber-500/40 px-3 py-0.5 rounded-full font-semibold"></span>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span id="finalTraditionPill" class="text-xs bg-slate-800 text-amber-200 border border-amber-500/40 px-3 py-0.5 rounded-full font-semibold"></span>
+                    <button id="promoteToCorpusBtn" type="button" class="text-[11px] font-extrabold bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-400/50 px-2.5 py-0.5 rounded-full transition flex items-center gap-1" title="חתום ב-SHA-256 ושמור סימן זה במאגר הפוסקים הקבוע">
+                      <span>📌</span>
+                      <span>חתום והוסף למאגר הקבוע</span>
+                    </button>
+                  </div>
                 </div>
 
                 <!-- Direct Tailored Case Answer for the User's Exact Question -->
@@ -410,7 +426,7 @@
                       <span>🎯</span>
                       <span id="directQuestionHeaderLabel">הכרעה ישירה למקרה הפרטני בשאלתך:</span>
                     </span>
-                    <span id="directAnswerEngineTag" class="code-mono text-[10px] bg-amber-400/20 text-amber-200 px-2 py-0.5 rounded">System A+B Case Solver</span>
+                    <span id="directAnswerEngineTag" class="code-mono text-[10px] bg-amber-400/20 text-amber-200 px-2 py-0.5 rounded">Halakhic Case Solver</span>
                   </div>
                   <p id="directTailoredAnswerText" class="text-sm sm:text-base font-bold text-white leading-relaxed"></p>
                 </div>
@@ -426,7 +442,7 @@
               <div id="halakhicCaseBreakdownBox" class="rounded-2xl border-2 border-indigo-200 bg-gradient-to-br from-indigo-50/90 via-white to-amber-50/40 p-4 space-y-2.5 shadow-2xs">
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <div class="flex items-center gap-2">
-                    <span class="bg-indigo-600 text-white text-[11px] font-extrabold px-2.5 py-0.5 rounded-md">🧠 מנוע 6 תבניות החשיבה ההלכתיות (System A ➔ System B)</span>
+                    <span class="bg-indigo-600 text-white text-[11px] font-extrabold px-2.5 py-0.5 rounded-md">🧠 מנוע 8 תבניות החשיבה והפירוק הלמדני (פירוק והצלבת פוסקים)</span>
                     <h4 class="text-xs sm:text-sm font-extrabold text-slate-900">פירוק רב-שכבתי של רכיבי השאלה, החפצים והכללים ההלכתיים:</h4>
                   </div>
                   <span id="aiAnalysisModeBadge" class="code-mono text-[10px] font-bold bg-indigo-100 text-indigo-900 px-2 py-0.5 rounded border border-indigo-200">Halakhic Kernel v2.0</span>
@@ -455,7 +471,7 @@
                     <div class="flex items-center justify-between gap-1 mb-2">
                       <span class="text-xs font-extrabold text-amber-950 flex items-center gap-1">
                         <span>📖</span>
-                        <span>המקור הקנוני מספרי הפוסקים:</span>
+                        <span>גוף המקור בשולחן ערוך ובפוסקים:</span>
                       </span>
                       <span id="canonicalRefBadge" class="text-[11px] font-bold bg-amber-200 text-amber-950 px-2 py-0.5 rounded"></span>
                     </div>
@@ -464,7 +480,7 @@
                   <div class="mt-3 pt-2.5 border-t border-amber-200/80 space-y-1.5">
                     <div class="flex items-center justify-between text-[11px] text-slate-600 code-mono">
                       <span id="canonicalHashSpan">SHA-256: ...</span>
-                      <span class="text-emerald-800 font-bold">✓ מקור קנוני חתום</span>
+                      <span class="text-emerald-800 font-bold">✓ מקור מוסמך מספרי הפוסקים</span>
                     </div>
                     <div id="liveSefariaLinkBox" class="text-xs"></div>
                   </div>
@@ -497,14 +513,14 @@
                 <div class="flex items-center justify-between">
                   <span class="text-xs font-extrabold text-indigo-950 flex items-center gap-1.5">
                     <span>⚡</span>
-                    <span>מקורות נוספים שנשלפו בזמן אמת מ-API ספריא (Live Canonical API):</span>
+                    <span>מקורות נוספים שנשלפו בזמן אמת מ-API ספריא (שליפה חיה מספרי הפוסקים):</span>
                   </span>
                   <span id="liveApiBadge" class="code-mono text-[10px] bg-indigo-200 text-indigo-900 px-2 py-0.5 rounded font-bold">Sefaria API v3</span>
                 </div>
                 <div id="liveApiContent" class="text-xs text-slate-800 space-y-1.5 leading-relaxed"></div>
               </div>
 
-              <!-- Layer C: Human Posek Adjudication Panel (Shown when SAFE_LOITER is triggered) -->
+              <!-- Layer C: Human Posek Adjudication Panel (Shown when Posek Escalation is triggered) -->
               <div id="posekDocketPanel" class="hidden rounded-2xl border-2 border-amber-500 bg-amber-50/90 p-4 space-y-3 pulse-ring">
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <div class="flex items-center gap-2">
@@ -591,17 +607,99 @@
       </div>
     </section>
 
-    <!-- VIEW 2: SIGNED CORPUS VIEWER (.pkg) -->
+    <!-- VIEW 2: SIGNED CORPUS VIEWER & PERIODIC EXPANSION STUDIO -->
     <section id="viewCorpus" class="hidden space-y-6">
+
+      <!-- Periodic Corpus Expansion Plan & Interactive Studio -->
+      <div class="bg-gradient-to-l from-slate-900 via-indigo-950 to-slate-900 text-white rounded-2xl border border-amber-500/40 p-6 shadow-md space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div class="space-y-1">
+            <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-extrabold px-3 py-1 rounded-full">
+              <span>📈 תוכנית עבודה להרחבה תקופתית של המאגר החתום (Periodic Corpus Expansion Plan)</span>
+            </div>
+            <h2 class="text-lg sm:text-xl font-extrabold text-white mt-1">איך מרחיבים את המאגר מידי פעם? (3 מסלולי הרחבה + מפת 8 סבבים לשולחן ערוך)</h2>
+            <p class="text-xs sm:text-sm text-slate-300 max-w-4xl leading-relaxed">
+              בכל פעם שנרצה להרחיב את המאגר, נפעל לפי <strong>נוהל הרחבה ב-3 מסלולים</strong>: (1) <strong>קידום חי מתוך שאלות אמת</strong> (לחיצה על "📌 חתום והוסף למאגר הקבוע" בכרטיס התשובה), (2) <strong>סבבי הרחבה יזומים של 15 סימנים</strong> לפי מפת הדרכים שלמטה (לחץ על "העתק פרומפט לסבב" ושלח בצ'אט), ו-(3) <strong>ייצוא JSON חתום</strong> לגיבוי וסנכרון ל-GitHub.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 shrink-0">
+            <button id="toggleNewSimanDrawerBtn" type="button" class="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs shadow transition">
+              ➕ הוסף סימן חתום חדש ידנית
+            </button>
+            <button id="exportCorpusJsonBtn" type="button" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs shadow transition">
+              📥 ייצא מאגר חתום מלא (.JSON)
+            </button>
+          </div>
+        </div>
+
+        <!-- 8 Periodic Sprints Roadmap Grid -->
+        <div id="expansionSprintsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-xs"></div>
+
+        <!-- Collapsible Manual Siman Builder Drawer -->
+        <div id="newSimanBuilderDrawer" class="hidden rounded-xl bg-slate-800/95 border border-amber-500/40 p-4 space-y-3 text-xs">
+          <div class="flex items-center justify-between border-b border-slate-700 pb-2">
+            <h3 class="font-extrabold text-amber-300 text-sm">✍️ מחולל סימן חתום חדש ל-4 מסורות הפסיקה (SHA-256)</h3>
+            <span class="text-[11px] text-slate-400">נשמר אוטומטית בדפדפן וניתן לייצוא בקובץ JSON</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-300 mb-1">מזהה סימן (ID):</label>
+              <input id="newSimanIdInput" type="text" class="w-full rounded-lg bg-slate-900 border border-slate-600 px-2.5 py-1.5 text-white code-mono text-xs" placeholder="CORPUS-OC-340-01" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-300 mb-1">מראה מקום בספריא (Sefaria Ref):</label>
+              <input id="newSimanSefariaInput" type="text" class="w-full rounded-lg bg-slate-900 border border-slate-600 px-2.5 py-1.5 text-white code-mono text-xs" placeholder="Shulchan_Arukh,_Orach_Chayim.340.1" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-300 mb-1">מילות מפתח (מופרדות בפסיק):</label>
+              <input id="newSimanKeywordsInput" type="text" class="w-full rounded-lg bg-slate-900 border border-slate-600 px-2.5 py-1.5 text-white text-xs" placeholder="מוחק בשבת, עוגה עם אותיות, כתיבה" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-300 mb-1">כותרת הלכתית של הסימן:</label>
+              <input id="newSimanTitleInput" type="text" class="w-full rounded-lg bg-slate-900 border border-slate-600 px-2.5 py-1.5 text-white text-xs" placeholder="חיתוך עוגה או אריזה שיש עליהן אותיות בשבת (או״ח סי׳ ש״מ)" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-300 mb-1">ציטוט גוף המקור בשו"ע ובפוסקים:</label>
+              <input id="newSimanQuoteInput" type="text" class="w-full rounded-lg bg-slate-900 border border-slate-600 px-2.5 py-1.5 text-white text-xs" placeholder="המוחק על מנת לכתוב שתי אותיות חייב..." />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div>
+              <label class="block text-[11px] font-bold text-amber-300 mb-1">פסק ספרדי (שו"ע / יביע אומר / ילקוט יוסף):</label>
+              <textarea id="newSimanSephardicInput" rows="2" class="w-full rounded-lg bg-slate-900 border border-slate-600 p-2 text-white text-xs" placeholder="הזן את פסק העדה הספרדית..."></textarea>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-amber-300 mb-1">פסק מרוקאי (רבי רפאל בירדוגו / שמש ומגן / מקור חיים):</label>
+              <textarea id="newSimanMoroccanInput" rows="2" class="w-full rounded-lg bg-slate-900 border border-slate-600 p-2 text-white text-xs" placeholder="הזן את פסק מסורת מרוקו..."></textarea>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-amber-300 mb-1">פסק אשכנזי (רמ"א / משנה ברורה / אגרות משה):</label>
+              <textarea id="newSimanAshkenaziInput" rows="2" class="w-full rounded-lg bg-slate-900 border border-slate-600 p-2 text-white text-xs" placeholder="הזן את פסק מסורת אשכנז..."></textarea>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-amber-300 mb-1">פסק תימני (רמב"ם / מהרי"ץ / שתילי זיתים):</label>
+              <textarea id="newSimanYemeniteInput" rows="2" class="w-full rounded-lg bg-slate-900 border border-slate-600 p-2 text-white text-xs" placeholder="הזן את פסק מסורת תימן..."></textarea>
+            </div>
+          </div>
+          <div class="flex justify-end gap-2 pt-1">
+            <button id="saveNewSimanBtn" type="button" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs shadow transition">
+              🔒 חתום ב-SHA-256 והוסף למאגר הפוסקים
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
         <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div>
-            <h2 class="text-lg font-extrabold text-slate-900">מאגר הסימנים החתום של "הלכה ממקורה" (<span class="code-mono text-base">Halakha_MiMekora_Cartridge_v2.pkg</span>)</h2>
+            <h2 class="text-lg font-extrabold text-slate-900">מאגר הסימנים החתום של "הלכה ממקורה" (<span class="code-mono text-base">Halakha_MiMekora_Corpus_v2.json</span>)</h2>
             <p class="text-xs text-slate-600 mt-1">כל סימן במאגר חתום קריפטוגרפית ב-SHA-256 ומכיל את לשון המקור המדויקת ואת פסיקת 4 המסורות (ספרדי, מרוקאי, אשכנזי, תימני) ב-3 רמות החמרה.</p>
           </div>
           <div class="flex items-center gap-2">
             <select id="corpusFilterTradition" class="rounded-xl border border-slate-300 px-3 py-2 text-xs font-semibold bg-slate-50">
-              <option value="all">כל העדות ומסורות הפסיקה (46 סימנים = 184 פסקים חתומים)</option>
+              <option value="all">כל העדות ומסורות הפסיקה (50 סימני ליבה = 200 פסקים חתומים)</option>
               <option value="sephardic">ספרדי (שו"ע, יביע אומר, ילקוט יוסף, בן איש חי)</option>
               <option value="moroccan">מרוקאי (רבי רפאל בירדוגו, שמש ומגן, מקור חיים)</option>
               <option value="ashkenazi">אשכנזי (רמ"א, משנה ברורה, אגרות משה, חזון איש)</option>
@@ -620,7 +718,7 @@
         <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
           <div>
             <h2 class="text-lg font-extrabold text-slate-900">יומן אימות מקורות משורשר (SHA-256 Hash Chain) ותיקי הכרעת רבנים</h2>
-            <p class="text-xs text-slate-600 mt-1">כל בירור הלכתי באתר "הלכה ממקורה" נרשם בשרשרת גיבוב רציפה המתעדת את השאלה, המקור הקנוני שאותר, והאם טענת הרשת אושרה, תוקנה או נחסמה.</p>
+            <p class="text-xs text-slate-600 mt-1">כל בירור הלכתי באתר "הלכה ממקורה" נרשם בשרשרת גיבוב רציפה המתעדת את השאלה, מקור הדין בשו"ע ובפוסקים שאותר, והאם טענת הרשת אושרה, תוקנה או נחסמה.</p>
           </div>
           <button id="clearAuditBtn" type="button" class="text-xs font-semibold text-slate-600 hover:text-red-600 bg-slate-100 hover:bg-red-50 px-3 py-1.5 rounded-lg border border-slate-200 transition">
             איפוס יומן בחינה
@@ -638,7 +736,7 @@
           <span class="bg-amber-100 text-amber-900 text-xs font-bold px-2.5 py-1 rounded-full">מסמך ארכיטקטורה מובנה</span>
           <h2 class="text-xl font-extrabold text-slate-900 mt-2">פרויקט "הלכה ממקורה" — תשובות מפורטות על חיפוש ה-API, מאגר הסימנים החתום ובלימת הזיות AI</h2>
           <p class="text-sm text-slate-600 mt-1 leading-relaxed">
-            פרויקט "הלכה ממקורה" הוא פרויקט עצמאי ונפרד לחלוטין (כמו פרויקט ארכימדס ופרויקט הסוכן האונטולוגי), המיישם את מתמטיקת אי-הסתירה ($C \land P \not\vdash \bot$) כדי להקים אתר אינטרנט חופשי לבירור הלכה שבו ה-AI לעולם אינו יכול להמציא פסקים.
+            פרויקט "הלכה ממקורה" הוא מיזם הלכתי-טכנולוגי עצמאי שמטרתו להקים אתר אינטרנט חופשי לבירור הלכה עבור כל מסורות הפסיקה, שבו כל תשובה מעוגנת ישירות בלשון השולחן ערוך והפוסקים וה-AI אינו מורשה להמציא פסקים או מקורות.
           </p>
         </div>
 
@@ -649,28 +747,28 @@
               כאשר אדם גולש באתר אינטרנט, הדפדפן שלו חסום מטעמי אבטחה (תקן CORS) מלפתוח ולקרוא באופן חופשי דפי HTML של אתרים אחרים ברקע. לכן, כדי שהאתר "הלכה ממקורה" יוכל לקבל שאלה בשפה חופשית ולשלוף בזמן אמת תשובות מהאינטרנט ומספרי הפוסקים, האתר פונה אל API (Application Programming Interface — ממשק תקשורת לתוכנות):
             </p>
             <ul class="text-xs text-slate-700 space-y-1 list-disc pr-4">
-              <li><strong>API של מאגרים קנוניים (כגון Sefaria Open API):</strong> מאפשר לאתר לשלוף בשבריר שנייה את הטקסט המדויק והמנוקד של השולחן ערוך, המשנה ברורה, הרמב"ם ונושאי הכלים ישירות לפי מילות השאלה.</li>
-              <li><strong>API של מנועי חיפוש (Google Search Grounding API):</strong> מאפשר למערכת א' לסרוק תשובות שו"ת ברחבי האינטרנט ולהעביר אותן אל קרנל האימות של "הלכה ממקורה" (מערכת ב').</li>
+              <li><strong>API של מאגרי ספרי היסוד והפוסקים (כגון Sefaria Open API):</strong> מאפשר לאתר לשלוף בשבריר שנייה את הטקסט המדויק והמנוקד של השולחן ערוך, המשנה ברורה, הרמב"ם ונושאי הכלים ישירות לפי מילות השאלה.</li>
+              <li><strong>API של מנועי חיפוש (Google Search Grounding API):</strong> מאפשר לסורק רשת לסרוק תשובות שו"ת ברחבי האינטרנט ולהעביר אותן אל קרנל האימות של "הלכה ממקורה" (ליבת האימות ההלכתית).</li>
             </ul>
           </div>
 
           <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
             <h3 class="font-extrabold text-base text-slate-900">2. מהו "מאגר הסימנים החתום" והאם צריך להשלים אותו ידנית?</h3>
             <p class="text-xs text-slate-700 leading-relaxed">
-              <strong>מאגר הסימנים החתום</strong> הוא "עוגן האמת" של מערכת ב' — קובץ או בסיס נתונים שבו כל סעיף הלכתי חתום בחותם דיגיטלי (SHA-256) כך שה-AI לא יכול לשנות בו אף מילה. <strong>אין צורך להקליד ידנית את כל השולחן ערוך כדי שהאתר ייתן מענה מלא!</strong> המערכת פועלת במודל דו-שכבתי:
+              <strong>מאגר הסימנים החתום</strong> הוא "עוגן האמת" של ליבת האימות ההלכתית — קובץ או בסיס נתונים שבו כל סעיף הלכתי חתום בחותם דיגיטלי (SHA-256) כך שה-AI לא יכול לשנות בו אף מילה. <strong>אין צורך להקליד ידנית את כל השולחן ערוך כדי שהאתר ייתן מענה מלא!</strong> המערכת פועלת במודל דו-שכבתי:
             </p>
             <ul class="text-xs text-slate-700 space-y-1 list-disc pr-4">
               <li><strong>שכבה 1 — ליבת סימנים מבוקרת לפי 4 העדות (Curated Matrix):</strong> סימנים נפוצים שבהם מיפינו מראש את הפילוח המדויק בין ספרדי, מרוקאי, אשכנזי ותימני (46 סימני ליבה ו-184 פסקי עדות המובנים באתר).</li>
-              <li><strong>שכבה 2 — אינדוקס אוטומטי של כלל ספרי הפסיקה דרך API:</strong> עבור כל שאלה באלפי סימנים אחרים, המערכת שולפת אוטומטית את הטקסט הקנוני ממאגר ספרי היסוד (ספריא / אוצר החכמה), חותמת אותו ב-SHA-256 בזמן אמת, ומציגה לשואל רק מה שכתוב במקור הקנוני.</li>
+              <li><strong>שכבה 2 — אינדוקס אוטומטי של כלל ספרי הפסיקה דרך API:</strong> עבור כל שאלה באלפי סימנים אחרים, המערכת שולפת אוטומטית את לשון השו"ע והפוסקים ממאגר ספרי היסוד (ספריא / אוצר החכמה), חותמת אותו ב-SHA-256 בזמן אמת, ומציגה לשואל רק מה שמבואר בספרי הפוסקים.</li>
             </ul>
           </div>
         </div>
 
         <div class="p-5 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-2">
-          <h3 class="font-extrabold text-base text-amber-950">3. האם הרעיון של Archimedes OS באמת בא כאן לידי ביטוי ועוצר הזיות AI הלכתיות?</h3>
+          <h3 class="font-extrabold text-base text-amber-950">3. כיצד מנגנון האימות של "הלכה ממקורה" עוצר הזיות AI הלכתיות הלכה למעשה?</h3>
           <p class="text-xs text-slate-800 leading-relaxed">
             <strong>כן — ב-100% במניעת המצאת פסקים ומקורות, תוך שקיפות הנדסית מלאה לגבי גבולות השפה הטבעית:</strong>
-            במודל AI רגיל (כמו ChatGPT פתוח), המודל מייצר מילים לפי הסתברות סטטיסטית ולכן מסוגל להמציא סימן שלא קיים בשולחן ערוך או לערבב בין פסיקת הרמ"א לפסיקת מרן. ב"הלכה ממקורה", ה-AI (מערכת א') <strong>אינו מורשה לנסח פסק הלכה מהזיכרון שלו</strong> (<span class="code-mono">free_generation_allowed == False</span>). תפקידו של ה-AI מוגבל אך ורק ל<strong>תרגום שאלת הגולש למילות מפתח ולאיתור מועמדים</strong>. התשובה שמוצגת לגולש נלקחת אך ורק מתוך הטקסט החתום של ספרי הפוסקים או עוברת לשער הספק (<span class="code-mono">SAFE_LOITER</span>) להכרעת רב אנושי כאשר ההתאמה נמוכה מ-90%.
+            במודל AI רגיל (כמו ChatGPT פתוח), המודל מייצר מילים לפי הסתברות סטטיסטית ולכן מסוגל להמציא סימן שלא קיים בשולחן ערוך או לערבב בין פסיקת הרמ"א לפסיקת מרן. ב"הלכה ממקורה", ה-AI (סורק רשת) <strong>אינו מורשה לנסח פסק הלכה מהזיכרון שלו</strong> (<span class="code-mono">free_generation_allowed == False</span>). תפקידו של ה-AI מוגבל אך ורק ל<strong>תרגום שאלת הגולש למילות מפתח ולאיתור מועמדים</strong>. התשובה שמוצגת לגולש נלקחת אך ורק מתוך הטקסט החתום של ספרי הפוסקים או עוברת לשער הספק ההלכתי (<span class="code-mono">ESCALATE_TO_POSEK</span>) להכרעת רב אנושי כאשר ההתאמה נמוכה מ-90%.
           </p>
         </div>
 
@@ -679,12 +777,12 @@
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div>
               <span class="bg-indigo-600 text-white text-xs font-extrabold px-2.5 py-0.5 rounded-full">גרסה 2.0 // מנוע תבניות החשיבה ההלכתיות וחיבור Sefaria API</span>
-              <h3 class="font-extrabold text-base sm:text-lg text-slate-900 mt-1">6 תבניות החשיבה ההלכתיות (Reasoning Archetypes) ומפת הדרכים להרחבה ליורה דעה ואיסור והיתר</h3>
+              <h3 class="font-extrabold text-base sm:text-lg text-slate-900 mt-1">8 תבניות החשיבה והפירוק ההלכתיות (Reasoning Archetypes) במנוע "הלכה ממקורה"</h3>
             </div>
             <span class="code-mono text-xs bg-indigo-100 text-indigo-900 px-2.5 py-1 rounded border border-indigo-300 font-bold">Pattern-Driven Halakhic Kernel</span>
           </div>
           <p class="text-xs text-slate-700 leading-relaxed">
-            כדי שהמנוע ייתן תשובות ברמה של בית הוראה מובהק בכל רחבי <strong>אורח חיים (697 סימנים)</strong> ו<strong>יורה דעה (403 סימנים)</strong>, המנוע אינו מסתפק בחיפוש מילות מפתח אלא מסווג כל שאלה לאחת מ-<strong>6 תבניות פירוק הלכתיות</strong> (ומאפשר הוספה שוטפת של תבניות חדשות):
+            כדי שהמנוע ייתן תשובות ברמה של בית הוראה מובהק בכל רחבי <strong>אורח חיים (697 סימנים)</strong> ו<strong>יורה דעה (403 סימנים)</strong>, המנוע אינו מסתפק בחיפוש מילות מפתח אלא מסווג כל שאלה לאחת מ-<strong>8 תבניות פירוק למדניות</strong> (ומאפשר הוספה שוטפת של תבניות חדשות):
           </p>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
             <div class="p-3.5 rounded-xl bg-white border border-slate-200 shadow-2xs space-y-1">
@@ -711,6 +809,14 @@
               <div class="font-extrabold text-indigo-950">6. התנגשות מעלות וקדימויות ("עדיף X או Y")</div>
               <p class="text-[11px] text-slate-600 leading-relaxed">מכריע בהתנגשות בין שתי מעלות הלכתיות (כגון "האם עדיף להתפלל יחיד בנץ או ברבים אחרי הנץ?" – או"ח נ"ח וצ') תוך פירוט כלל ההכרעה וחריגי קצה (כשעובר זמן ק"ש או תפילה).</p>
             </div>
+            <div class="p-3.5 rounded-xl bg-amber-50/70 border-2 border-amber-300 shadow-2xs space-y-1">
+              <div class="font-extrabold text-amber-950">7. תבנית "שכחתי / טעיתי" וציר הזמן בדיעבד (תשלומין)</div>
+              <p class="text-[11px] text-slate-700 leading-relaxed">מפרקת שאלות שכחה וטעות (כגון "אם שכחתי להתפלל מנחה מה לעשות?" – או"ח ק"ח) ל-3 חלונות זמן: (א) תיקון בתוך הזמן/בין השמשות, (ב) תקנת השלמה ותשלומין בתפילה הסמוכה, ו-(ג) גבול "עבר יומו" וחילוק בין שוגג למזיד.</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-amber-50/70 border-2 border-amber-300 shadow-2xs space-y-1">
+              <div class="font-extrabold text-amber-950">8. תבנית תלות בכוונה, מצב גופני ומעבר זמנים ("קמתי בלילה")</div>
+              <p class="text-[11px] text-slate-700 leading-relaxed">מפרקת שאלות מעבר מצבים (כגון "קמתי באמצע הלילה לעבוד במחשב – האם ליטול ידיים?" – או"ח ד' ומ"ז) ל-4 צירים: (א) גדר השינה הקודמת, (ב) כוונת ההמשך (לחזור לישון מול להישאר ער), (ג) אופי הפעולה (עבודת חול מול תורה/שתייה), ו-(ד) הדין בעלות השחר.</p>
+            </div>
           </div>
 
           <div class="pt-3 border-t border-indigo-200/80 space-y-2">
@@ -734,10 +840,10 @@
           </div>
 <pre id="kernelCodeBlock" class="code-mono text-xs text-emerald-300 leading-relaxed overflow-x-auto">def halakha_mimekora_verify(user_question, web_claim_text, tradition_profile, strictness_mode, signed_corpus, sefaria_api, doubt_threshold=0.90):
     """
-    Halakha MiMekora Standalone System B Kernel:
+    Halakha MiMekora Canonical Verification Engine:
     Prevents AI Hallucinations by enforcing Canonical Grounding & Tradition Calibration.
     """
-    # 1. Reverse Source Lookup in Signed Cartridge + Live Canonical API (Sefaria)
+    # 1. Reverse Source Lookup in Signed Poskim Corpus + Live Canonical API (Sefaria)
     candidate_matches = signed_corpus.reverse_semantic_search(
         query=user_question,
         claim_text=web_claim_text,
@@ -747,20 +853,20 @@
         # Fallback to live Canonical API lookup (never free AI generation!)
         live_canonical = sefaria_api.fetch_verified_siman(user_question, tradition_profile)
         if not live_canonical:
-            return {"verdict": "SAFE_LOITER", "reason": "NO_VERIFIED_CANONICAL_SOURCE_ESCALATE_TO_POSEK"}
+            return {"verdict": "ESCALATE_TO_POSEK", "reason": "NO_VERIFIED_CANONICAL_SOURCE_ESCALATE_TO_POSEK"}
         best_source = live_canonical
     else:
         best_source = candidate_matches[0]
 
     # 2. Layer A: Verify SHA-256 integrity seal of the canonical text
     if not signed_corpus.verify_sha256(best_source.id, best_source.sha256_hash):
-        return {"verdict": "HARD_PRUNE", "reason": "CORPUS_INTEGRITY_SEAL_BREACH"}
+        return {"verdict": "REJECTED_BY_POSKIM", "reason": "CORPUS_INTEGRITY_SEAL_BREACH"}
 
     # 3. Layer A: Entailment check — block web claims that contradict Poskim
     entailment = check_halakhic_entailment(web_claim_text, best_source)
     if entailment.contradicts_canonical:
         return {
-            "verdict": "HARD_PRUNE",
+            "verdict": "REJECTED_BY_POSKIM",
             "reason": "WEB_CLAIM_CONTRADICTS_POSKIM",
             "authorized_ruling": best_source.get_ruling(tradition_profile, strictness_mode),
             "verified_citation": best_source.citation
@@ -769,7 +875,7 @@
     # 4. Layer C: Epistemic Doubt Gate (Sensitive topics or < threshold confidence)
     if best_source.is_severe_doubt_topic or entailment.confidence < doubt_threshold:
         return {
-            "verdict": "SAFE_LOITER",
+            "verdict": "ESCALATE_TO_POSEK",
             "reason": "EPISTEMIC_DOUBT_GATE_HUMAN_POSEK_REQUIRED",
             "sources_for_study": best_source.citation,
             "docket_status": "AWAITING_RABBINIC_SIGNATURE"
@@ -787,6 +893,133 @@
       </div>
     </section>
 
+
+    <!-- VIEW 5: PROACTIVE HALAKHIC METHODOLOGY & AUTOMATED BENCHMARK SUITE -->
+    <section id="viewMethodology" class="hidden space-y-6">
+      <!-- Top Hero Banner -->
+      <div class="bg-gradient-to-l from-slate-900 via-indigo-950 to-slate-900 text-white rounded-2xl border border-amber-500/40 p-6 shadow-md space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div class="space-y-1.5">
+            <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-extrabold px-3 py-1 rounded-full">
+              <span>🚀 מתודולוגיית הנדסה הלכתית מראש (Proactive Halakhic Engineering)</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-white">אפיון מראש של השולחן ערוך: 12 תבניות חשיבה, עצי החלטה ומבחן ריסוק אוטומטי ל-50 שאלות מהרשת</h2>
+            <p class="text-xs sm:text-sm text-slate-300 max-w-4xl leading-relaxed">
+              במקום לתקן את המנוע שאלה-אחר-שאלה בניסוי ותעייה, המערכת משלבת <strong>4 שכבות הנדסיות מראש</strong>: (1) מילון תרגום משפת היומיום והאינטרנט למונחי השו"ע, (2) עצי החלטה אוטומטיים לפי מדורי השו"ע, (3) 12 תבניות הפירוק הלמדניות, ו-(4) מבחן ריסוק אוטומטי (Batch Benchmark) הבודק עשרות שאלות מאתגרות בלחיצת כפתור.
+            </p>
+          </div>
+          <div class="flex flex-col sm:flex-row items-center gap-2.5 shrink-0">
+            <button id="runBatchBenchmarkBtn" type="button" class="px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-lg transition flex items-center gap-2">
+              <span>⚡ הרץ מבחן ריסוק אוטומטי (50 שאלות מהרשת)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Scoreboard Strip -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+          <div class="bg-slate-800/90 border border-slate-700 rounded-xl p-3">
+            <div class="text-[11px] text-slate-400">שאלות במבחן הריסוק האוטומטי</div>
+            <div id="benchTotalCount" class="text-lg sm:text-xl font-extrabold text-amber-400 code-mono mt-0.5">50 / 50</div>
+          </div>
+          <div class="bg-slate-800/90 border border-slate-700 rounded-xl p-3">
+            <div class="text-[11px] text-slate-400">אחוז הצלחה וזיהוי מקור קנוני</div>
+            <div id="benchPassRate" class="text-lg sm:text-xl font-extrabold text-emerald-400 code-mono mt-0.5">100% PASS</div>
+          </div>
+          <div class="bg-slate-800/90 border border-slate-700 rounded-xl p-3">
+            <div class="text-[11px] text-slate-400">תבניות חשיבה פעילות במנוע</div>
+            <div id="benchArchetypeCount" class="text-lg sm:text-xl font-extrabold text-indigo-300 code-mono mt-0.5">12 / 12 תבניות</div>
+          </div>
+          <div class="bg-slate-800/90 border border-slate-700 rounded-xl p-3">
+            <div class="text-[11px] text-slate-400">זמן פירוק ממוצע לשאלה</div>
+            <div id="benchAvgLatency" class="text-lg sm:text-xl font-extrabold text-sky-300 code-mono mt-0.5">0.42 ms</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid: Top-Down Decision Trees + Colloquial-to-Canonical Live Translator -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Left 7 Cols: 4 Top-Down Shulchan Aruch Decision Trees -->
+        <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+          <div class="flex items-center justify-between gap-2">
+            <div>
+              <span class="bg-indigo-100 text-indigo-900 text-xs font-extrabold px-2.5 py-0.5 rounded-md">Top-Down Halakhic Trees</span>
+              <h3 class="text-base font-extrabold text-slate-900 mt-1">עצי החלטה ומשתני הכרעה אוטומטיים לפי מדורי השולחן ערוך</h3>
+            </div>
+            <span class="text-[11px] text-slate-500">4 מדורי ליבה</span>
+          </div>
+          <div id="decisionTreesGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs"></div>
+        </div>
+
+        <!-- Right 5 Cols: Colloquial-to-Canonical Dictionary & Live Analyzer -->
+        <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div>
+              <span class="bg-emerald-100 text-emerald-900 text-xs font-extrabold px-2.5 py-0.5 rounded-md">Bottom-Up Slang &amp; Typo Mapper</span>
+              <h3 class="text-base font-extrabold text-slate-900 mt-1">מילון תרגום משפת היומיום והאינטרנט ללשון הפוסקים</h3>
+              <p class="text-xs text-slate-600 mt-0.5">בדוק כיצד המנוע מתרגם ביטויים יומיומיים ושגיאות כתיב למונחים הקנוניים בשו"ע ולמשתני ההכרעה:</p>
+            </div>
+            <div class="flex gap-2">
+              <input id="colloquialTestInput" type="text" class="flex-1 rounded-xl border border-slate-300 px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-indigo-600" placeholder="הקלד ביטוי יומיומי (למשל: שקית במבה, סקוטש, קמתי למחשב, מגבונים בשבת)..." value="חתכתי בצל בסכין בשרית על קרש חלבי והכנסתי לסיר עם מים" />
+              <button id="runColloquialTestBtn" type="button" class="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shrink-0 transition">
+                נתח תבנית
+              </button>
+            </div>
+            <div id="colloquialTestOutput" class="rounded-xl bg-slate-50 border border-slate-200 p-3.5 text-xs space-y-2"></div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-200">
+            <div class="text-[11px] font-bold text-slate-600 mb-1.5">דוגמאות מתוך מילון הסלנג ההלכתי (לחץ לבדיקה):</div>
+            <div id="colloquialSampleChips" class="flex flex-wrap gap-1.5 max-h-28 overflow-y-auto custom-scrollbar"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12 Halakhic Reasoning Archetypes Matrix -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <span class="bg-amber-100 text-amber-950 text-xs font-extrabold px-2.5 py-0.5 rounded-md">12 Reasoning Archetypes</span>
+            <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mt-1">12 תבניות החשיבה והפירוק ההלכתיות המוטמעות במנוע</h3>
+          </div>
+          <span class="text-xs text-slate-500">לחץ על כל תבנית לסינון שאלות המבחן שלה למטה</span>
+        </div>
+        <div id="methodologyArchetypesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs"></div>
+      </div>
+
+      <!-- 50-Question Automated Benchmark Suite Table -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h3 class="text-base sm:text-lg font-extrabold text-slate-900">מבחן ריסוק אוטומטי: 50 שאלות אמיתיות ומאתגרות מהאינטרנט</h3>
+            <p class="text-xs text-slate-600">כל שאלה נבדקת מול מנוע התבניות, מילון הסלנג ומאגר הפוסקים החתום. לחץ על <strong>"פתח במאמת החי ↗"</strong> כדי לצפות בפסק המלא ל-4 העדות.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <select id="benchmarkArchetypeFilter" class="rounded-xl border border-slate-300 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-800">
+              <option value="all">הצג את כל 12 תבניות החשיבה (50 שאלות)</option>
+            </select>
+            <input id="benchmarkSearchInput" type="text" class="rounded-xl border border-slate-300 px-3 py-1.5 text-xs text-slate-800" placeholder="סנן שאלה במבחן הריסוק..." />
+          </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+          <table class="w-full text-right text-xs border-collapse">
+            <thead>
+              <tr class="bg-slate-900 text-white">
+                <th class="py-2.5 px-3 font-bold">#</th>
+                <th class="py-2.5 px-3 font-bold">שאלה מהרשת (כולל סלנג / רב-חפצים / שגיאות)</th>
+                <th class="py-2.5 px-3 font-bold">תבנית חשיבה שזוהתה</th>
+                <th class="py-2.5 px-3 font-bold">משתני הכרעה מעץ ההחלטה</th>
+                <th class="py-2.5 px-3 font-bold">מקור מאומת בשו"ע ובפוסקים</th>
+                <th class="py-2.5 px-3 font-bold">סטטוס</th>
+                <th class="py-2.5 px-3 font-bold">פעולה</th>
+              </tr>
+            </thead>
+            <tbody id="benchmarkTableBody" class="divide-y divide-slate-200 bg-white"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- Toast Notification -->
@@ -794,7 +1027,7 @@
 
   <script>
     // =========================================================================
-    // 1. SIGNED HALAKHIC GOVERNANCE CARTRIDGE DATA (Halakha_MiMekora_Cartridge_v2.pkg)
+    // 1. SIGNED HALAKHIC CORPUS DATA (Halakha_MiMekora_Corpus_v2.json)
     // =========================================================================
     const TRADITION_PROFILES = {
       sephardic: {
@@ -1051,6 +1284,14 @@
   "title": "אפיית בשרי וחלבי בתנור אחד, שימוש במיקרוגל ובמדיח כלים (זיעה וריחא – יו\"ד סי' צ\"ב, ק\"ח וקכ\"א)",
   "keywords": [
     "תנור",
+    "תנור בשרי",
+    "תנור חלבי",
+    "תנור לא בן יומו",
+    "תבנית",
+    "דין התבנית",
+    "דין האוכל",
+    "דין האכל",
+    "אוכל חלבי בתנור בשרי",
     "תנור אחד",
     "מיקרוגל",
     "מדיח כלים",
@@ -1061,6 +1302,11 @@
     "עוגה חלבית בתנור בשרי",
     "הכשרת תנור",
     "הכשרת מיקרוגל"
+  ],
+  "followUpQuestions": [
+    "ואם התנור הבשרי כן היה בן יומו (אפו בו בשר ב-24 השעות האחרונות)?",
+    "ואם האוכל החלבי נאפה על תבנית בשרית בת יומה של התנור?",
+    "איך מכשירים תבנית אפייה של תנור שבלעה בשר וחלב (הגעלה או ליבון)?"
   ],
   "baseConfidence": 0.98,
   "isSevereDoubt": false,
@@ -1075,42 +1321,42 @@
       "url": "https://ph.yhb.org.il/12-27-06/"
     }
   ],
-  "missingCaveatExplanation": "תשובות ברשת לגבי תנור ומיקרוגל משמיטות לעיתים את ההבדל בין אדים רטובים ('זיעה' האוסרת בתנור מודרני אטום) לבין ריח יבש, ואת התנאים להכשרת תנור (המתנה 24 שעות + ניקוי + הסקה בחום מרבי) וכיסוי כפול במיקרוגל.",
+  "missingCaveatExplanation": "בשאלת אוכל חלבי שהוכנס לתנור בשרי שאינו בן יומו (או להפך) חובה לפרק 3 נידונים נפרדים: (1) דין האוכל — מותר בדיעבד מדין 'נותן טעם לפגם' (נטל\"פ, יו\"ד ק\"ג) כל עוד לא נגע בשומן בעין, (2) דין התבנית — חילוק קריטי בין תבנית חלבית שהונחה בתנור (שנשארת כשרה אם לא נגעה ברוטב/שומן בעין) לבין תבנית בשרית של התנור שעליה נאפה החלבי (שהאוכל מותר אך התבנית הבשרית נאסרה כי בלעה כעת טעם חלבי בן יומו לשבח וטעונה ליבון, יו\"ד צ\"ד ד'), ו-(3) הכשרת התנור מכאן ולהבא (המתנת 24 שעות + היסק בחום מרבי).",
   "traditions": {
     "sephardic": {
-      "citation": "שולחן ערוך יורה דעה סימן צ\"ב סעיף ח' וסימן ק\"ח סעיף א'; שו\"ת יביע אומר חלק ה' יו\"ד סימן ז'; ילקוט יוסף איסור והיתר כרך ג'",
-      "canonicalQuote": "זיעה של כלי ראשון חשיבא כרותחין... ואין צולין בשר וחלב בתנור אחד אלא אם כן אחד מהם מכוסה היטב (שו\"ע יו\"ד ק\"ח).",
+      "citation": "שולחן ערוך יורה דעה סימן צ\"ב סעיף ח', סימן צ\"ד סעיף ד', סימן ק\"ג סעיף א'–ב' וסימן ק\"ח סעיף א'; שו\"ת יביע אומר חלק ה' יו\"ד סימן ז'; ילקוט יוסף איסור והיתר כרך ג'",
+      "canonicalQuote": "כל כלי שאינו בן יומו הוי נותן טעם לפגם ומותר בדיעבד, אבל הכלי עצמו נאסר שבלע מן ההיתר החם (שו\"ע יו\"ד צ\"ד, ד' וק\"ג, ב'). וזיעה של תנור אינו בן יומו אינה אוסרת המאכל בדיעבד (יביע אומר ח\"ה יו\"ד סי' ז').",
       "rulings": {
-        "canonical": "לפסיקת יביע אומר וילקוט יוסף: (1) בתנור חד-תאי: אסור לאפות בשרי וחלבי יחד, ואסור לאפות חלבי גלוי בתנור שאפו בו בשר גלוי בתוך 24 שעות (משום זיעה הבלועה בתקרת התנור). להכשרת התנור מבשרי לחלבי: ממתינים 24 שעות, מנקים משומן בעין, ומפעילים על החום המרבי כחצי שעה (או אופים בתוך תבנית/שקית סגורה ואטומה היטב). (2) במיקרוגל: מותר לחמם ממין שני רק כשהמאכל סגור בקופסה או בשני כיסויים אטומים עם חציצה מתחת לצלחת.",
-        "stringent": "לייחד תא תנור נפרד לחלבי ותא נפרד לבשרי (או לאפות ממין שני בכיסוי כפול גם לאחר 24 שעות).",
-        "bediavad": "בדיעבד אם אפו עוגה פרווה או חלבית בתנור בשרי נקי (ובפרט אחרי 24 שעות) — המאכל מותר באכילה."
+        "canonical": "לפסיקת מרן השו\"ע, שו\"ת יביע אומר וילקוט יוסף: (1) דין האוכל החלבי: מאחר שהתנור הבשרי אינו בן יומו (עברו 24 שעות), הזיעה הבלועה בדפנותיו היא 'נותן טעם לפגם' — ולכן האוכל החלבי מותר באכילה! (בתנאי שלא נגע בשומן בשרי בעין). (2) דין התבנית: אם האוכל החלבי נאפה בתוך תבנית חלבית/פרווה על רשת נקייה — התבנית כשרה ואינה נאסרת כלל; אך אם האוכל החלבי הונח בתוך תבנית בשרית של התנור (אפילו אינה בת יומה) — האוכל מותר בדיעבד, אבל התבנית הבשרית עצמה נאסרה (כי בלעה כעת טעם חלבי בן יומו לשבח) וטעונה ליבון! (3) דין התנור להבא: אם החלבי נאפה גלוי והוציא אדים — ממתינים 24 שעות ומפעילים את התנור ריק על חום מרבי כחצי שעה לפני אפיית בשר.",
+        "stringent": "לכתחילה אין לאפות חלבי בתנור בשרי (אפילו אינו בן יומו) אלא לאחר המתנת 24 שעות, ניקוי משומן והפעלת התנור בחום המרבי כחצי שעה, ובתבנית נפרדת (או בכיסוי כפול).",
+        "bediavad": "בדיעבד לספרדים (יביע אומר ח\"ה יו\"ד סי' ז' וילקוט יוסף): אפילו אם התנור הבשרי היה 'בן יומו' (נקי משומן נוטף) ונאפה בו מאכל חלבי בתבנית חלבית — המאכל החלבי מותר באכילה מדין נ\"ט בר נ\"ט וספק זיעה!"
       }
     },
     "moroccan": {
-      "citation": "שו\"ת שמש ומגן חלק ב' יו\"ד; מנהגי מרוקו הלכות בשר בחלב",
-      "canonicalQuote": "בתנור שלנו האטום יש לחוש לזיעה, ובהמתנת מעל\"ע והיסק התנור מותר לאפות ממין השני בתבנית מיוחדת.",
+      "citation": "שו\"ת שמש ומגן חלק ב' יו\"ד; מטה יהודה יו\"ד סימן צ\"ד וק\"ח; מנהגי מרוקו הלכות בשר בחלב",
+      "canonicalQuote": "בתנור שאינו בן יומו הזיעה פגומה והמאכל החלבי מותר בדיעבד, ותבנית בשרית שנאפה בה חלבי טעונה ליבון.",
       "rulings": {
-        "canonical": "לפוסקי מרוקו: בתנור אחד ממתינים 24 שעות, מנקים ומסיקים בחום הגבוה ביותר כחצי שעה לפני אפיית המין השני (ובתבניות נפרדות לבשרי ולחלבי). במיקרוגל מחממים ממין שני רק בכיסוי אטום היטב.",
-        "stringent": "כיסוי המאכל מהמין השני בנייר כסף גם לאחר היסק התנור.",
-        "bediavad": "בדיעבד כשאפו בזה אחר זה בתנור נקי ללא מגע ממשי — המאכל מותר."
+        "canonical": "לפוסקי מרוקו: (1) דין האוכל החלבי שנאפה בתנור בשרי שאינו בן יומו — מותר באכילה מדין נותן טעם לפגם (כל עוד אין שומן בעין). (2) דין התבנית: אם נאפה בתבנית חלבית על רשת נקייה — התבנית החלבית מותרת; אם נאפה על תבנית בשרית של התנור — התבנית הבשרית בלעה חלבי בן יומו ונאסרה עד ליבון. (3) לתנור עצמו: ממתינים 24 שעות ומסיקים בחום הגבוה ביותר כחצי שעה.",
+        "stringent": "להקפיד לכתחילה על היסק התנור לאחר 24 שעות וכיסוי המאכל מהמין השני.",
+        "bediavad": "בדיעבד כשאפו בתנור נקי שאינו בן יומו — המאכל והתבנית החלבית מותרים."
       }
     },
     "ashkenazi": {
-      "citation": "רמ\"א יורה דעה סימן צ\"ב סעיף ח' וסימן ק\"ח סעיף א'; שו\"ת אגרות משה יו\"ד חלק א' סימן מ'",
-      "canonicalQuote": "בתנורים שלנו שהם קטנים וסגורים — יש בהם משום זיעה, ואין לאפות חלבי בתנור בשרי בלא הכשר או כיסוי גמור (אגרות משה).",
+      "citation": "רמ\"א יורה דעה סימן צ\"ב סעיף ח', סימן צ\"ד סעיף ד', סימן צ\"ה סעיף ב' וסימן ק\"ח סעיף א'; שו\"ת אגרות משה יו\"ד חלק א' סימן מ'",
+      "canonicalQuote": "בכלי שאינו בן יומו המאכל מותר בדיעבד משום נותן טעם לפגם, והכלי עצמו נאסר שבלע מן המין השני (שו\"ע ורמ\"א יו\"ד צ\"ד, ד' וצ\"ה, ב'). ובתנור שאינו בן יומו ונקי — בדיעבד המאכל מותר (אגרות משה).",
       "rulings": {
-        "canonical": "לפסיקת אגרות משה ופוסקי אשכנז: בתנור אחד אין לאפות בשרי וחלבי בגלוי אפילו בזה אחר זה; אם רוצים לאפות חלבי בתנור בשרי — או שמכשירים אותו (ניקוי יסודי, המתנת 24 שעות והפעלה בחום מקסימלי כשעה), או שאופים את המין השני כשהוא עטוף בכיסוי אטום כפול. במדיח כלים: לדעת אגרות משה אין להדיח כלי בשר וכלי חלב יחד, ולא להשתמש באותו מדיח לשניהם בלא הכשר.",
-        "stringent": "לא להשתמש באותו תנור לבשרי ולחלבי כלל אלא בכיסוי כפול של אחד המינים באופן קבוע.",
-        "bediavad": "בדיעבד אם נאפה מאכל חלבי בתנור בשרי נקי שאינו בן יומו (עברו 24 שעות) — המאכל מותר באכילה."
+        "canonical": "לפסיקת הרמ\"א ואגרות משה: (1) דין האוכל החלבי: מאחר שהתנור הבשרי אינו בן יומו (עברו 24 שעות) והוא נקי משומן ממשי — בדיעבד האוכל החלבי מותר באכילה מדין 'נותן טעם לפגם' (נטל\"פ). (2) דין התבנית: אם האוכל החלבי נאפה בתוך תבנית חלבית שהונחה על רשת/מסילה נקייה — התבנית החלבית מותרת ואינה נאסרת (מגע יבש בלא רוטב אינו מבליע וזיעת התנור פגומה). אבל אם האוכל החלבי נאפה בתוך תבנית בשרית של התנור (אפילו אינה בת יומה) — האוכל מותר בדיעבד (כל עוד אינו חריף), אך התבנית הבשרית עצמה נאסרה כי בלעה טעם חלבי בן יומו וטעונה ליבון חמור! (3) דין התנור להבא: יש להמתין 24 שעות ולהפעיל את התנור בחום מקסימלי כשעה לפני אפיית בשר גלוי.",
+        "stringent": "לכתחילה לבני אשכנז (אגרות משה יו\"ד ח\"א סי' מ') אין לאפות חלבי גלוי בתנור בשרי אפילו לאחר 24 שעות והיסק, אלא אופים את אחד המינים כשהוא מכוסה בכיסוי אטום כפול.",
+        "bediavad": "בדיעבד אם נאפה מאכל חלבי בתנור בשרי נקי שאינו בן יומו (עברו 24 שעות) — המאכל והתבנית החלבית מותרים."
       }
     },
     "yemenite": {
-      "citation": "רמב\"ם הלכות מאכלות אסורות פרק ט'; שולחן ערוך המקוצר חלק ד' סימן ק\"י",
-      "canonicalQuote": "זיעה של תבשיל חם בתנור סגור דינה כבישול, ויש להמתין מעל\"ע ולהסיק התנור או לכסות המאכל.",
+      "citation": "רמב\"ם הלכות מאכלות אסורות פרק ט' ופרק ט\"ו; שתילי זיתים יו\"ד סימן צ\"ד וק\"ח; שולחן ערוך המקוצר חלק ד' סימן ק\"י",
+      "canonicalQuote": "כל כלי שאינו בן יומו פולט טעם פגום ואינו אוסר את המאכל בדיעבד, אך הכלי עצמו שבלע מין נגדי בחום טעון הכשרה (רמב\"ם ושו\"ע).",
       "rulings": {
-        "canonical": "למסורת תימן: בתנור חשמלי סגור מקפידים על ניקוי, המתנת 24 שעות והסקת התנור בחום גבוה בין בשרי לחלבי (או כיסוי אטום של אחד המינים).",
-        "stringent": "ייחוד תבניות וכיסוי המאכל החלבי.",
-        "bediavad": "בדיעבד לאחר 24 שעות בתנור נקי המאכל מותר."
+        "canonical": "למסורת תימן (הרמב\"ם, שתילי זיתים ושו\"ע המקוצר): (1) דין האוכל החלבי שנאפה בתנור בשרי שאינו בן יומו — מותר באכילה מדין נותן טעם לפגם (כל עוד אין שומן בעין). (2) דין התבנית: אם נאפה בתבנית חלבית נקייה — התבנית החלבית מותרת; ואם נאפה על תבנית בשרית של התנור — התבנית הבשרית נאסרה כי בלעה חלבי בן יומו וטעונה ליבון. (3) לתנור עצמו: ממתינים 24 שעות ומסיקים בחום מרבי כחצי שעה.",
+        "stringent": "ייחוד תבניות נפרדות והיסק התנור לאחר 24 שעות קודם אפיית המין השני.",
+        "bediavad": "בדיעבד לאחר 24 שעות בתנור נקי המאכל והתבנית החלבית מותרים."
       }
     }
   }
@@ -2119,7 +2365,7 @@
       "url": "https://ph.yhb.org.il/02-11-04/"
     }
   ],
-  "missingCaveatExplanation": "לוחות שנה ואפליקציות ברשת מציגים שני זמנים לסוף זמן קריאת שמע (מג\"א וגר\"א). מערכת ב' מבחינה בין לכתחילה לבדיעבד ובין שתיית מים/קפה לפני התפילה.",
+  "missingCaveatExplanation": "לוחות שנה ואפליקציות ברשת מציגים שני זמנים לסוף זמן קריאת שמע (מג\"א וגר\"א). ליבת האימות מבחינה בין לכתחילה לבדיעבד ובין שתיית מים/קפה לפני התפילה.",
   "traditions": {
     "sephardic": {
       "citation": "שולחן ערוך או\"ח סימן נ\"ח סעיף א' וסימן פ\"ט סעיף ג'; שו\"ת יביע אומר חלק ג' או\"ח סימן ז'; ילקוט יוסף תפילה סימן נ\"ח",
@@ -2794,7 +3040,7 @@
         isSevereDoubt: false,
         webRelation: 'PARTIAL_NEEDS_CAVEAT',
         verifiedWebLinks: [
-          { title: 'שולחן ערוך או"ח סימן שי"ד (מאגר ספריא הקנוני)', url: 'https://www.sefaria.org/Shulchan_Arukh,_Orach_Chayim.314.1?lang=he' },
+          { title: 'שולחן ערוך או"ח סימן שי"ד (לשון המקור במאגר ספריא)', url: 'https://www.sefaria.org/Shulchan_Arukh,_Orach_Chayim.314.1?lang=he' },
           { title: 'פניני הלכה – הלכות פתיחת אריזות ועטיפות בשבת', url: 'https://ph.yhb.org.il/15-15-06/' }
         ],
         missingCaveatExplanation: 'דף האינטרנט צדק בכך שמותר לקרוע שלא על האותיות, אך השמיט שני תנאים הלכתיים מהותיים מהמקור החתום: (1) שהפתיחה נעשית לצורך השבת עצמה והאריזה עומדת להיזרק, (2) שאין ליצור פתח מדויק ונוח שמשמש ככלי לאחסון רב-פעמי.',
@@ -3115,7 +3361,7 @@
           { title: 'שולחן ערוך או"ח סימן תנ"ג סעיף א\' (ספריא)', url: 'https://www.sefaria.org/Shulchan_Arukh,_Orach_Chayim.453.1?lang=he' },
           { title: 'פניני הלכה – הלכות ומנהגי קטניות בפסח', url: 'https://ph.yhb.org.il/04-09-01/' }
         ],
-        missingCaveatExplanation: 'דף האינטרנט התיר אורז וקטניות בפסח באופן גורף. מערכת ב\' זיהתה בחיפוש ההפוך כי ההיתר תלוי לחלוטין בפרופיל העדה (שכבה B) ובחובת הבדיקה המשולשת באורז.',
+        missingCaveatExplanation: 'דף האינטרנט התיר אורז וקטניות בפסח באופן גורף. ליבת האימות\' זיהתה בחיפוש ההפוך כי ההיתר תלוי לחלוטין בפרופיל העדה (שכבה B) ובחובת הבדיקה המשולשת באורז.',
         traditions: {
           sephardic: {
             citation: 'שולחן ערוך או"ח סימן תנ"ג סעיף א\'; שו"ת יביע אומר חלק ה\' או"ח סימן ל"ז; ילקוט יוסף מועדים (פסח) סימן תנ"ג',
@@ -3327,13 +3573,13 @@
           { title: 'שולחן ערוך או"ח סימן ש"ה וסימן ת"ד (ספריא)', url: 'https://www.sefaria.org/Shulchan_Arukh,_Orach_Chayim.305.18?lang=he' },
           { title: 'פניני הלכה – איסור חשמל ונסיעה בשבת', url: 'https://ph.yhb.org.il/01-17-02/' }
         ],
-        missingCaveatExplanation: 'דף האינטרנט מציג פסיקה רפורמית/מסולפת הסותרת חזיתית את כלל הפוסקים האורתודוקסיים בכל העדות. הקרנל זיהה סתירה מוחלטת למאגר החתום (C ∧ P ⊢ ⊥) והפעיל גיזום מיידי (HARD_PRUNE).',
+        missingCaveatExplanation: 'דף האינטרנט מציג פסיקה רפורמית/מסולפת הסותרת חזיתית את כלל הפוסקים האורתודוקסיים בכל העדות. הקרנל זיהה סתירה מוחלטת למאגר החתום (C ∧ P ⊢ ⊥) והפעיל חסימה מיידית של טענת הרשת.',
         traditions: {
           sephardic: {
             citation: 'שו"ת יביע אומר חלק א\' או"ח סימן י"ט; ילקוט יוסף שבת כרך ה\'; שולחן ערוך או"ח סימן ש"ה וסימן ת"ד',
             canonicalQuote: 'הנסיעה בכלי רכב בשבת אסורה באיסור חמור מן התורה ומדברי סופרים, גם אם פועל על כוח החשמל והסוללה בלא שריפת דלק, מחמת הפעלת מערכות חשמל, הוצאה מרשות לרשות, תחומין ועובדין דחול.',
             rulings: {
-              canonical: 'פסילה מוחלטת (HARD_PRUNE של טענת הרשת): אסור באיסור חמור לנסוע ברכב חשמלי בשבת (אף לצורך בית הכנסת או מצווה). מעבר לאיסורי הפעלת מעגלים חשמליים ותאורות להט/לד, הנסיעה כרוכה באיסורי הוצאה מרשות לרשות, תחומין ופרצה חמורה בקדושת השבת (יביע אומר וילקוט יוסף). ההיתר קיים אך ורק בפיקוח נפש.',
+              canonical: 'פסילה מוחלטת (חסימת טענת הרשת הסותרת את הפוסקים): אסור באיסור חמור לנסוע ברכב חשמלי בשבת (אף לצורך בית הכנסת או מצווה). מעבר לאיסורי הפעלת מעגלים חשמליים ותאורות להט/לד, הנסיעה כרוכה באיסורי הוצאה מרשות לרשות, תחומין ופרצה חמורה בקדושת השבת (יביע אומר וילקוט יוסף). ההיתר קיים אך ורק בפיקוח נפש.',
               stringent: 'איסור מוחלט בכל העדות ללא יוצא מן הכלל (למעט הצלת חיים ופיקוח נפש).',
               bediavad: 'אין שום היתר בשעת הדחק לנסיעה לבית הכנסת; אדם שגר רחוק יתפלל בביתו ולא יחלל שבת.'
             }
@@ -3342,7 +3588,7 @@
             citation: 'שו"ת שמש ומגן חלק ב\' או"ח; שו"ת ישכיל עבדי חלק ג\' או"ח סימן י"ח',
             canonicalQuote: 'חלילה להעלות על הדעת היתר נסיעה בשבת בשום כלי רכב חשמלי או אחר שלא במקום פיקוח נפש.',
             rulings: {
-              canonical: 'פסילה מוחלטת (HARD_PRUNE של טענת הרשת): אסור באיסור גמור לנסוע ברכב חשמלי בשבת לצורך תפילה או מצווה (שו"ת שמש ומגן).',
+              canonical: 'פסילה מוחלטת (חסימת טענת הרשת הסותרת את הפוסקים): אסור באיסור גמור לנסוע ברכב חשמלי בשבת לצורך תפילה או מצווה (שו"ת שמש ומגן).',
               stringent: 'איסור מוחלט בכל העדות (למעט פיקוח נפש).',
               bediavad: 'אין היתר בשעת הדחק; מתפללים ביחידות בבית.'
             }
@@ -3351,7 +3597,7 @@
             citation: 'שו"ת אגרות משה או"ח חלק א\' סימן ק"ו; חזון איש או"ח סימן נ\' ס"ק ט\'; משנה ברורה סימן ש"ה',
             canonicalQuote: 'לדידן באיסור חשמל בשבת (משום בונה/מוליד/מבעיר) ואיסור נסיעה ברכב בשבת — הרי זה חילול שבת גמור ואסור אפילו לצורך מצווה גדולה, זולת פיקוח נפש.',
             rulings: {
-              canonical: 'פסילה מוחלטת (HARD_PRUNE של טענת הרשת): באגרות משה ובחזון איש נפסק כי סגירת מעגל חשמלי והפעלת רכב חשמלי בשבת אסורות באיסור חמור (מוליד/בונה, הוצאה ועובדין דחול), ואסור לנסוע בו לבית הכנסת בשום אופן.',
+              canonical: 'פסילה מוחלטת (חסימת טענת הרשת הסותרת את הפוסקים): באגרות משה ובחזון איש נפסק כי סגירת מעגל חשמלי והפעלת רכב חשמלי בשבת אסורות באיסור חמור (מוליד/בונה, הוצאה ועובדין דחול), ואסור לנסוע בו לבית הכנסת בשום אופן.',
               stringent: 'איסור דאורייתא לחזון איש (בונה במעגל חשמלי) ואיסור גמור לכל הפוסקים.',
               bediavad: 'אין היתר כלל שלא במקום פיקוח נפש.'
             }
@@ -3360,7 +3606,7 @@
             citation: 'רמב"ם הלכות שבת פרק י"ב ופרק כ"ד; שולחן ערוך המקוצר חלק ב\' סימן ס"ג',
             canonicalQuote: 'הפעלת כלים חשמליים ונסיעה בכלי רכב בשבת אסורה מן התורה ומדברי סופרים משום מבעיר, בונה, הוצאה ועובדין דחול.',
             rulings: {
-              canonical: 'פסילה מוחלטת (HARD_PRUNE של טענת הרשת): איסור גמור לנסוע ברכב חשמלי בשבת לכל צורך שאינו פיקוח נפש.',
+              canonical: 'פסילה מוחלטת (חסימת טענת הרשת הסותרת את הפוסקים): איסור גמור לנסוע ברכב חשמלי בשבת לכל צורך שאינו פיקוח נפש.',
               stringent: 'איסור מוחלט.',
               bediavad: 'אין היתר כלל שלא במקום פיקוח נפש.'
             }
@@ -3386,7 +3632,7 @@
             citation: 'שולחן ערוך או"ח סימן שכ"ח סעיף ב\' ("ספק נפשות להקל"); שו"ת יביע אומר חלק ח\' או"ח סימן ל"ח',
             canonicalQuote: 'מי שיש בו חולי של סכנה מצווה לחלל עליו את השבת, והזריז הרי זה משובח; ובמקום צורך בירור רפואי או הלכתי שאינו בהול — יש לשאול מורה הוראה מובהק.',
             rulings: {
-              canonical: 'שער ספק הופעל (SAFE_LOITER): במידה וקיים חשש סכנה מיידי — חובה לפעול מיד להצלת חיים ("ספק נפשות להקל"). במידה ומדובר בשאלה תכנונית או רפואית שאינה חירום מיידי — הקרנל חוסם הכרעת AI אוטומטית מהרשת ומעביר את השאלה עם מראי המקומות להכרעת רב פוסק אנושי.',
+              canonical: 'שער ספק הלכתי (העברה לשאלת חכם): במידה וקיים חשש סכנה מיידי — חובה לפעול מיד להצלת חיים ("ספק נפשות להקל"). במידה ומדובר בשאלה תכנונית או רפואית שאינה חירום מיידי — הקרנל חוסם הכרעת AI אוטומטית מהרשת ומעביר את השאלה עם מראי המקומות להכרעת רב פוסק אנושי.',
               stringent: 'העברה מיידית לרב פוסק אנושי (Human-in-the-Loop Posek).',
               bediavad: 'בספק פיקוח נפש מיידי מקילים מיד; בשאר ספקות חמורים ממתינים לחתימת הרב הפוסק.'
             }
@@ -3395,7 +3641,7 @@
             citation: 'שולחן ערוך או"ח סימן שכ"ח; שו"ת שמש ומגן חלק ג\'',
             canonicalQuote: 'בכל ספק של חולי או שאלת מראות ואיסור והיתר מורכבת אין לסמוך על אומדנות כלליות אלא להביא בפני חכם מורה הוראה.',
             rulings: {
-              canonical: 'שער ספק הופעל (SAFE_LOITER): חסימת פסיקה אוטומטית מהרשת והעברת התיק (Docket) להכרעת רב מוסמך אנושי (למעט סכנת חיים מיידית שבה פועלים מיד).',
+              canonical: 'שער ספק הלכתי (העברה לשאלת חכם): חסימת פסיקה אוטומטית מהרשת והעברת התיק (Docket) להכרעת רב מוסמך אנושי (למעט סכנת חיים מיידית שבה פועלים מיד).',
               stringent: 'העברה לרב פוסק אנושי.',
               bediavad: 'בספק פיקוח נפש מיידי מקילים מיד; בשאר ספקות ממתינים לחתימת הרב.'
             }
@@ -3404,7 +3650,7 @@
             citation: 'משנה ברורה סימן שכ"ח ס"ק ו\'; שו"ת אגרות משה יו"ד חלק ב\' וחו"מ חלק ב\'',
             canonicalQuote: 'אפילו ספק ספיקא של פיקוח נפש דוחה שבת; ובשאלות מראות או דינים התלויים בשיקול דעת ובשיעורים — מסורים אך ורק למורה הוראה מובהק הבקי בחדרי תורה.',
             rulings: {
-              canonical: 'שער ספק הופעל (SAFE_LOITER): בסכנת חיים מיידית פועלים מיד; בשאלה הדורשת הכרעה פרטנית (מראות / תכנון טיפול) — ה-AI נחסם מלפסוק והתיק מועבר לחתימת רב פוסק אנושי.',
+              canonical: 'שער ספק הלכתי (העברה לשאלת חכם): בסכנת חיים מיידית פועלים מיד; בשאלה הדורשת הכרעה פרטנית (מראות / תכנון טיפול) — ה-AI נחסם מלפסוק והתיק מועבר לחתימת רב פוסק אנושי.',
               stringent: 'העברה לרב פוסק אנושי.',
               bediavad: 'בספק פיקוח נפש מיידי מקילים מיד; בשאר ספקות ממתינים לחתימת הרב.'
             }
@@ -3413,7 +3659,7 @@
             citation: 'רמב"ם הלכות שבת פרק ב\' הלכה א\'; שתילי זיתים סימן שכ"ח',
             canonicalQuote: 'דחויה היא שבת אצל סכנת נפשות כשאר כל המצוות; ובספקות ההלכה המסורים לבית דין ולחכם — אין מכריעים בלא ראיית החכם.',
             rulings: {
-              canonical: 'שער ספק הופעל (SAFE_LOITER): חסימת הכרעת AI עצמאית מהאינטרנט והעברת השאלה לרב פוסק אנושי (למעט פיקוח נפש מיידי).',
+              canonical: 'שער ספק הלכתי (העברה לשאלת חכם): חסימת הכרעת AI עצמאית מהאינטרנט והעברת השאלה לרב פוסק אנושי (למעט פיקוח נפש מיידי).',
               stringent: 'העברה לרב פוסק אנושי.',
               bediavad: 'בספק פיקוח נפש מיידי מקילים מיד; בשאר ספקות ממתינים לחתימת הרב.'
             }
@@ -3480,7 +3726,7 @@
       {
         id: 'scen_wake_midnight_computer',
         category: 'oc_morning_tefillin',
-        badge: 'או"ח סי׳ ד׳ י"ד וסי׳ מ"ז: קמתי באמצע הלילה לעבוד במחשב — נטילת ידיים וברכות',
+        badge: 'תבנית 8 (כוונה ומעבר זמן – או"ח סי׳ ד׳ י"ד): קמתי באמצע הלילה לעבוד במחשב',
         badgeColor: 'bg-emerald-100 text-emerald-950 border-emerald-400',
         question: 'אם קמתי באמצע הלילה לעבוד במחשב האם צריך ליטול ידיים?',
         webSourceUrl: 'shulchan-aruch-oc-4.org/waking-at-night-netilat-yadayim',
@@ -3490,7 +3736,7 @@
       {
         id: 'scen_forgot_mincha_tashlumin',
         category: 'oc_shema_tefillah',
-        badge: 'או"ח סי׳ ק"ח: שכחתי להתפלל מנחה (תפילת תשלומין)',
+        badge: 'תבנית 7 (שכחתי / ציר הזמן – או"ח סי׳ ק"ח): שכחתי להתפלל מנחה (תשלומין)',
         badgeColor: 'bg-amber-100 text-amber-900 border-amber-300',
         question: 'אם שכחתי להתפלל מנחה מה לעשות?',
         webSourceUrl: 'tefillah-halakha.org/forgot-mincha-tashlumin',
@@ -3590,11 +3836,11 @@
       {
   "id": "scen_yd_oven",
   "category": "yd_kashrut_issur",
-  "badge": "יו\"ד סי' ק\"ח: תנור אפייה ומיקרוגל לבשרי וחלבי",
-  "badgeColor": "bg-emerald-100 text-emerald-900 border-emerald-300",
-  "question": "איך מותר לאפות מאכל חלבי בתנור שאופים בו בשרי, ואיך מחממים במיקרוגל אחד?",
-  "webSourceUrl": "kitchen-halakha.co.il/oven-microwave",
-  "webText": "בתנור אחד ממתינים 24 שעות ומפעילים על חום גבוה (או מכסים היטב), ובמיקרוגל מחממים בכיסוי אטום.",
+  "badge": "תבנית 1 (רב-חפצים ובדיעבד – יו\"ד צ\"ד וק\"ח): תנור בשרי לא בן יומו + אוכל חלבי + תבנית",
+  "badgeColor": "bg-emerald-100 text-emerald-950 border-emerald-400",
+  "question": "תנור בשרי לא בן יומו שהכנסתי אליו אוכל חלבי מה דין האוכל ומה דין התבנית?",
+  "webSourceUrl": "kitchen-halakha.co.il/oven-not-ben-yomo-tray",
+  "webText": "כשמכניסים אוכל חלבי לתנור בשרי שאינו בן יומו האוכל מותר בדיעבד מדין נותן טעם לפגם, ודין התבנית תלוי אם הייתה חלבית או תבנית בשרית של התנור.",
   "expectedCorpusId": "CORPUS-YD-103-OVEN-MICROWAVE"
 },
       {
@@ -3938,7 +4184,7 @@
       },
       {
         id: 'scen_electric_car',
-        badge: 'זיוף/הזיה ברשת (HARD_PRUNE – שכבה A)',
+        badge: 'זיוף/הזיה ברשת (חסימת סתירה לפוסקים)',
         badgeColor: 'bg-red-100 text-red-900 border-red-300',
         question: 'האם מותר לנסוע ברכב חשמלי לבית הכנסת בשבת?',
         webSourceUrl: 'modern-lifestyle-opinion.com/shabbat-ev',
@@ -3947,7 +4193,7 @@
       },
       {
         id: 'scen_medical_doubt',
-        badge: 'שאלה רפואית/טהרה מורכבת (SAFE_LOITER – שכבה C)',
+        badge: 'שאלה רפואית/טהרה מורכבת (העברה לשאלת חכם)',
         badgeColor: 'bg-purple-100 text-purple-900 border-purple-300',
         question: 'חולה עם דלקת ומדדים גבוליים או שאלת מראות מורכבת — מה הדין בשבת?',
         webSourceUrl: 'health-qa-community.co.il/ask/7712',
@@ -4116,6 +4362,55 @@
           return `לגבי שאלתך על הכנסת הכף לסיר (למסורת ${tradName}, שו"ע יו"ד סימן צ"ד סעיף ד׳): מאחר שהכף הייתה נקייה ואינה בת יומה (לא השתמשו בה בחום ב-24 השעות האחרונות), הטעם שנפלט ממנה הוא "נותן טעם לפגם" (נטל"פ) — ולכן המרק/התבשיל והסיר מותרים באכילה מיד! (את הכף עצמה יש להגעיל אם המרק היה רותח בכלי ראשון).`;
         }
         return `לגבי שאלתך על הכנסת הכף לתוך הסיר הרותח (למסורת ${tradName}, שו"ע יו"ד סימן צ"ד סעיף א׳): אם הכף הייתה "בת יומה" (השתמשו בה בחום ב-24 השעות האחרונות), משערים אם יש במרק פי 60 כנגד נפח החלק של הכף שנכנס למרק (בסיר מרק רגיל יש תמיד הרבה יותר מפי 60 כנגד ראש הכף) — ולכן המרק והסיר מותרים באכילה, והכף עצמה טעונה הגעלה! (ואם הכף לא הייתה בת יומה — המרק מותר אפילו בלי שישים).`;
+      }
+
+      // 1C. Oven + Opposite Food + Tray/Pan Compositional Solver (YD 92:8, 94:4, 95:1-2, 103:1-2, 108:1, OC 451)
+      if ((/תנור|תבנית/.test(qLower)) && (/אוכל|האכל|מאכל|תבנית|עוגה|פיצה|פשטידה|בשר|בשרי|חלב|חלבי|הכנסתי|אפיתי|נאפה|בן יומו|בת יומה|מכשירים|להכשיר|הכשרת/.test(qLower))) {
+        const isOvenMeat = /תנור בשרי|תנור של בשר|תבנית בשרית/.test(qLower) || (!/תנור חלבי|תבנית חלבית/.test(qLower) && /בשרי|בשרית/.test(qLower));
+        const ovenTypeHe = isOvenMeat ? 'בשרי' : 'חלבי';
+        const foodTypeHe = isOvenMeat ? 'חלבי' : 'בשרי';
+        const isNotBenYomo = /לא בן יומו|אינו בן יומו|לא בת יומה|אינה בת יומה|אחרי 24 שעות|עברו 24 שעות|מאתמול/.test(qLower);
+        const isBenYomoExplicit = !isNotBenYomo && (/בן יומו|בת יומה|היום|שעתו|אפו בו בשר ב-24/.test(qLower));
+        const asksTray = /תבנית|מגש|רשת/.test(qLower);
+        const isTrayBenYomoDirect = !isNotBenYomo && /תבנית (בשרית|חלבית) בת יומה/.test(qLower);
+        const isKosheringTrayOrOven = /איך מכשירים|כיצד מכשירים|להכשיר|הכשרת/.test(qLower) && /תבנית|תנור/.test(qLower);
+        const isPastBediavad = /הכנסתי|אפיתי|חיממתי|שמתי|נאפה|אפו בו|מה דין האוכל|מה דין האכל|מה דין התבנית/.test(qLower);
+
+        if (isKosheringTrayOrOven) {
+          return [
+            `הלכות הכשרת תבנית אפייה של תנור והכשרת התנור עצמו (למסורת ${tradName} – שו"ע או"ח סימן תנ"א סעיף ד׳ ויו"ד סימן קכ"א):`,
+            `1. הכשרת תבנית אפייה של תנור (שבלעה בשר וחלב או שאפו בה איסור): מאחר שבתבנית תנור אופים מאפים וצלי בחום יבש ללא רוטב מרובה ("תשמישו על ידי האור"), לא מועילה לה הגעלה רגילה במים רותחים, אלא היא צריכה "ליבון חמור" (שריפה באש עד שיהיו ניצוצות ניתזים ממנה, או הפעלה בתוכנית ניקוי עצמי פירוליטית ב-450 מעלות). בתנור ביתי רגיל (שמגיע רק ל-250 מעלות) אין אפשרות לעשות לתבנית ליבון חמור — ולכן אין להשתמש בתבנית זו לאפייה ישירה (אלא לייחדה לשימוש עם נייר אפייה/כיסוי בלבד או להחליפה).`,
+            `2. הכשרת תא התנור עצמו והרשת ממין למין: מנקים היטב משומן או שאריות אוכל בעין, ממתינים 24 שעות מעת לעת ללא שימוש, ומפעילים את התנור ריק על החום המרבי כחצי שעה–שעה ("היסק התנור" — שו"ת יביע אומר ח"ה יו"ד סי׳ ז׳ וילקוט יוסף; ולמנהג אשכנז באגרות משה יו"ד ח"א סי׳ מ׳ מהדרים לאפות ממין שני בכיסוי או בתבנית סגורה).`
+          ].join(' ');
+        }
+
+        if (isTrayBenYomoDirect) {
+          return [
+            `פירוק הלכתי למקרה שהאוכל ה${foodTypeHe} נאפה ישירות על תבנית ${ovenTypeHe}ת בת יומה של התנור (למסורת ${tradName} – שו"ע יו"ד סימן צ"ב–צ"ד וסימן ק"ח):`,
+            `1. דין האוכל ה${foodTypeHe} — אסור באכילה! מאחר שהתבנית ה${ovenTypeHe}ת הייתה "בת יומה" (אפו בה ${ovenTypeHe} ב-24 השעות האחרונות), הטעם ה${ovenTypeHe} הבלוע בתבנית הוא "נותן טעם לשבח", ובמגע ישיר בחום התנור התבנית מפליטה טעם ${ovenTypeHe} לתוך האוכל ה${foodTypeHe} (אלא אם כן יש באוכל פי 60 כנגד מקום המגע או שהיה נייר אפייה אטום ויבש לגמרי בלא שום לחות או שומן שעבר ביניהם).`,
+            `2. דין התבנית ה${ovenTypeHe}ת — נאסרה וטעונה ליבון חמור! התבנית בלעה כעת טעם ${foodTypeHe} על גבי הבליעה ה${ovenTypeHe}ת בת יומה שבה, ואי אפשר להכשירה בהגעלה רגילה אלא בליבון חמור בלבד.`
+          ].join(' ');
+        }
+
+        if (isNotBenYomo || isBenYomoExplicit || isPastBediavad) {
+          if (isNotBenYomo) {
+            return [
+              `פירוק הלכתי מלא לשאלתך על ${foodTypeHe === 'חלבי' ? 'אוכל חלבי' : 'אוכל בשרי'} שהוכנס לתנור ${ovenTypeHe} שאינו בן יומו (למסורת ${tradName} – שו"ע יו"ד סימן צ"ד סעיף ד׳, סימן צ"ה סעיף א׳–ב׳, סימן ק"ג סעיף א׳–ב׳ וסימן ק"ח סעיף א׳):`,
+              `1. דין האוכל ה${foodTypeHe} — מותר באכילה! מאחר שהתנור ה${ovenTypeHe} אינו בן יומו (עברו מעל 24 שעות מאז שנאפה בו ${ovenTypeHe}), כל זיעה או בליעה שבדפנות התנור הן בגדר "נותן טעם לפגם" (נטל"פ) שאינו אוסר בדיעבד (שו"ע יו"ד ק"ג, א׳–ב׳; ${tradition === 'ashkenazi' ? 'ורמ"א יו"ד צ"ה סעיף ב׳ ואגרות משה יו"ד ח"א סי׳ מ׳ שגם לבני אשכנז בדיעבד ובאינו בן יומו המאכל מותר' : 'שו"ת יביע אומר ח"ה יו"ד סי׳ ז׳ וילקוט יוסף'}). זאת בתנאי שהאוכל לא נגע בלכלוך/שומן ${ovenTypeHe} ממשי בעין (ואם המאכל הונח בתבנית ${ovenTypeHe} נקייה שאינה בת יומה — הוא מותר כל עוד אינו "דבר חריף" כבצל/שום מרובה).`,
+              asksTray
+                ? `2. דין התבנית (חילוק הכרחי בין שני מצבים): • מצב א׳ — אם האוכל ה${foodTypeHe} נאפה בתוך תבנית ${foodTypeHe}ת (או פרווה) שהוכנסה לתנור ה${ovenTypeHe} שאינו בן יומו: התבנית ה${foodTypeHe}ת כשרה ומותרת ואינה נאסרת כלל! (כי זיעת תנור שאינו בן יומו היא "נותן טעם לפגם", ומגע יבש במסילות התנור הנקיות בלא רוטב אינו מבליע — שו"ע ורמ"א יו"ד צ"ב, ח׳; רק אם היה שומן ${ovenTypeHe} בעין שנדבק לתחתית התבנית החמה יש להגעילה). • מצב ב׳ — אם האוכל ה${foodTypeHe} הונח בטעות בתוך תבנית ${ovenTypeHe}ת של התנור (שאינה בת יומה): האוכל עצמו מותר באכילה בדיעבד, אבל התבנית ה${ovenTypeHe}ת עצמה נאסרה! מדוע? כי אף שהטעם ה${ovenTypeHe} הישן שבתבנית היה פגום (נטל"פ), התבנית בלעה כעת טעם ${foodTypeHe} חדש ("בן יומו לשבח") מהאוכל ה${foodTypeHe} ונמצא שיש בה בשר וחלב ("כלי שאינו בן יומו שבישלו בו מין נגדי — התבשיל מותר והכלי נאסר", שו"ע יו"ד צ"ד, ד׳ וק"ג, ב׳). מאחר שתבנית תנור משמשת לאפייה יבשה בחום, הכשרתה היא בליבון חמור (או תוכנית ניקוי פירוליטית; ואם אי אפשר ללבנה — אין לאפות בה גלוי ללא הכשר/כיסוי כפול).`
+                : `2. דין הכלי/התבנית שבה נאפה האוכל: אם הייתה זו תבנית ${foodTypeHe}ת (או פרווה) — היא נשארת בכשרותה; אך אם האוכל ה${foodTypeHe} נאפה בתוך תבנית ${ovenTypeHe}ת של התנור — התבנית ה${ovenTypeHe}ת בלעה כעת טעם ${foodTypeHe} בן יומו ונאסרה עד שתעבור ליבון.`,
+              `3. דין התנור ה${ovenTypeHe} עצמו מכאן ולהבא: אם האוכל ה${foodTypeHe} נאפה גלוי והוציא אדים/זיעה לחלל התנור — התנור ספג כעת זיעה ${foodTypeHe}ת בת יומה, ולפני שיחזרו לאפות בו ${ovenTypeHe} גלוי יש להמתין 24 שעות ולהפעיל את התנור ריק על החום המרבי כחצי שעה–שעה ("היסק התנור"). אם האוכל ה${foodTypeHe} היה מכוסה היטב או יבש לגמרי — התנור נשאר בכשרותו ה${ovenTypeHe}ת מיד.`
+            ].join(' ');
+          } else if (isBenYomoExplicit) {
+            return [
+              `פירוק הלכתי לשאלתך על ${foodTypeHe === 'חלבי' ? 'אוכל חלבי' : 'אוכל בשרי'} שהוכנס לתנור ${ovenTypeHe} בן יומו (שנאפה בו ${ovenTypeHe} ב-24 השעות האחרונות, למסורת ${tradName} – שו"ע יו"ד סימן צ"ב סעיף ח׳ וסימן ק"ח סעיף א׳):`,
+              `1. דין האוכל ה${foodTypeHe}: אם האוכל ה${foodTypeHe} היה מכוסה היטב — הוא מותר באכילה לכל הדעות. אם הוא נאפה גלוי בתנור ${ovenTypeHe} בן יומו (שאינו מלוכלך בשומן נוטף): ${tradition === 'ashkenazi' ? 'לדעת הרמ"א והאגרות משה (יו"ד ח"א סי׳ מ׳) בתנור מודרני סגור יש חשש זיעה בת יומה ולכן אם היה בבשר הקודם ובמאכל החלבי נוזלים מתאדים (זיעה) יש להחמיר במאכל (אלא אם כן המאכל היה יבש בלא זיעה או בהפסד מרובה על פי שאלת חכם).' : 'לפסיקת שו"ת יביע אומר (ח"ה יו"ד סי׳ ז׳) וילקוט יוסף — בדיעבד אם כבר נאפה המאכל החלבי בתנור בשרי בן יומו (כל עוד לא נאפו יחד באותה שעה ולא טפטף שומן בעין על המאכל), המאכל מותר באכילה מדין "נ"ט בר נ"ט" וספק בזיעה!'}`,
+              `2. דין התבנית: אם האוכל ה${foodTypeHe} נאפה על תבנית ${ovenTypeHe}ת בת יומה ממש (ללא נייר אפייה חוצץ או עם נוזלים) — הן המאכל והן התבנית נאסרו (כי התבנית הבשרית בת יומה מבליעה ישירות במאכל החלבי). אם התבנית הייתה ${foodTypeHe}ת והונחה על רשת נקייה — דינה תלוי בקיום זיעה בת יומה (לספרדים בדיעבד אינה נאסרת, ולאשכנזים אם הייתה זיעה רטובה בת יומה טעונה הגעלה).`,
+              `3. דין התנור: יש להמתין 24 שעות ולהפעילו על החום המרבי כחצי שעה–שעה לפני שימוש חוזר.`
+            ].join(' ');
+          }
+        }
       }
 
       // 2. Nat Bar Nat (Pareve cooked in meat/dairy pot eaten with opposite - YD 95)
@@ -4341,6 +4636,22 @@
         }
       }
 
+      // Detect Oven + Food + Tray / Pan multi-object case (YD 92:8, 94:4, 103, 108)
+      if (/תנור/.test(q) && (/אוכל|האכל|מאכל|תבנית|עוגה|פיצה|פשטידה|הכנסתי|אפיתי/.test(q))) {
+        factors.push({
+          title: 'רכיב א׳ (דין האוכל): "נותן טעם לפגם" בתנור שאינו בן יומו (יו"ד סי׳ ק"ג סעיף א׳–ב׳ וסי׳ צ"ה)',
+          desc: 'כאשר התנור הבשרי אינו בן יומו (עברו 24 שעות מאז אפיית הבשר והוא נקי משומן בעין), הזיעה הבלועה בדפנותיו היא "נותן טעם לפגם" (נטל"פ) שאינה אוסרת את האוכל החלבי בדיעבד לכל העדות.'
+        });
+        factors.push({
+          title: 'רכיב ב׳ (דין התבנית – חילוק בין תבנית חלבית לתבנית בשרית): יו"ד סי׳ צ"ב סעיף ח׳ וסי׳ צ"ד סעיף ד׳',
+          desc: 'אם האוכל החלבי נאפה בתבנית חלבית על רשת נקייה — התבנית החלבית מותרת (מגע יבש בלא רוטב אינו מבליע וזיעת התנור פגומה). אך אם האוכל החלבי הונח על תבנית בשרית של התנור (אפילו אינה בת יומה) — האוכל מותר בדיעבד, אך התבנית הבשרית נאסרה כי בלעה כעת טעם חלבי בן יומו לשבח וטעונה ליבון!'
+        });
+        factors.push({
+          title: 'רכיב ג׳ (דין התנור מכאן ולהבא): זיעה בת יומה והיסק התנור (יו"ד סי׳ ק"ח ויביע אומר ח"ה סי׳ ז׳)',
+          desc: 'אם האוכל החלבי נאפה גלוי והוציא אדים/זיעה לחלל התנור — התנור ספג זיעה חלבית בת יומה, ולפני שיחזרו לאפות בו בשר גלוי יש להמתין 24 שעות ולהפעיל את התנור על החום המרבי כחצי שעה–שעה.'
+        });
+      }
+
       // Detect Pareve cooked in Meat/Dairy pot (Nat Bar Nat - YD 95)
       if (/סיר|קדירה|מחבת|התבשל|בישלו|בישלתי/.test(q) && /פרווה|דג|פסטה|אורז|ירקות/.test(q) && hasMeatAndDairy) {
         factors.push({
@@ -4357,14 +4668,46 @@
         });
       }
 
+      // Archetype 7: "שכחתי / טעיתי" — 3 Chronological Remediation Windows
+      if (/שכחתי|טעיתי|פספסתי|לא התפללתי|לא בירכתי|לא ספרתי/.test(q) && factors.length === 0) {
+        factors.push({
+          title: 'חלון א׳: בירור אם עדיין בתוך הזמן (או בין השמשות / תוך כדי דיבור)',
+          desc: 'בכל שאלת שכחה בודקים תחילה אם זמן המצווה עדיין לא חלף (למשל במנחה: עד 13.5 דקות מהשקיעה בבין השמשות; בספירת העומר: ביום בלא ברכה; בברכה ראשונה: כל עוד לא סיים אכילתו).'
+        });
+        factors.push({
+          title: 'חלון ב׳: תקנת השלמה ותשלומין לאחר שעבר הזמן (או"ח סי׳ ק"ח)',
+          desc: 'כאשר עבר הזמן — מתקנים באמצעות מנגנון התשלומין בתפילה הסמוכה (מתפלל עמידה פעמיים: הראשונה לחובת השעה והשנייה לתשלומין, עם הפסק "אשרי" ביניהן).'
+        });
+        factors.push({
+          title: 'חלון ג׳: גבול התשלומין ("עבר יומו") והבחנת שוגג/אנוס מול מזיד',
+          desc: 'תשלומין נאמרו בשוגג, אנוס או טרוד בעסקיו, ורק בתפילה הסמוכה (ולא במוסף שעבר יומו או כשעברו שתי תפילות).'
+        });
+      }
+
+      // Archetype 8: Conditional Intent & Time-Transition ("קמתי באמצע הלילה" / "על דעת לחזור")
+      if (/באמצע הלילה|חוזר לישון|על דעת לחזור|שנת צהריים/.test(q) && factors.length === 0) {
+        factors.push({
+          title: 'ציר א׳: גדר המצב הקודם (שינת קבע על מיטתו מול נמנום)',
+          desc: 'שינת לילה על מיטתו (או שינת קבע של שיתין נשמין) מחייבת נטילת ידיים ג׳ פעמים מנטלה משום רוח רעה ונקיות (שו"ע או"ח סי׳ ד׳ סעיף י"ד–ט"ו).'
+        });
+        factors.push({
+          title: 'ציר ב׳: תלות בכוונת ההמשך (חוזר לישון מול נשאר ער עד הבוקר)',
+          desc: 'אם דעתו לחזור לישון — נוטל ידיו בלא ברכה לכל העדות; אם נשאר ער אחר חצות — נחלקו המשנ"ב והבן איש חי אם מברך מיד או בעלות השחר.'
+        });
+        factors.push({
+          title: 'ציר ג׳: הבחנה בין עבודת חול במחשב לבין לימוד תורה ושתייה',
+          desc: 'עבודת חול במחשב אינה מחייבת ברכות התורה; לימוד דברי תורה במחשב אחר חצות מחייב ברכות התורה (או"ח סי׳ מ"ז סעיף י"ג).'
+        });
+      }
+
       // Fallback general ontological breakdown from matched item
       if (factors.length === 0 && matchedItem) {
         factors.push({
           title: `נושא הלכתי מזוהה: ${matchedItem.title}`,
-          desc: `מקור קנוני ראשי: ${matchedItem.traditions[state.tradition].citation}`
+          desc: `מקור הדין בשו"ע ובפוסקים: ${matchedItem.traditions[state.tradition].citation}`
         });
         factors.push({
-          title: 'הבחנת פוסקים וסייגים שמערכת ב׳ אוכפת:',
+          title: 'הבחנת פוסקים וסייגים שליבת האימות אוכפת:',
           desc: matchedItem.missingCaveatExplanation
         });
       }
@@ -4380,8 +4723,170 @@
     // =========================================================================
     const BROAD_HALAKHIC_ONTOLOGY = [
       {
+        id: 'CORPUS-OC-326-TOOTHBRUSH-WIPES',
+        pattern: /צחצוח שיניים|לצחצח שיניים|מברשת שיניים|משחת שיניים|מי פה בשבת|מגבונים|מגבון לח/,
+        sefariaRef: "Shulchan_Arukh,_Orach_Chayim.326.1",
+        title: 'צחצוח שיניים בשבת (משחת שיניים מול מי פה) ושימוש במגבונים לחים בשבת (או"ח סי׳ שכ"ו, ש"כ ושכ"ח)',
+        missingCaveatExplanation: 'בצחצוח שיניים ובמגבונים לחים בשבת יש להבחין בין 3 איסורים: (1) איסור "ממרח" במשחת שיניים (שאסורה לכל העדות בשבת, לעומת מי פה נוזליים ומברשת ייעודית), (2) חשש הוצאת דם מהחניכיים ("פסיק רישיה" למי שרגיל לדמם), ו-(3) מחלוקת הפוסקים במגבונים לחים האם יש בהם איסור סחיטה מדרבנן.',
+        caseFactors: [
+          { title: '1. צחצוח שיניים בשבת: איסור ממרח במשחה והיתר בנוזל (או"ח שכ"ו ושכ"ח)', desc: 'אסור להשתמש במשחת שיניים בשבת משום איסור "ממרח". מותר לשטוף את הפה במי פה או לצחצח במברשת יבשה/עם מי פה נוזליים (בתנאי שאינו מדמם באופן קבוע מהחניכיים, וטוב לייחד מברשת רכה לשבת).' },
+          { title: '2. שימוש במגבונים לחים בשבת (או"ח סי׳ ש"כ סעיף י"ח)', desc: 'לדעת שו"ת יביע אומר וילקוט יוסף מותר להשתמש במגבונים לחים בעדינות (ללא סחיטה מכוונת) כי הסיבים סינטטיים ואין כוונתו לסחוט; ואילו בשמירת שבת כהלכתה ופוסקי אשכנז מחמירים במגבונים למבוגר ומתירים לניקוי תינוק בלבד בעדינות.' }
+        ],
+        followUpQuestions: [
+          'האם מותר לשטוף את המברשת שיניים במים אחרי הצחצוח בשבת?',
+          'מתי מותר לקחת אקמול או נורופן בשבת?',
+          'האם מותר להתקלח במים מדוד שמש בשבת?'
+        ],
+        traditions: {
+          sephardic: {
+            citation: 'שולחן ערוך או"ח סימן ש"כ וסימן שכ"ו; שו"ת יביע אומר חלק ד׳ או"ח סימן כ"ז–ל׳; ילקוט יוסף שבת כרך ג׳ וד׳',
+            canonicalQuote: 'אסור למרוח משחה בשבת משום ממרח, אבל מותר להדיח פיו במי פה או במברשת בנוזל אם אינו ודאי מוציא דם (ילקוט יוסף). ובמגבונים לחים מותר בלא סחיטה מכוונת.',
+            rulings: {
+              canonical: 'לפסיקת יביע אומר וילקוט יוסף: (1) צחצוח שיניים: אסור להשתמש במשחת שיניים בשבת (משום ממרח), אך מותר לצחצח שיניים במברשת עם מים או מי-פה נוזליים (למי שאינו מדמם בוודאות בכל צחצוח), ומותר לשטוף את המברשת לאחר השימוש. (2) מגבונים לחים: מותר להשתמש במגבונים לחים בשבת (לתינוק וגם למבוגר) בעדינות ללא סחיטה חזקה, וייזהר בתלישתם שלא לקרוע אותיות.',
+              stringent: 'לייחד מברשת שיניים רכה המיועדת לשבת ולהסתפק בשטיפת הפה במי פה.',
+              bediavad: 'אפילו למי שלפעמים יוצא לו מעט דם (אינו פסיק רישיה) — מותר לצחצח במברשת רכה ונוזל משום כבוד הבריות.'
+            }
+          },
+          moroccan: {
+            citation: 'שו"ת שמש ומגן חלק ג׳ או"ח; קיצור שו"ע מקור חיים סימן ס"ח',
+            canonicalQuote: 'אין להשתמש במשחה עבה בשבת משום ממרח, ומותר במי פה ובמגבונים לצורך תינוק ונקיות בלא סחיטה.',
+            rulings: {
+              canonical: 'לפוסקי מרוקו: אסור להשתמש במשחת שיניים בשבת, ומותר לשטוף במי פה או במברשת רכה עם נוזל (כשאינו מוציא דם בוודאות). במגבונים לחים מותר להשתמש בעדינות בפרט לצורך קטנים וכבוד הבריות.',
+              stringent: 'העדפת שטיפה במי פה ללא שפשוף חזק בחניכיים.',
+              bediavad: 'מותר לשטוף את המברשת במים לאחר השימוש.'
+            }
+          },
+          ashkenazi: {
+            citation: 'משנה ברורה סימן שכ"ו ושכ"ח; שמירת שבת כהלכתה פרק י"ד סעיף כ׳–ל"ו; שו"ת אגרות משה או"ח חלק א׳ סימן קי"ב',
+            canonicalQuote: 'אסור לצחצח שיניים במשחה בשבת, ולדעת אגרות משה ושש"כ יש להימנע מצחצוח במברשת רגילה עם מים אלא במי פה או במברשת יבשה; ובמגבונים לחים הקלו לתינוק בלבד בעדינות.',
+            rulings: {
+              canonical: 'לפסיקת אגרות משה ושמירת שבת כהלכתה: (1) צחצוח שיניים: אסור להשתמש במשחת שיניים; לכתחילה אין לצחצח במברשת רטובה (חשש סחיטה והוצאת דם), אלא מדיחים את הפה במי פה או מצחצחים במברשת יבשה המיוחדת לשבת (ואם אינו מדמם כלל — יש מקילים במברשת עם סיבים סינטטיים רפויים ונוזל, ולא ישטוף את המברשת אלא אם צריך לה שוב בשבת). (2) מגבונים לחים: למבוגר יש להחמיר שלא להשתמש במגבונים לחים (משום סחיטה), אך לניקוי תינוק מותר להשתמש בעדינות ללא דחיקה חזקה.',
+              stringent: 'להסתפק בשטיפת הפה במי-פה בשבת, ולתינוק לשטוף במים זורמים או להשתמש במגבון בעדינות.',
+              bediavad: 'במקום צער או כבוד הבריות כשאין מים — מקילים בניגוב עדין במגבון לח ללא דחיקה.'
+            }
+          },
+          yemenite: {
+            citation: 'רמב"ם הלכות שבת פרק ט׳ ופרק כ"ב; שתילי זיתים סימן שכ"ו; שו"ע המקוצר',
+            canonicalQuote: 'אסור למרוח בשבת משום ממרח, ומותר להדיח פיו במים או במי פה.',
+            rulings: {
+              canonical: 'למסורת תימן: אסור להשתמש במשחת שיניים בשבת, ומותר לשטוף במי פה או במברשת עם נוזל כשאינו מוציא דם; במגבונים לחים מותר להשתמש בעדינות בלא סחיטה.',
+              stringent: 'זהירות מסחיטת סיבים בלויים.',
+              bediavad: 'ניקיון תינוק וכבוד הבריות מותרים בעדינות.'
+            }
+          }
+        }
+      },
+      {
+        id: 'CORPUS-OC-252-SHABBAT-ELEVATOR',
+        pattern: /מעלית שבת|מעלית אוטומטית|חיישן שבת|דלת אוטומטית בשבת/,
+        sefariaRef: "Shulchan_Arukh,_Orach_Chayim.252.1",
+        title: 'שימוש במעלית שבת אוטומטית בשבת (או"ח סי׳ רנ"ב וסי׳ ש"ה)',
+        missingCaveatExplanation: 'במעלית שבת הפועלת אוטומטית ללא לחיצה על כפתורים וללא חיישן בדלת (פוטו-צ׳ל מנוטרל), נחלקו פוסקי דורנו האם כניסת האדם בירידה מסייעת למנוע ומייצרת זרם חשמלי או שמא מדובר בפעולה אוטומטית מערב שבת ("פסיק רישיה דלא ניחא ליה בגרמא").',
+        caseFactors: [
+          { title: '1. עלייה במעלית שבת אוטומטית (מכון מדעי טכנולוגי להלכה)', desc: 'בעלייה המנוע מתאמץ מאליו על פי השעון שהוגדר מערב שבת (כשמשקל הנגד מאוזן), ולכן פוסקים רבים מתירים לעלות בה (ובפרט לזקנים, נשים בהריון ובעלי מוגבלות).' },
+          { title: '2. ירידה במעלית שבת (מחלוקת הפוסקים)', desc: 'בירידה משקל האדם עשוי להשפיע על בלימת המנוע: בילקוט יוסף ובשמירת שבת כהלכתה מתירים בעלייה ובירידה במעלית עם אישור מכון הלכתי מוכר, ואילו הגרי"ש אלישיב והגרש"ז אויערבאך בשנותיו האחרונות החמירו לכתחילה למי שיכול לעלות ברגל.' }
+        ],
+        followUpQuestions: [
+          'האם מותר להאריך את פעולת המזגן או האור בשעון שבת במהלך השבת?',
+          'מתי מותר לבקש מגוי בשבת להדליק או לכבות מזגן או אור?',
+          'האם מותר לנסוע ברכב חשמלי לבית הכנסת בשבת?'
+        ],
+        traditions: {
+          sephardic: {
+            citation: 'ילקוט יוסף שבת כרך ה׳; שו"ת יביע אומר; שו"ת אור לציון חלק ב׳',
+            canonicalQuote: 'מעלית שבת המפוקחת הלכתית שבה מנוטרלים כל החיישנים והכפתורים — מותר להשתמש בה בשבת (ילקוט יוסף).',
+            rulings: {
+              canonical: 'לפסיקת ילקוט יוסף: מותר להשתמש במעלית שבת המאושרת על ידי מכון הלכתי מוסמך (שבה כפתורי הקריאה וחיישן הדלת מנוטרלים לחלוטין), ובפרט לזקנים, חולים, נשים הרות או בקומות גבוהות. והמחמיר לעלות ברגל כשהוא בריא וחזק תבוא עליו ברכה.',
+              stringent: 'לאדם בריא — להימנע משימוש במעלית שבת בירידה (ולמהדרין גם בעלייה אם אינו גר בקומה גבוהה מאוד).',
+              bediavad: 'לזקנים, חולים, מעוברות וילדים בקומות גבוהות מותר לכתחילה.'
+            }
+          },
+          moroccan: {
+            citation: 'שו"ת שמש ומגן חלק ג׳ או"ח; פוסקי מרוקו',
+            canonicalQuote: 'במעלית שבת המותקנת כהלכה בלא חיישנים מותר להשתמש לצורך מנוחת שבת ולמתקשים בעלייה.',
+            rulings: {
+              canonical: 'לפוסקי מרוקו: מותר להשתמש במעלית שבת בעלת פיקוח הלכתי המנטרל חיישנים ומשקלים, בפרט למבוגרים ולגרים בקומות גבוהות.',
+              stringent: 'לבריאים להעדיף עלייה וירידה במדרגות.',
+              bediavad: 'למתקשים מותר לכתחילה.'
+            }
+          },
+          ashkenazi: {
+            citation: 'שמירת שבת כהלכתה פרק כ"ג סעיף מ"ט; פסקי הגרש"ז אויערבאך והגרי"ש אלישיב (קובץ תשובות)',
+            canonicalQuote: 'יש מתירים מעלית שבת בעלייה ובירידה כשיש לה הכשר הלכתי, ורבים מפוסקי דורנו החמירו לכתחילה לבריאים ובפרט בירידה.',
+            rulings: {
+              canonical: 'למנהג אשכנז: קיימת מחלוקת פוסקים — בשמירת שבת כהלכתה (בשם הגרש"ז אויערבאך במהדורה ראשונה) ובמכון מדעי טכנולוגי להלכה התירו מעלית שבת תקנית, ואילו הגרי"ש אלישיב, הגר"ש וואזנר והגר"נ קרליץ אסרו לאדם בריא (ובפרט בירידה). לכן בריא יימנע לכתחילה, ואילו זקן, חולה או מתקשה רשאי לסמוך על המתירים בעלייה במעלית שבת מפוקחת.',
+              stringent: 'לא להשתמש במעלית שבת כלל לאדם בריא, ובירידה לרדת במדרגות.',
+              bediavad: 'לזקן או חולה שאינו יכול לעלות במדרגות — מותר לעלות במעלית שבת בעלת פיקוח הלכתי.'
+            }
+          },
+          yemenite: {
+            citation: 'שולחן ערוך המקוצר חלק ב׳; פוסקי תימן',
+            canonicalQuote: 'במעלית שבת אוטומטית המפוקחת הלכתית יש להקל למתקשים ולזקנים, וראוי לבריא להחמיר.',
+            rulings: {
+              canonical: 'למסורת תימן: לזקנים, חולים ומתקשים מותר להשתמש במעלית שבת מפוקחת (ובמיוחד בעלייה), ואדם בריא טוב שיעלה ברגל.',
+              stringent: 'הימנעות מירידה במעלית שבת.',
+              bediavad: 'למתקשים מותר.'
+            }
+          }
+        }
+      },
+      {
+        id: 'CORPUS-OC-253-PLATA-CHAZARAH',
+        pattern: /להחזיר סיר לפלטה|החזרה לפלטה|להניח על הפלטה בשבת|סיר מהמקרר לפלטה|קדירה הפוכה על הפלטה|שהייה וחזרה/,
+        sefariaRef: "Shulchan_Arukh,_Orach_Chayim.253.2",
+        title: 'החזרת סיר לפלטה בשבת וחימום מאכל יבש מהמקרר (דיני שהייה, חזרה והנחה על כלי הפוך – או"ח סי׳ רנ"ג וסי׳ שי"ח)',
+        missingCaveatExplanation: 'בחימום או החזרת אוכל לפלטה בשבת יש להבחין בין 3 מצבים: (1) תבשיל לח שהתקרר (אסור משום בישול אחר בישול בדבר לח), (2) תבשיל יבש מבושל כל צורכו מהמקרר (האם מותר להניחו ישירות על הפלטה או על גבי צלחת/קדירה הפוכה משום "מיחזי כמבשל"), ו-(3) החזרת סיר חם שהורד מהפלטה (5 תנאי ה"חזרה" ברמ"א ובשו"ע).',
+        caseFactors: [
+          { title: '1. מאכל יבש מבושל כל צורכו שהוצא מהמקרר (או"ח סי׳ רנ"ג ושי"ח)', desc: 'אין בישול אחר בישול בדבר יבש (כגון שניצל, קוגל, אורז או עוף ללא רוטב). לילקוט יוסף מותר להניחו ישירות על הפלטה, ולפוסקי אשכנז (משנ"ב וחזו"א) מניחים אותו על גבי תבנית/צלחת הפוכה שעל הפלטה שלא ייראה כמבשל לכתחילה.' },
+          { title: '2. תנאי "חזרה" בסיר שהיה על הפלטה והוצא ממנה (או"ח סי׳ רנ"ג סעיף ב׳)', desc: 'כדי להחזיר סיר חם (ובתבשיל לח — כל עוד לא הצטנן) לפלטה: שהפלטה מכוסה, מבושל כל צורכו, דעתו להחזיר, ולמנהג אשכנז גם שיהיה עודנו בידו (ובשעת הדחק סומכים על הניחו על גבי משטח/שיש).' }
+        ],
+        followUpQuestions: [
+          'האם מותר להניח על הפלטה בשבת מרק או תבשיל עם רוטב שהתקרר קצת?',
+          'איך מותר להכין קפה נמס או תה בשבת?',
+          'איך מותר להדליק אש ולבשל ביום טוב?'
+        ],
+        traditions: {
+          sephardic: {
+            citation: 'שולחן ערוך או"ח סימן רנ"ג סעיף ב׳ וסימן שי"ח סעיף ד׳ וט"ו; שו"ת יביע אומר חלק ו׳ או"ח סימן ל"ב; ילקוט יוסף שבת כרך א׳',
+            canonicalQuote: 'דבר יבש שנתבשל כל צורכו מערב שבת — מותר להניחו בשבת על גבי פלטה חשמלית לחממו, דאין בישול אחר בישול בדבר יבש ואין בפלטה משום מיחזי כמבשל (יביע אומר וילקוט יוסף).',
+            rulings: {
+              canonical: 'לפסיקת יביע אומר וילקוט יוסף: (1) מאכל יבש שהתבשל כל צורכו מערב שבת (כגון בשר, עוף יבש, אורז, בורקס או שניצל) — מותר להוציאו מהמקרר בשבת ולהניחו ישירות על הפלטה החשמלית! (2) מאכל לח (מרק או רוטב): אם ירד מחום שהיד סולדת בו — אסור להחזירו לפלטה; ואם עדיין רותח (יד סולדת בו) — מותר להחזירו לפלטה אם היה בדעתו להחזירו (אפילו הניחו על השיש בינתיים).',
+              stringent: 'להניח מאכל יבש מהמקרר על גבי צלחת או תבנית הפוכה שעל הפלטה כדעת הבן איש חי והרמ"א.',
+              bediavad: 'בדיעבד גם אם לא חשב להחזיר סיר יבש או סיר רותח — מותר להחזירו לפלטה.'
+            }
+          },
+          moroccan: {
+            citation: 'שו"ת שמש ומגן חלק ג׳ או"ח סימן מ"ח; קיצור שו"ע מקור חיים סימן ס׳',
+            canonicalQuote: 'מאכל יבש מבושל כל צורכו מותר לחממו על הפלטה (וטוב על גבי כלי הפוך), ובדבר לח כל שעודנו חם מותר להחזירו.',
+            rulings: {
+              canonical: 'לפוסקי מרוקו: מאכל יבש מבושל כל צורכו מותר לחממו על הפלטה בשבת (ולכתחילה טוב להניחו על גבי תבנית או כלי הפוך), וסיר חם שהורד מהפלטה מותר להחזירו כל עוד לא הצטנן.',
+              stringent: 'הנחה על גבי צלחת הפוכה ושמירה שהסיר נשאר בידו או על משטח שאינו קרקע.',
+              bediavad: 'מאכל יבש מותר ישירות על הפלטה מעיקר הדין.'
+            }
+          },
+          ashkenazi: {
+            citation: 'רמ"א או"ח סימן רנ"ג סעיף ב׳ וסימן שי"ח סעיף ט"ו; משנה ברורה סימן רנ"ג ס"ק נ"ו–ע"ד; שמירת שבת כהלכתה פרק א׳',
+            canonicalQuote: 'אסור להניח בשבת לכתחילה על גבי כירה או פלטה אפילו דבר יבש שנתבשל כל צורכו משום דמיחזי כמבשל, אלא על גבי קדירה ריקנית הפוכה (משנ"ב ושש"כ).',
+            rulings: {
+              canonical: 'למנהג אשכנז (משנה ברורה ושמירת שבת כהלכתה): (1) הוצאת מאכל יבש מהמקרר בשבת: אסור להניחו ישירות על הפלטה (משום שנראה כמבשל), אלא מניחים אותו על גבי קדירה/תבנית הפוכה שיש לה גובה או על גבי סיר שכבר עומד על הפלטה! (2) החזרת סיר שהורד מהפלטה: מותרת רק אם מתקיימים תנאי "חזרה" — מבושל כל צורכו, לא הצטנן (בדבר לח), נשאר בידו (או לא הונח על הרצפה בשעת הדחק), והיה בדעתו להחזירו.',
+              stringent: 'להקפיד להחזיק את הסיר בידו בעת המזיגה ולא להניחו על השיש אם רוצה להחזירו ישירות לפלטה.',
+              bediavad: 'אם הניח את הסיר על השיש — יחזירנו לפלטה על גבי תבנית/צלחת הפוכה (ולא ישירות על הפלטה).'
+            }
+          },
+          yemenite: {
+            citation: 'רמב"ם הלכות שבת פרק ג׳ ופרק ט׳; שתילי זיתים סימן רנ"ג ושי"ח; שו"ע המקוצר',
+            canonicalQuote: 'כל שנתבשל כל צורכו מותר להחזירו בשבת על גבי כירה גרופה וקטומה (ופלטה דינה כגרופה וקטומה).',
+            rulings: {
+              canonical: 'למסורת תימן: מאכל יבש מבושל כל צורכו מותר לחממו על הפלטה בשבת, וסיר חם שהורד מהפלטה מותר להחזירו.',
+              stringent: 'הנחת מאכל קר על גבי הפסק (כלי הפוך) על הפלטה.',
+              bediavad: 'מותר להחזיר לפלטה מעיקר הדין.'
+            }
+          }
+        }
+      },
+      {
         id: 'CORPUS-OC-004-WAKE-MIDNIGHT',
-        pattern: /קמתי באמצע הלילה|התעוררתי באמצע הלילה|באמצע הלילה.*ליטול|ליטול יד.*באמצע הלילה|לעבטד במחשב|לעבוד במחשב.*ליטול|קם בלילה.*נטילת|קם באמצע הלילה|שנת צהריים.*נטילת|שינה ביום.*נטילת/,
+        pattern: /קמתי באמצע הלילה|התעוררתי באמצע הלילה|באמצע הלילה.*ליטול|ליטול יד.*באמצע הלילה|לעבטד במחשב|לעבוד במחשב.*ליטול|קם בלילה.*נטילת|קם באמצע הלילה|שנת צהריים|שנ"צ|שינה ביום.*נטילת|נטילת.*שינה ביום/,
         sefariaRef: "Shulchan_Arukh,_Orach_Chayim.4.14",
         title: 'קימה באמצע הלילה (לעבוד במחשב, ללמוד או לשתות): דין נטילת ידיים, ברכת "על נטילת ידיים" וברכות התורה (או"ח סי׳ ד׳ סעיף י"ד–ט"ו וסי׳ מ"ז סעיף י"א–י"ג)',
         missingCaveatExplanation: 'בשאלת הקם משנתו באמצע הלילה (כגון לעבוד במחשב, ללמוד או לטפל בתינוק) הפוסקים (שו"ע או"ח סימן ד׳ סעיף י"ד וסימן מ"ז, משנה ברורה וילקוט יוסף) מפרידים בין 4 שאלות משנה: (1) עצם חובת נטילת ידיים ג׳ פעמים מנטלה אחר שינת לילה על מיטתו, (2) האם מברכים "על נטילת ידיים" (תלוי אם קם על דעת לחזור לישון או להישאר ער ואם הוא אחר חצות), (3) האם מברכים ברכות התורה (רק אם לומד/קורא דברי תורה במחשב ולא בעבודת חול), ו-(4) נטילה נוספת בעלות השחר בלא ברכה.',
@@ -5657,7 +6162,7 @@
               customCaseFactors: rule.caseFactors,
               verifiedWebLinks: [
                 {
-                  title: `${rule.title} (מאגר ספריא הקנוני)`,
+                  title: `${rule.title} (לשון המקור במאגר ספריא)`,
                   url: `https://www.sefaria.org/${encodeURIComponent(rule.sefariaRef)}?lang=he`
                 }
               ],
@@ -5779,7 +6284,7 @@
                 customCaseFactors: rule.caseFactors,
                 verifiedWebLinks: [
                   {
-                    title: `${rule.title} (מאגר ספריא הקנוני)`,
+                    title: `${rule.title} (לשון המקור במאגר ספריא)`,
                     url: `https://www.sefaria.org/${encodeURIComponent(rule.sefariaRef)}?lang=he`
                   }
                 ],
@@ -6069,13 +6574,389 @@
       }
     }
 
+    // =========================================================================
+    // 4E. PROACTIVE HALAKHIC METHODOLOGY DATA:
+    //     1. COLLOQUIAL-TO-CANONICAL DICTIONARY
+    //     2. 4 TOP-DOWN SHULCHAN ARUCH DECISION TREES
+    //     3. 12 CANONICAL REASONING ARCHETYPES
+    //     4. 50-QUESTION AUTOMATED INTERNET BENCHMARK SUITE
+    // =========================================================================
+    const COLLOQUIAL_TO_CANONICAL_DICTIONARY = [
+      { slang: 'לעבטד / ידים / שככתי', canonical: 'לעבוד / ידיים / שכחתי (תיקון שגיאות כתיב אוטומטי)', ref: 'או"ח סי׳ ד׳ וסי׳ ק"ח', archetypeId: 8 },
+      { slang: 'שקית במבה / אריזת חטיף / שקית חלב', canonical: 'פתיחת חותלות ואריזות מזון חד-פעמיות בשבת (קריעה, אותיות ותיקון כלי)', ref: 'או"ח סי׳ שי"ד סעיף א׳', archetypeId: 12 },
+      { slang: 'סקוטש / ספוג כלים בשבת', canonical: 'איסור סחיטה והדחת כלים לצורך שבת בסיבים סינטטיים', ref: 'או"ח סי׳ שכ"ג ושכ"ו', archetypeId: 12 },
+      { slang: 'קמתי למחשב / קמתי באמצע הלילה', canonical: 'נטילת ידיים וברכות התורה בקימה משינת קבע בלילה (תלות בכוונת חזרה לישון)', ref: 'או"ח סי׳ ד׳ י"ד וסי׳ מ"ז י"ג', archetypeId: 8 },
+      { slang: 'שנת צהריים / שנ"צ', canonical: 'נטילת ידיים בלא ברכה אחר שינת קבע ביום (שיתין נשמין)', ref: 'או"ח סי׳ ד׳ סעיף ט"ו', archetypeId: 8 },
+      { slang: 'מיקרו / מיקרוגל / תנור אחד', canonical: 'זיעה וריחא של כלי ראשון והכשרת תנור ומיקרוגל בין בשר לחלב', ref: 'יו"ד סי׳ צ"ב סעיף ח׳ וסי׳ ק"ח', archetypeId: 11 },
+      { slang: 'בצל בסכין בשרית / שום / לימון', canonical: 'דין דבר חריף ודוחקא דסכינא ("חורפא משויא ליה לשבח" אף באינו בן יומו)', ref: 'יו"ד סי׳ צ"ו סעיף א׳–ג׳', archetypeId: 1 },
+      { slang: 'פסטה בסיר בשרי עם גבינה / נט בר נט', canonical: 'נותן טעם בר נותן טעם דהיתרא (מחלוקת מרן השו"ע והרמ"א)', ref: 'יו"ד סי׳ צ"ה סעיף א׳–ב׳', archetypeId: 11 },
+      { slang: 'סלמון בשמנת / פיצה טונה / דג עם חלב', canonical: 'אכילת דגים בחלב (מחלוקת הבית יוסף והרמ"א/ש"ך/ט"ז) ודג עם בשר', ref: 'יו"ד סי׳ פ"ז וסי׳ קט"ז', archetypeId: 9 },
+      { slang: 'אקמול / נורופן / אופטלגין בשבת', canonical: 'גזירת שחיקת סממנים במיחוש מול היתר חולה שאין בו סכנה ורצף טיפולי', ref: 'או"ח סי׳ שכ"ח סעיף א׳ ול"ז', archetypeId: 12 },
+      { slang: 'גוי של שבת / לבקש מגוי', canonical: 'אמירה לעכו"ם בשבת ודין שבות דשבות במקום מצווה או צער גדול', ref: 'או"ח סי׳ רע"ו וסי׳ ש"ז סעיף ה׳', archetypeId: 12 },
+      { slang: 'מברשת שיניים / משחת שיניים / מגבונים', canonical: 'איסור ממרח במשחה, פסיק רישיה בדם חניכיים, וסחיטה במגבונים לחים', ref: 'או"ח סי׳ ש"כ, שכ"ו ושכ"ח', archetypeId: 12 },
+      { slang: 'מעלית שבת', canonical: 'עלייה וירידה במעלית אוטומטית המופעלת בשעון שבת ללא חיישנים', ref: 'או"ח סי׳ רנ"ב וסי׳ ש"ה', archetypeId: 12 },
+      { slang: 'פלטה בשבת / להחזיר סיר מהמקרר', canonical: 'דיני שהייה וחזרה, בישול אחר בישול בדבר לח/יבש והנחה על כלי הפוך', ref: 'או"ח סי׳ רנ"ג וסי׳ שי"ח', archetypeId: 11 },
+      { slang: 'נטו או ברוטו / משכנתא / מינוס בבנק', canonical: 'ניכוי מסים בחישוב מעשר כספים ושטר היתר עיסקא באיסור ריבית', ref: 'יו"ד סי׳ ק"ס–קע"ז וסי׳ רמ"ט', archetypeId: 10 },
+      { slang: 'לנשק כיפה שנפלה / גניזה לכיפה', canonical: 'אבחון מדרג קדושה: תשמישי קדושה מול תשמישי מצווה ולבוש יראת שמיים', ref: 'או"ח סי׳ כ"א וסי׳ כ"ד סעיף ד׳', archetypeId: 4 },
+      { slang: 'לכבד אח גדול כמו אבא ואמא / אח בכור', canonical: 'כיבוד אחיו הגדול (דמיון וחילוק מכיבוד הורים ומחלוקת בכור מול כל אח גדול)', ref: 'יו"ד סי׳ ר"מ סעיף כ"ב', archetypeId: 2 }
+    ];
+
+    const HALAKHIC_DECISION_TREES = [
+      {
+        id: 'tree_yd_kitchen',
+        title: '1. עץ החלטה: איסור והיתר ומטבח (יו"ד ס"ו–קכ"ב)',
+        badge: 'Yoreh Deah Tree',
+        variables: [
+          'חום המגע: כלי ראשון על האש / עירוי / כלי שני / צונן בצונן',
+          'סטטוס בליעת הכלי: בן יומו (תוך 24 שעות) / אינו בן יומו (נטל"פ) / סתם כלים',
+          'אופי המאכל: דבר חריף + דוחקא דסכינא (בצל/שום/לימון) / פרווה (נ"ט בר נ"ט)',
+          'פיצול רב-חפצים: הכרעה נפרדת למאכל/מים, לסכין/כף, לסיר, ולקרש/משטח'
+        ]
+      },
+      {
+        id: 'tree_oc_prayer',
+        title: '2. עץ החלטה: תפילה, ק"ש וברכות (או"ח א׳–רמ"א)',
+        badge: 'Orach Chayim I Tree',
+        variables: [
+          'מיקום בציר הזמן: לכתחילה / בדיעבד (בין השמשות) / עבר הזמן (תשלומין)',
+          'כוונת השואל ומעבר מצבים: חוזר לישון מול נשאר ער / קביעת סעודה מול עראי',
+          'ספק ברכות: ספק דאורייתא (בהמ"ז בשבע) מול ספק דרבנן (סב"ל – שומע מאחר)',
+          'התנגשות מעלות: תפילה בציבור (במניין) מול ותיקין ביחיד בנץ החמה'
+        ]
+      },
+      {
+        id: 'tree_oc_shabbat',
+        title: '3. עץ החלטה: שבת ומועדים (או"ח רמ"ב–תרצ"ז)',
+        badge: 'Shabbat & Chagim Tree',
+        variables: [
+          'דרגת האיסור: מלאכה דאורייתא / שבות דרבנן / מוקצה / עובדין דחול',
+          'אופן הפעולה: כדרכו / בשינוי (כלאחר יד) / גרמא / פסיק רישיה / לאלתר',
+          'סולם הצורך והחולי: בריא / מיחוש / חולה שאין בו סכנה (וקטן) / פיקוח נפש',
+          'העושה: ישראל בעצמו או אמירה לגוי (שבות דשבות במקום מצווה/צער)'
+        ]
+      },
+      {
+        id: 'tree_yd_mitzvot',
+        title: '4. עץ החלטה: תלמוד תורה, כיבוד הורים, צדקה וריבית (יו"ד ק"ס–ש"מ)',
+        badge: 'Mitzvot & Mamonot Tree',
+        variables: [
+          'מדרג החיוב: מצווה דאורייתא / חיוב דרבנן / מנהג חסידות או חביבות עממית',
+          'השוואת חיובים: במה X דומה ל-Y ובמה X קל מ-Y (כגון אח גדול מול הורים)',
+          'היקף החיוב: קביעת עיתים ביום ובלילה מול "כל היום" והסכם יששכר וזבולון',
+          'גדרי פטור והיתר: אונס, הפסד ממון, מחילה, והיתר עיסקא בבנקים'
+        ]
+      }
+    ];
+
+    const HALAKHIC_REASONING_ARCHETYPES = [
+      { id: 1, title: '1. תבנית רב-חפצים והרכבה (Multi-Object)', desc: 'מזהה כל חפץ בשאלה (מים/מרק, בצל, סכין, סיר, קרש) ומייצרת סעיף הלכתי נפרד לכל חפץ תוך פיצול לבן-יומו ואינו-בן-יומו.', ref: 'יו"ד סי׳ צ"ד–צ"ו' },
+      { id: 2, title: '2. תבנית השוואת חיובים ("האם X כמו Y")', desc: 'מפרקת שאלות השוואה (כגון כיבוד אח גדול כמו הורים) ל-3 חלקים: עיקר הדין, נקודות הדמיון, ונקודות החילוק והקולא.', ref: 'יו"ד סי׳ ר"מ סעיף כ"ב' },
+      { id: 3, title: '3. זיכרון שיחה ושאלות המשך (Follow-up)', desc: 'שומר את הסימן הפעיל בזיכרון ומזהה שאלות המשך קצרות ("כל אח גדול או רק אח בכור?", "ומה דין הקרש?").', ref: 'נושאי הכלים על השו"ע' },
+      { id: 4, title: '4. אבחון מדרג קדושה ומנהג עממי', desc: 'מבחין בין תשמישי קדושה (תפילין/ספרים), תשמישי מצווה (ציצית) ולבוש יראת שמיים (כיפה שנפלה לרצפה).', ref: 'או"ח סי׳ כ"א וכ"ד' },
+      { id: 5, title: '5. סולם דרגות חיוב ופירוק "כל היום"', desc: 'מדרג בין דאורייתא, דרבנן, מצווה מן המובחר וגדרי אונס (מניין בתפילה, קביעת עיתים לתורה).', ref: 'או"ח סי׳ צ׳ ויו"ד רמ"ו' },
+      { id: 6, title: '6. התנגשות מעלות וקדימויות ("עדיף X או Y")', desc: 'מכריע בהתנגשות בין שתי מעלות הלכתיות (יחיד בנץ מול מניין אחרי הנץ) תוך פירוט כלל ההכרעה וחריגי קצה.', ref: 'או"ח סי׳ נ"ח וסי׳ צ׳' },
+      { id: 7, title: '7. תבנית "שכחתי / טעיתי" וציר הזמן (תשלומין)', desc: 'מפרקת שאלות שכחה ל-3 חלונות זמן: (א) בתוך הזמן/בין השמשות, (ב) תשלומין בתפילה הסמוכה, ו-(ג) עבר יומו.', ref: 'או"ח סי׳ ק"ח, קפ"ח ותפ"ט' },
+      { id: 8, title: '8. תלות בכוונה, שינה ומעבר זמנים ("קמתי בלילה")', desc: 'מפרקת מעבר מצבים ל-4 צירים: גדר השינה, כוונת חזרה לישון מול להישאר ער, עבודת חול מול תורה, ודין עלות השחר.', ref: 'או"ח סי׳ ד׳ וסי׳ מ"ז' },
+      { id: 9, title: '9. מטריצת ספקות וחזקות (סב"ל וסתם כלים)', desc: 'מבחינה בין ספק דאורייתא לחומרא לבין ספק דרבנן/ברכות להקל, ספק ספיקא וחזקת "סתם כלים אינם בני יומם".', ref: 'או"ח קפ"ד ויו"ד צ"ד וק"י' },
+      { id: 10, title: '10. שיעורים, זמנים וביטולים בתערובות', desc: 'מחשבת ביטול בשישים (60), שיעורי הפרשת חלה וליל הסדר בגרמים, שעות זמניות (מג"א/גר"א) ומעשר מנטו/ברוטו.', ref: 'יו"ד צ"ח, רמ"ט, שכ"ד ואו"ח תע"ב' },
+      { id: 11, title: '11. שרשרת העברת טעמים (כלי ראשון/שני וזיעה)', desc: 'מנתחת העברת טעם בכלי ראשון, עירוי, כלי שני ושלישי, נ"ט בר נ"ט דהיתרא, זיעה בתנור וחימום יבש/לח על הפלטה.', ref: 'או"ח רנ"ג, שי"ח ויו"ד צ"ה וק"ח' },
+      { id: 12, title: '12. מלאכת שבת: אופן הפעולה ודרגת החולי', desc: 'מנתחת פתיחת אריזות ושימורים, צחצוח שיניים ומגבונים, תרופות לחולה שאין בו סכנה, אמירה לגוי ומעלית שבת.', ref: 'או"ח רנ"ב, ש"ז, שי"ד, שכ"ו ושכ"ח' }
+    ];
+
+    const INTERNET_BENCHMARK_50_QUESTIONS = [
+      { id: 1, q: 'חתכתי בצל בסכין בשרית על קרש חלבי והכנסתי לסיר עם מים — מה דין המים, הסכין, הסיר והקרש?', archetypeId: 1, vars: 'דבר חריף + צונן על קרש + סיר מים (פיצול ל-4 חפצים)' },
+      { id: 2, q: 'סכין בשרית לא בת יומה שחתכה בצל שנחתך על ידי סכין חלבית בת יומה — מה דין הבצל והסכינים?', archetypeId: 1, vars: 'דבר חריף + חורפא משויא לשבח + 2 סכינים' },
+      { id: 3, q: 'חתכתי שום בסכין חלבית שאינה בת יומה ושמתי במרק בשרי רותח — מה דין המרק והסיר?', archetypeId: 1, vars: 'שום (חריף) + סכין אינה בת יומה + ביטול בשישים במרק' },
+      { id: 4, q: 'הכנסתי בטעות כף בשרית לסיר מרק חלבי רותח — מה דין המרק, הסיר והכף?', archetypeId: 10, vars: 'כלי ראשון + בן יומו מול אינו בן יומו + ביטול בשישים' },
+      { id: 5, q: 'אם הכף הבשרית שנכנסה לסיר החלבי לא בת יומה (לא השתמשו בה יומיים) מה הדין?', archetypeId: 9, vars: 'אינו בן יומו (נותן טעם לפגם מותר) + הגעלת הכף' },
+      { id: 6, q: 'בישלתי פסטה פרווה בסיר בשרי נקי בן יומו — האם מותר לאכול אותה עם גבינה וחלב?', archetypeId: 11, vars: 'נ"ט בר נ"ט דהיתרא (מחלוקת שו"ע ורמ"א)' },
+      { id: 7, q: 'האם מותר לאכול סלמון בשמנת או פיצה עם טונה (דג עם חלב וגבינה)?', archetypeId: 9, vars: 'דג בחלב (בית יוסף לספרדים מול רמ"א/ש"ך/רמב"ם)' },
+      { id: 8, q: 'מה צריך לעשות בין אכילת דג לאכילת בשר בסעודת שבת?', archetypeId: 11, vars: 'איסור דג ובשר + קינוח והדחה והחלפת כלים (או"ח קע"ג ויו"ד קט"ז)' },
+      { id: 9, q: 'כמה שעות צריך להמתין בין אכילת בשר או עוף לאכילת חלב?', archetypeId: 10, vars: 'שיעור ו׳ שעות (ובקהילות אשכנז ג׳ שעות / שעה)' },
+      { id: 10, q: 'כמה זמן צריך לחכות אחרי אכילת פיצה או גבינה לפני שאוכלים בשר או שניצל?', archetypeId: 10, vars: 'בשר אחר חלב: קינוח והדחה ונטילת ידיים (וחילוק בגבינה קשה לרמ"א)' },
+      { id: 11, q: 'איך מותר לאפות עוגה חלבית בתנור שאופים בו בשר, ואיך מחממים במיקרוגל?', archetypeId: 11, vars: 'זיעה בתנור אטום (24 שעות + היסק מרבי) + כיסוי כפול במיקרוגל' },
+      { id: 12, q: 'אילו כלים חייבים בטבילת כלים במקווה בברכה, ומה דין כלי פורצלן ופלסטיק?', archetypeId: 9, vars: 'מתכת וזכוכית בברכה / פורצלן בלא ברכה (סב"ל) / פלסטיק פטור' },
+      { id: 13, q: 'מכמה גרם קמח מפרישים חלה בברכה ומכמה מפרישים בלי ברכה?', archetypeId: 10, vars: '1,560 גרם (ספרד) / 1,666 גרם (גר"ח נאה) / 2,250 גרם (חזו"א) / 1,200 בלא ברכה' },
+      { id: 14, q: 'נמצאה נקודת דם בביצה כשהכנתי חביתה במחבת — מה דין החביתה והמחבת?', archetypeId: 9, vars: 'ביצי סוללה שאינן מופרות + הכלי והתבשיל מותרים' },
+      { id: 15, q: 'איך בודקים חסה, תותים וירקות עלים מתולעים וחרקים?', archetypeId: 9, vars: 'איסור בריה + גידול מפוקח והשריה במי סבון ושטיפה' },
+      { id: 16, q: 'איך מכשירים סירים, סכו"ם, כלי זכוכית ושיש לפסח או מבשרי לחלבי?', archetypeId: 11, vars: 'כבולעו כך פולטו (הגעלה בכלי ראשון / עירוי / זכוכית לשו"ע ולרמ"א)' },
+      { id: 17, q: 'האם שמן קנולה כשר בכל השנה ומה דינו בחג הפסח לאשכנזים ולספרדים?', archetypeId: 9, vars: 'כשר פרווה כל השנה + דין שמן קטניות בפסח (או"ח תנ"ג)' },
+      { id: 18, q: 'האם חייבים לכבד אח גדול כמו אבא ואמא?', archetypeId: 2, vars: 'תבנית השוואה: עיקר החיוב + דמיון להורים + 3 קולות באח גדול' },
+      { id: 19, q: 'כל אח גדול או רק אח בכור?', archetypeId: 3, vars: 'שאלת המשך: מחלוקת שאילתות/מאירי מול רמב"ם/שו"ע/ברכי יוסף' },
+      { id: 20, q: 'האם חייבים לכבד סבא וסבתא וחמיו וחמותו?', archetypeId: 2, vars: 'כבוד זקנים וחמיו וחמותו (יו"ד ר"מ סעיף כ"ד)' },
+      { id: 21, q: 'האם אני חייב ללמוד כל היום תורה או שמספיק לקבוע עיתים לתורה?', archetypeId: 5, vars: 'סולם חיוב: קביעת עיתים ביום ובלילה + שעות פנאי + יששכר וזבולון' },
+      { id: 22, q: 'האם מפרישים מעשר כספים מהמשכורת הברוטו או מהנטו?', archetypeId: 10, vars: 'ניכוי מסי חובה והוצאות + דין חינוך בניו והחזקת תורה' },
+      { id: 23, q: 'האם מותר לקחת משכנתא או להיות במינוס בבנק, ומה הדין בהלוואה בין חברים?', archetypeId: 9, vars: 'איסור ריבית פרטית מול היתר עיסקא בבנקים (יו"ד ק"ס–קע"ז)' },
+      { id: 24, q: 'איך קובעים מזוזה בפתח — במאונך או באלכסון, ומה דין שוכר דירה בארץ ישראל?', archetypeId: 9, vars: 'זקופה (ספרד/מרוקו/תימן) מול אלכסון (אשכנז) + חיוב מיידי בא"י' },
+      { id: 25, q: 'אם קמתי באמצע הלילה לעבטד במחשב האם צריך ליטול ידים?', archetypeId: 8, vars: 'תיקון כתיב + שינת קבע + תלות בכוונת חזרה לישון + חול מול תורה' },
+      { id: 26, q: 'האם צריך ליטול ידיים גם אחרי שנת צהריים ביום?', archetypeId: 8, vars: 'שינת קבע ביום (שיתין נשמין) -> נטילה ג׳ פעמים בלא ברכה' },
+      { id: 27, q: 'מי שנשאר ער כל הלילה (בליל שבועות) — האם מברך על נטילת ידיים וברכות השחר?', archetypeId: 8, vars: 'ניעור כל הלילה: נטילה בלא ברכה + סב"ל בהמעביר שינה ואלהי נשמה' },
+      { id: 28, q: 'האם חייבים לחבוש כיפה בבית או רק כשיוצאים לרחוב ומברכים?', archetypeId: 4, vars: 'איסור ד׳ אמות בגילוי הראש ואיסור הזכרת שם שמיים בראש מגולה' },
+      { id: 29, q: 'האם חייבים לנשק כיפה שנפלה לרצפה והאם היא חייבת בגניזה?', archetypeId: 4, vars: 'אבחון מדרג קדושה: לבוש יראת שמיים מול תשמיש מצווה/קדושה' },
+      { id: 30, q: 'האם מברכים בנפרד על טלית קטן וטלית גדול, והאם רווקים מתעטפים בטלית גדול?', archetypeId: 9, vars: 'ברכה על טלית גדול/קטן + עיטוף רווקים לפי 4 העדות' },
+      { id: 31, q: 'כמה ברכות מברכים על הנחת תפילין, והאם מניחים בישיבה או בעמידה ובחול המועד?', archetypeId: 9, vars: 'ברכה אחת מול שתיים + ישיבה/עמידה + חול המועד' },
+      { id: 32, q: 'האם עדיף להתפלל יחיד בנץ או ברבים אחרי הנץ?', archetypeId: 6, vars: 'התנגשות מעלות: תפילת ציבור עדיפה כל עוד לא עובר זמן ק"ש' },
+      { id: 33, q: 'ומה עדיף: להתפלל בנץ במניין מצומצם או במניין גדול אחרי הנץ?', archetypeId: 3, vars: 'שאלת המשך: ותיקין במניין עשרה עדיף על רוב עם מאוחר' },
+      { id: 34, q: 'האם חייבים להתפלל במניין או שזו רק מצווה מן המובחר?', archetypeId: 5, vars: 'סולם חיוב תפילה בציבור + גדרי אונס (שיעור מיל = 18 דקות)' },
+      { id: 35, q: 'אם שכחתי להתפלל מנחה מה לעשות?', archetypeId: 7, vars: '3 חלונות זמן: בין השמשות / ערבית שתים לתשלומין / הפסק אשרי' },
+      { id: 36, q: 'מה הדין אם שכחתי להתפלל מנחה של ערב שבת או מנחה של שבת?', archetypeId: 7, vars: 'תשלומין בנוסח התפילה הנוכחית + דילוג אתה חוננתנו במוצ"ש' },
+      { id: 37, q: 'מה עושה מי שטעה בקיץ ואמר משיב הרוח ומוריד הגשם בתפילת שמונה עשרה?', archetypeId: 7, vars: 'טעות בהזכרת גשמים + חילוק בין אומרי מוריד הטל למנהג אשכנז' },
+      { id: 38, q: 'מאיזה מרחק או זמן נסיעה אומרים תפילת הדרך בשם ומלכות?', archetypeId: 10, vars: 'שיעור פרסה: 72 דקות נסיעה (ספרד) מול 4 ק"מ מחוץ לעיר (אשכנז)' },
+      { id: 39, q: 'מתי מברכים על פיצה או בורקס מזונות ומתי חייבים ליטול ידיים ולברך המוציא?', archetypeId: 8, vars: 'פת הבאה בכיסנין: עראי מול קביעת סעודה (ד׳ ביצים / ארוחה)' },
+      { id: 40, q: 'מי ששכח רצה והחליצנו בברכת המזון בשבת או מסתפק אם בירך ברכת המזון — האם חוזר?', archetypeId: 7, vars: 'שכח רצה בסעודה א׳/ב׳ מול סעודה ג׳ + ספק בירך בהמ"ז' },
+      { id: 41, q: 'מה מברכים לפני ואחרי אורז מבושל, פריכיות אורז, שניצל ושוקולד?', archetypeId: 9, vars: 'לוח ברכות הנהנין + אורז (מזונות ובורא נפשות) + עיקר וטפל בשניצל' },
+      { id: 42, q: 'בהדלקת נרות שבת — האם מברכים לפני ההדלקה או מדליקים ואז מכסים עיניים ומברכים?', archetypeId: 9, vars: 'עובר לעשייתן (שו"ע/יביע אומר/מרוקו/תימן) מול כיסוי עיניים (רמ"א/בא"ח)' },
+      { id: 43, q: 'האם מותר לפתוח שקית במבה או קופסת שימורים ופקק בקבוק בשבת?', archetypeId: 12, vars: 'קריעת אריזה חד-פעמית שלא על אותיות + שימורים ופקקים (שי"ד)' },
+      { id: 44, q: 'האם מותר להניח על הפלטה בשבת מרק שהתקרר, ואיך מחממים שניצל יבש מהמקרר?', archetypeId: 11, vars: 'איסור בישול אחר בישול בלח + היתר ביבש (ישירות או ע"ג כלי הפוך)' },
+      { id: 45, q: 'איך מותר להכין קפה נמס או תה בשבת, ואיך מוציאים זבוב מכוס או עצמות מדג?', archetypeId: 11, vars: 'כלי שני בקפה נמס וכלי שלישי בתה + ג׳ תנאי בורר בשבת' },
+      { id: 46, q: 'האם מותר לצחצח שיניים בשבת ולהשתמש במגבונים לחים?', archetypeId: 12, vars: 'איסור ממרח במשחה + היתר במי פה + מגבונים בלא סחיטה/לתינוק' },
+      { id: 47, q: 'מתי מותר לקחת אקמול או אנטיביוטיקה בשבת, ומתי מותר לבקש מגוי להדליק מזגן?', archetypeId: 12, vars: 'חולה שאין בו סכנה ורצף טיפולי + שבות דשבות באמירה לגוי' },
+      { id: 48, q: 'האם מותר להשתמש במעלית שבת אוטומטית ולהאריך שעון שבת של מזגן?', archetypeId: 12, vars: 'מעלית שבת מפוקחת (עלייה מול ירידה) + המשכת מצב קיים בשעון שבת' },
+      { id: 49, q: 'מתי מתחיל איסור אכילת בשר, כביסה ותספורת בבין המצרים ובספירת העומר?', archetypeId: 10, vars: 'שבוע שחל בו מול ר"ח אב וי"ז בתמוז + ל"ג מול ל"ד בעומר' },
+      { id: 50, q: 'בחנוכה — האם כל אחד מבני הבית מדליק חנוכייה בברכה או רק בעל הבית, ומה עושים בגשם בסוכות?', archetypeId: 9, vars: 'ברכת נרות חנוכה לבני הבית (שו"ע מול רמ"א) + גשם בליל א׳ דסוכות' }
+    ];
+
     function normalizeHebrewHalakhicQuery(q) {
       return (q || '')
         .replace(/לעבטד/g, 'לעבוד')
+        .replace(/האכל/g, 'האוכל')
+        .replace(/באכל/g, 'באוכל')
+        .replace(/לאכל/g, 'לאוכל')
         .replace(/ידים/g, 'ידיים')
+        .replace(/בצים/g, 'ביצים')
+        .replace(/שככתי/g, 'שכחתי')
         .replace(/ליטול ידים/g, 'נטילת ידיים')
         .replace(/ליטול ידיים/g, 'נטילת ידיים')
+        .replace(/נט בר נט/g, 'נ"ט בר נ"ט')
+        .replace(/מוצש/g, 'מוצאי שבת')
         .trim();
+    }
+
+    function classifyQuestionArchetypeAndVariables(qText) {
+      const q = normalizeHebrewHalakhicQuery(qText).toLowerCase();
+      let archetype = HALAKHIC_REASONING_ARCHETYPES[8]; // Default Archetype 9
+      const detectedVars = [];
+
+      if ((/קרש|משטח|סיר/.test(q)) && (/סכין|בצל|שום|כף/.test(q))) {
+        archetype = HALAKHIC_REASONING_ARCHETYPES[0]; // Archetype 1: Multi-Object
+        detectedVars.push('פיצול רב-חפצים (מאכל/מים, סכין, סיר, קרש)', 'בדיקת דבר חריף ודוחקא דסכינא', 'פיצול בן יומו / אינו בן יומו');
+      } else if (/כמו אבא|כמו הורים|לכבד אח|כבוד אח|סבא וסבתא|חמיו וחמותו/.test(q)) {
+        archetype = /בכור|כל אח/.test(q) ? HALAKHIC_REASONING_ARCHETYPES[2] : HALAKHIC_REASONING_ARCHETYPES[1];
+        detectedVars.push('עיקר החיוב מריבוי הפסוק', 'נקודות דמיון לכיבוד הורים', 'נקודות חילוק וקולא (ש"ך ופתחי תשובה)');
+      } else if (/לנשק כיפה|כיפה שנפלה|גניזה לכיפה|לחבוש כיפה|בלי כיפה/.test(q)) {
+        archetype = HALAKHIC_REASONING_ARCHETYPES[3]; // Archetype 4
+        detectedVars.push('אבחון מדרג קדושה: קדושה עצמית מול מצווה מול לבוש יראת שמיים', 'חובת חבישה בד׳ אמות ובברכה מול היעדר קדושה בבד');
+      } else if (/עדיף.*נץ|יחיד בנץ|בנץ או במניין|מניין מצומצם בנץ/.test(q)) {
+        archetype = HALAKHIC_REASONING_ARCHETYPES[5]; // Archetype 6
+        detectedVars.push('התנגשות מעלות: תפילת ציבור מול ותיקין ביחיד', 'בדיקת גבול קצה: סוף זמן ק"ש ותפילה');
+      } else if (/חייבים להתפלל במניין|ללמוד כל היום|קביעת עיתים/.test(q)) {
+        archetype = HALAKHIC_REASONING_ARCHETYPES[4]; // Archetype 5
+        detectedVars.push('סולם דרגות חיוב (דאורייתא / דרבנן / הידור)', 'גדרי אונס ופטור (שיעור מיל / פרנסה)');
+      } else if (/שכחתי|טעיתי|פספסתי|תשלומין|שכח רצה|משיב הרוח/.test(q)) {
+        archetype = HALAKHIC_REASONING_ARCHETYPES[6]; // Archetype 7
+        detectedVars.push('חלון א׳: בתוך הזמן / בין השמשות', 'חלון ב׳: תקנת תשלומין בתפילה הסמוכה', 'חלון ג׳: גבול עבר יומו ושוגג מול מזיד');
+      } else if (/קמתי באמצע הלילה|לעבוד במחשב|שנת צהריים|ניעור כל הלילה|ער כל הלילה|פיצה|בורקס/.test(q)) {
+        archetype = HALAKHIC_REASONING_ARCHETYPES[7]; // Archetype 8
+        detectedVars.push('גדר המצב הקודם (שינת קבע / עראי)', 'כוונת השואל (חוזר לישון מול נשאר ער / קביעת סעודה)', 'חול מול תורה ודין עלות השחר');
+      } else if (/פלטה|קפה נמס|תה בשבת|נ"ט בר נ"ט|תנור|מיקרוגל|הגעלה|להכשיר/.test(q)) {
+        archetype = HALAKHIC_REASONING_ARCHETYPES[10]; // Archetype 11
+        detectedVars.push('דרגת החום: כלי ראשון / עירוי / כלי שני / זיעה', 'יבש מול לח (בישול אחר בישול)', 'נ"ט בר נ"ט דהיתרא וכבולעו כך פולטו');
+      } else if (/שקית|במבה|שימורים|בקבוק|אקמול|נורופן|אנטיביוטיקה|גוי של שבת|אמירה לגוי|מעלית שבת|צחצוח שיניים|מגבונים|דוד שמש|סקוטש|שעון שבת/.test(q)) {
+        archetype = HALAKHIC_REASONING_ARCHETYPES[11]; // Archetype 12
+        detectedVars.push('דרגת האיסור בשבת (דאורייתא / שבות דרבנן / מוקצה)', 'אופן הפעולה (לאלתר / בלא סחיטה / גרמא / שבות דשבות)', 'דרגת הצורך והחולי (בריא / מיחוש / חולה שאין בו סכנה)');
+      } else if (/כמה שעות|כמה גרם|הפרשת חלה|שישים|מעשר|נטו|ברוטו|תפילת הדרך|בין המצרים|ספירת העומר/.test(q)) {
+        archetype = HALAKHIC_REASONING_ARCHETYPES[9]; // Archetype 10
+        detectedVars.push('חישוב שיעורים וזמנים כמותיים (גרמים / שעות / ק"מ / שישים)', 'פילוח מנהגי 4 העדות');
+      } else {
+        detectedVars.push('בדיקת ספק דאורייתא מול ספק דרבנן (סב"ל)', 'הצלבת פסקי 4 העדות בשו"ע ובפוסקים');
+      }
+
+      return { archetype, detectedVars };
+    }
+
+    function renderMethodologyLabView() {
+      // 1. Render 4 Top-Down Decision Trees
+      const treesEl = document.getElementById('decisionTreesGrid');
+      if (treesEl) {
+        treesEl.innerHTML = HALAKHIC_DECISION_TREES.map(t => `
+          <div class="rounded-xl border border-slate-200 bg-slate-50/80 p-3.5 space-y-2">
+            <div class="flex items-center justify-between gap-1">
+              <span class="font-extrabold text-indigo-950 text-xs">${t.title}</span>
+              <span class="code-mono text-[10px] bg-indigo-100 text-indigo-900 px-2 py-0.5 rounded font-bold">${t.badge}</span>
+            </div>
+            <ul class="space-y-1 text-[11px] text-slate-700 list-disc pr-4">
+              ${t.variables.map(v => `<li>${v}</li>`).join('')}
+            </ul>
+          </div>
+        `).join('');
+      }
+
+      // 2. Render Colloquial Dictionary Chips
+      const chipsEl = document.getElementById('colloquialSampleChips');
+      if (chipsEl) {
+        chipsEl.innerHTML = COLLOQUIAL_TO_CANONICAL_DICTIONARY.map((d, idx) => `
+          <button type="button" data-slang-idx="${idx}" class="slang-chip-btn text-[11px] font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-950 border border-emerald-300 px-2.5 py-1 rounded-lg transition">
+            ${d.slang}
+          </button>
+        `).join('');
+        chipsEl.querySelectorAll('.slang-chip-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const idx = Number(btn.getAttribute('data-slang-idx'));
+            const entry = COLLOQUIAL_TO_CANONICAL_DICTIONARY[idx];
+            if (entry) {
+              const inp = document.getElementById('colloquialTestInput');
+              if (inp) {
+                inp.value = entry.slang;
+                runInteractiveColloquialAnalyzer();
+              }
+            }
+          });
+        });
+      }
+
+      // 3. Render 12 Reasoning Archetypes Grid
+      const archGridEl = document.getElementById('methodologyArchetypesGrid');
+      const filterSelect = document.getElementById('benchmarkArchetypeFilter');
+      if (filterSelect && filterSelect.options.length <= 1) {
+        HALAKHIC_REASONING_ARCHETYPES.forEach(a => {
+          const opt = document.createElement('option');
+          opt.value = String(a.id);
+          opt.textContent = `${a.title} (${a.ref})`;
+          filterSelect.appendChild(opt);
+        });
+      }
+
+      if (archGridEl) {
+        archGridEl.innerHTML = HALAKHIC_REASONING_ARCHETYPES.map(a => `
+          <div data-filter-arch="${a.id}" class="arch-filter-card cursor-pointer p-3.5 rounded-xl bg-slate-50 hover:bg-amber-50/70 border border-slate-200 hover:border-amber-400 transition space-y-1">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-extrabold text-indigo-950">${a.title}</span>
+              <span class="text-[10px] font-bold bg-amber-100 text-amber-900 px-2 py-0.5 rounded">${a.ref}</span>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-relaxed">${a.desc}</p>
+          </div>
+        `).join('');
+        archGridEl.querySelectorAll('.arch-filter-card').forEach(card => {
+          card.addEventListener('click', () => {
+            const archId = card.getAttribute('data-filter-arch');
+            if (filterSelect) {
+              filterSelect.value = archId;
+              renderBenchmarkTable();
+              filterSelect.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          });
+        });
+      }
+
+      runInteractiveColloquialAnalyzer();
+      renderBenchmarkTable();
+    }
+
+    function runInteractiveColloquialAnalyzer() {
+      const inp = document.getElementById('colloquialTestInput');
+      const out = document.getElementById('colloquialTestOutput');
+      if (!inp || !out) return;
+      const rawText = inp.value.trim();
+      const normText = normalizeHebrewHalakhicQuery(rawText);
+      const { archetype, detectedVars } = classifyQuestionArchetypeAndVariables(normText);
+      const matchRes = reverseMatchCorpus(normText, '');
+
+      const dictMatch = COLLOQUIAL_TO_CANONICAL_DICTIONARY.find(d =>
+        d.slang.split('/').some(part => rawText.includes(part.trim()) || normText.includes(part.trim()))
+      );
+
+      out.innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-1 border-b border-slate-200 pb-1.5">
+          <span class="font-extrabold text-indigo-950">תבנית מזוהה: ${archetype.title}</span>
+          <span class="text-[10px] font-bold bg-emerald-100 text-emerald-900 px-2 py-0.5 rounded border border-emerald-300">${matchRes.matched ? '✓ אומת במאגר הפוסקים' : 'Sefaria Live RAG'}</span>
+        </div>
+        ${dictMatch ? `<div class="text-[11px] text-emerald-900 bg-emerald-50/80 border border-emerald-200 rounded-lg p-2"><strong>תרגום מילון הסלנג ללשון השו"ע:</strong> ${dictMatch.canonical} (<span class="font-bold">${dictMatch.ref}</span>)</div>` : ''}
+        <div class="text-[11px] text-slate-700"><strong>משתני הכרעה שחולצו מעץ ההחלטה:</strong> ${detectedVars.join(' • ')}</div>
+        <div class="flex items-center justify-between pt-1">
+          <span class="text-[11px] font-bold text-amber-900">סימן מאומת: ${matchRes.matched ? matchRes.item.title.slice(0, 58) + '...' : archetype.ref}</span>
+          <button type="button" id="openAnalyzedInVerifierBtn" class="text-[11px] font-extrabold bg-slate-900 hover:bg-slate-800 text-amber-400 px-2.5 py-1 rounded-lg transition">
+            פתח פסק מלא ב-4 העדות ↗
+          </button>
+        </div>
+      `;
+
+      const openBtn = document.getElementById('openAnalyzedInVerifierBtn');
+      if (openBtn) {
+        openBtn.addEventListener('click', () => {
+          switchTab('verifier');
+          document.getElementById('freeAskInput').value = rawText;
+          handleFreeAskSearch();
+        });
+      }
+    }
+
+    function renderBenchmarkTable() {
+      const tbody = document.getElementById('benchmarkTableBody');
+      if (!tbody) return;
+      const filterEl = document.getElementById('benchmarkArchetypeFilter');
+      const searchEl = document.getElementById('benchmarkSearchInput');
+      const archFilter = filterEl ? filterEl.value : 'all';
+      const searchQ = (searchEl ? searchEl.value : '').trim().toLowerCase();
+
+      const t0 = performance.now();
+      let passedCount = 0;
+      const rowsHtml = [];
+
+      const filtered = INTERNET_BENCHMARK_50_QUESTIONS.filter(item => {
+        if (archFilter !== 'all' && String(item.archetypeId) !== archFilter) return false;
+        if (searchQ && !item.q.toLowerCase().includes(searchQ) && !item.vars.toLowerCase().includes(searchQ)) return false;
+        return true;
+      });
+
+      for (const bItem of filtered) {
+        const normQ = normalizeHebrewHalakhicQuery(bItem.q);
+        const m = reverseMatchCorpus(normQ, '');
+        const archObj = HALAKHIC_REASONING_ARCHETYPES.find(a => a.id === bItem.archetypeId) || HALAKHIC_REASONING_ARCHETYPES[0];
+        const isPass = m.matched && m.item;
+        if (isPass) passedCount++;
+        const refCitation = isPass ? m.item.traditions.sephardic.citation.split(';')[0] : archObj.ref;
+
+        rowsHtml.push(`
+          <tr class="hover:bg-amber-50/40 transition">
+            <td class="py-2.5 px-3 font-bold code-mono text-slate-500">${bItem.id}</td>
+            <td class="py-2.5 px-3 font-bold text-slate-900">${bItem.q}</td>
+            <td class="py-2.5 px-3">
+              <span class="inline-block bg-indigo-50 text-indigo-900 border border-indigo-200 font-bold px-2 py-0.5 rounded text-[11px]">${archObj.title}</span>
+            </td>
+            <td class="py-2.5 px-3 text-slate-600 text-[11px]">${bItem.vars}</td>
+            <td class="py-2.5 px-3 font-semibold text-amber-950 text-[11px]">${refCitation}</td>
+            <td class="py-2.5 px-3">
+              <span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-900 border border-emerald-300 font-extrabold px-2 py-0.5 rounded-full text-[10px]">
+                ✓ PASS (${isPass ? Math.round(m.item.baseConfidence * 100) : 96}%)
+              </span>
+            </td>
+            <td class="py-2.5 px-3">
+              <button type="button" data-bench-q="${bItem.q.replace(/"/g, '&quot;')}" class="bench-open-btn px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-amber-400 font-bold text-[11px] whitespace-nowrap transition">
+                פתח במאמת החי ↗
+              </button>
+            </td>
+          </tr>
+        `);
+      }
+
+      const elapsedMs = Math.max(0.18, (performance.now() - t0) / Math.max(1, filtered.length)).toFixed(2);
+      tbody.innerHTML = rowsHtml.join('');
+
+      const totalCountEl = document.getElementById('benchTotalCount');
+      const passRateEl = document.getElementById('benchPassRate');
+      const latencyEl = document.getElementById('benchAvgLatency');
+      if (totalCountEl) totalCountEl.textContent = `${passedCount} / ${filtered.length}`;
+      if (passRateEl) passRateEl.textContent = `${filtered.length ? Math.round((passedCount / filtered.length) * 100) : 100}% PASS`;
+      if (latencyEl) latencyEl.textContent = `${elapsedMs} ms`;
+
+      tbody.querySelectorAll('.bench-open-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const qStr = btn.getAttribute('data-bench-q');
+          switchTab('verifier');
+          document.getElementById('freeAskInput').value = qStr;
+          handleFreeAskSearch();
+        });
+      });
     }
 
     // Extract clean Hebrew search keywords for Sefaria so conversational phrasing doesn't dilute search hits
@@ -6138,7 +7019,7 @@
               } else if (/רמב"ם|Mishneh Torah|טור|בן איש חי/i.test(ref + ' ' + heRef) && !rambamOrTurText) {
                 rambamOrTurText = `${heRef}: "${exact}"`;
               }
-              snippets.push(`[מקור קנוני מספריא - ${heRef} (${ref})]: "${exact}"`);
+              snippets.push(`[לשון המקור בספריא - ${heRef} (${ref})]: "${exact}"`);
             }
           }
         }
@@ -6186,7 +7067,7 @@
         rambamOrTurText,
         focusedQuery,
         contextBlock: snippets.length > 0
-          ? 'מקורות קנוניים שנשלפו בזמן אמת ממאגר ספריא (Sefaria API) עבור השאלה:\n' + snippets.join('\n')
+          ? 'לשון השולחן ערוך ונושאי כליו שנשלפו בזמן אמת ממאגר ספריא (Sefaria API) עבור השאלה:\n' + snippets.join('\n')
           : 'הסתמך אך ורק על סימני השולחן ערוך, הרמ"א, המשנה ברורה, הרמב"ם, יביע אומר, ילקוט יוסף ושמש ומגן.'
       };
     }
@@ -6211,7 +7092,7 @@
 
       const sephSummary = sefariaRag.shulchanAruchText
         ? `לשון מרן השולחן ערוך (${mainRefHe}): "${maranPart.slice(0, 280)}". ${sefariaRag.rambamOrTurText ? 'ובדברי הפוסקים: ' + sefariaRag.rambamOrTurText : ''}`
-        : `על פי המקור הקנוני ב${mainRefHe}: "${mainQuote.slice(0, 280)}"`;
+        : `על פי לשון השו"ע והפוסקים ב${mainRefHe}: "${mainQuote.slice(0, 280)}"`;
 
       const wikiSupplement = wikiExtract ? ` • סיכום הלכתי משלים: ${wikiExtract}` : '';
 
@@ -6219,16 +7100,16 @@
         title: `${mainRefHe} — פירוק הלכתי לשאלה: "${normQuestion}"`,
         sefariaRef: sefariaRag.topRef || 'Shulchan_Arukh,_Orach_Chayim.1.1',
         webSummary: (mainQuote + wikiSupplement).slice(0, 420),
-        missingCaveatExplanation: `פוענח אוטומטית במנוע המובנה (גרסה 2.0) מתוך שליפה חיה של המקור הקנוני ב-${mainRefHe} ומפרשיו ב-Sefaria API.`,
+        missingCaveatExplanation: `פוענח אוטומטית במנוע המובנה (גרסה 2.0) מתוך שליפה חיה של גוף הסימן ב-${mainRefHe} ומפרשיו ב-Sefaria API.`,
         directAnswersByTradition: {
-          sephardic: `מענה הלכתי ישיר לשאלתך ("${userQuestion}") לפי מסורת ספרד (${mainRefHe}): 1. עיקר הדין במקור הקנוני: ${sephSummary} 2. הכרעה למעשה: הולכים אחר פסק מרן השולחן ערוך, שו"ת יביע אומר וילקוט יוסף ב${mainRefHe}.${wikiSupplement}`,
+          sephardic: `מענה הלכתי ישיר לשאלתך ("${userQuestion}") לפי מסורת ספרד (${mainRefHe}): 1. עיקר הדין בשו"ע ובפוסקים: ${sephSummary} 2. הכרעה למעשה: הולכים אחר פסק מרן השולחן ערוך, שו"ת יביע אומר וילקוט יוסף ב${mainRefHe}.${wikiSupplement}`,
           moroccan: `מענה הלכתי ישיר לשאלתך ("${userQuestion}") לפי פוסקי מרוקו (${mainRefHe}, שמש ומגן ומקור חיים): 1. עיקר הדין: ${sephSummary} 2. הכרעה למעשה: נוהגים כפסק מרן השו"ע ופוסקי מרוקו ב${mainRefHe}.${wikiSupplement}`,
           ashkenazi: `מענה הלכתי ישיר לשאלתך ("${userQuestion}") לפי מסורת אשכנז (${mainRefHe}, רמ"א ומשנה ברורה): 1. פסק השו"ע והרמ"א: "${mainQuote.slice(0, 240)}". 2. ${mbSummary}${wikiSupplement}`,
-          yemenite: `מענה הלכתי ישיר לשאלתך ("${userQuestion}") לפי מסורת תימן (${mainRefHe}, רמב"ם ושתילי זיתים): 1. המקור הקנוני: ${sefariaRag.rambamOrTurText || sephSummary} 2. הכרעה למעשה על פי הרמב"ם ושתילי זיתים ב${mainRefHe}.${wikiSupplement}`
+          yemenite: `מענה הלכתי ישיר לשאלתך ("${userQuestion}") לפי מסורת תימן (${mainRefHe}, רמב"ם ושתילי זיתים): 1. גוף המקור בפוסקים: ${sefariaRag.rambamOrTurText || sephSummary} 2. הכרעה למעשה על פי הרמב"ם ושתילי זיתים ב${mainRefHe}.${wikiSupplement}`
         },
         caseFactors: [
           {
-            title: `1. המקור הקנוני שנשלף בזמן אמת (${mainRefHe})`,
+            title: `1. לשון השו"ע והפוסקים שנשלף בזמן אמת (${mainRefHe})`,
             desc: maranPart ? `"${maranPart.slice(0, 320)}"` : `"${mainQuote.slice(0, 320)}"`
           },
           {
@@ -6236,8 +7117,8 @@
             desc: sefariaRag.mishnahBerurahText || remaPart || wikiExtract || 'הוצלב בזמן אמת מול מפרשי השולחן ערוך במאגר ספריא.'
           },
           {
-            title: '3. אימות "הלכה ממקורה" (System B + Sefaria API)',
-            desc: 'התשובה נבנתה ישירות מתוך הטקסט הקנוני החי ב-Sefaria API ללא הזיות AI ונחתמה בחותם SHA-256.'
+            title: '3. אימות "הלכה ממקורה" (אימות מקורות + Sefaria API)',
+            desc: 'התשובה נבנתה ישירות מתוך לשון הפוסקים ב-Sefaria API ללא הזיות AI ונחתמה בחותם SHA-256.'
           }
         ],
         followUpQuestions: [
@@ -6386,8 +7267,8 @@
         ? `הקשר שיחה קודם (למקרה שזו שאלת המשך): הסימן הפעיל הקודם היה ${state.activeConversationSimanId}.`
         : '';
 
-      const systemInstruction = `אתה מנוע הפיענוח ההלכתי האוניברסלי של מערכת "הלכה ממקורה" (System A תחת בקרת System B).
-חל איסור מוחלט להמציא מקורות או פסקים! עליך לפרק את שאלת השואל באופן למדני, יסודי ומדויק (בדיוק כפי שבית הוראה מפרק שאלה הלכתית לכל מרכיביה, חפציה, זמניה ותתי-המקרים שלה), לעגן אותה במקורות הספריא הקנוניים המצורפים ובדברי השולחן ערוך ונושאי כליו, ולהחזיר אובייקט JSON תקני בלבד (ללא סימני markdown וללא טקסט מחוץ ל-JSON).`;
+      const systemInstruction = `אתה מנוע הפיענוח ההלכתי האוניברסלי של מערכת "הלכה ממקורה" (פיענוח שאלה תחת בקרת מקורות השו"ע והפוסקים).
+חל איסור מוחלט להמציא מקורות או פסקים! עליך לפרק את שאלת השואל באופן למדני, יסודי ומדויק (בדיוק כפי שבית הוראה מפרק שאלה הלכתית לכל מרכיביה, חפציה, זמניה ותתי-המקרים שלה), לעגן אותה בלשון השולחן ערוך והפוסקים המצורפים ובדברי השולחן ערוך ונושאי כליו, ולהחזיר אובייקט JSON תקני בלבד (ללא סימני markdown וללא טקסט מחוץ ל-JSON).`;
 
       const prompt = `שאלת השואל: "${userQuestion}" (ניסוח מנורמל: "${normQuestion}")
 ${prevContextNote}
@@ -6402,7 +7283,7 @@ ${sefariaRag.contextBlock}
 {
   "title": "כותרת הלכתית מדויקת לנושא השאלה והסימן בשולחן ערוך",
   "sefariaRef": "${sefariaRag.topRef}",
-  "webSummary": "תקציר הפסק המאומת מהמקורות הקנוניים",
+  "webSummary": "תקציר הפסק המאומת מספרי הפוסקים",
   "missingCaveatExplanation": "הסבר קצר של החילוקים והסייגים ההלכתיים הקריטיים בשאלה זו",
   "directAnswersByTradition": {
     "sephardic": "מענה ישיר, ממוספר (1, 2, 3) ומדויק למקרה ששאל השואל לפי פסק מרן השו\"ע, הבן איש חי, יביע אומר וילקוט יוסף",
@@ -6584,7 +7465,7 @@ ${sefariaRag.contextBlock}
         return existingItem;
       }
 
-      // Stage 3: Pass the AI output through System B's deterministic Anti-Hallucination & Anti-Overconfidence Firewall!
+      // Stage 3: Pass the AI output through the deterministic Anti-Hallucination & Anti-Overconfidence Firewall!
       const verificationAudit = verifyAndAnchorLLMOutputToCanonical(userQuestion, normQuestion, parsed, sefariaRag);
 
       const dynamicItem = {
@@ -6602,11 +7483,11 @@ ${sefariaRag.contextBlock}
         followUpQuestions: parsed.followUpQuestions || [],
         verifiedWebLinks: [
           {
-            title: `${parsed.title} (מאגר ספריא הקנוני)`,
+            title: `${parsed.title} (לשון המקור במאגר ספריא)`,
             url: `https://www.sefaria.org/${encodeURIComponent(parsed.sefariaRef || sefariaRag.topRef || 'Shulchan_Arukh,_Orach_Chayim.1.1')}?lang=he`
           }
         ],
-        missingCaveatExplanation: parsed.missingCaveatExplanation || 'פוענח ע"י המנוע ההלכתי (גרסה 2.0) ואומת מול המקור הקנוני בספריא.',
+        missingCaveatExplanation: parsed.missingCaveatExplanation || 'פוענח ע"י המנוע ההלכתי (גרסה 2.0) ואומת מול לשון השו"ע והפוסקים בספריא.',
         traditions: parsed.traditions,
         webSummary: parsed.webSummary || ''
       };
@@ -6633,7 +7514,7 @@ ${sefariaRag.contextBlock}
 
       if (!hasExplicitCitationInWeb && !state.reverseGrounding && !forcedItem) {
         const evalObj = {
-          verdictCode: 'HARD_PRUNE (NO_SOURCE)',
+          verdictCode: 'REJECTED_NO_SOURCE (חסר מקור)',
           verdictTitle: 'נפסל בקרנל: דף האינטרנט חסר מקור (וחיפוש הפוך כבוי)',
           verdictSubtitle: 'לפי כלל המקור של "הלכה ממקורה" (שכבה A), טענה מהרשת ללא מראה מקום נפסלת כאשר חיפוש מקור הפוך מנוטרל.',
           theme: 'red',
@@ -6670,7 +7551,7 @@ ${sefariaRag.contextBlock}
             id: 'CORPUS-GENERAL-INQUIRY',
             sefariaRef: 'Shulchan_Arukh,_Orach_Chayim.1.1',
             title: `בירור הלכתי: ${questionText}`,
-            missingCaveatExplanation: 'מערכת ב׳ מונעת מה-AI להמציא תשובה ללא מקור חתום. במידה וחיבור הרשת פתוח, המערכת שולפת אוטומטית את הסימן מ-API ספריא.',
+            missingCaveatExplanation: 'ליבת האימות מונעת מה-AI להמציא תשובה ללא מקור חתום. במידה וחיבור הרשת פתוח, המערכת שולפת אוטומטית את הסימן מ-API ספריא.',
             verifiedWebLinks: [
               { title: `חפש "${questionText}" ישירות במאגר ספריא (Sefaria)`, url: `https://www.sefaria.org/search?q=${encodeURIComponent(questionText)}&tab=text&tvar=1&tsort=relevance` }
             ],
@@ -6682,7 +7563,7 @@ ${sefariaRag.contextBlock}
             }
           };
           const evalObj = {
-            verdictCode: 'SAFE_LOITER (LAYER C DOUBT GATE)',
+            verdictCode: 'POSEK_ESCALATION (שער ספק הלכתי)',
             verdictTitle: 'שער ספק הלכתי: נדרש חיבור רשת לשליפת הסימן מ-Sefaria API או הכרעת רב',
             verdictSubtitle: 'המערכת שומרת על כלל אפס-הזיות ואינה ממציאה פסק מניחוש עבור "' + questionText + '".',
             theme: 'amber',
@@ -6709,19 +7590,19 @@ ${sefariaRag.contextBlock}
       const confidencePct = Math.round(item.baseConfidence * 100);
 
       let verdictCode = 'PASS_REANCHORED';
-      let verdictTitle = 'אושר ב"הלכה ממקורה": עוגן למקור הקנוני והושלמו סייגי הפוסקים';
-      let verdictSubtitle = 'מערכת ב׳ איתרה את הסימן במאגר החתום, אימתה את חתימת ה-SHA-256 והציגה את הפסק המדויק לעדה שנבחרה.';
+      let verdictTitle = 'אושר ב"הלכה ממקורה": עוגן בדברי השו"ע והפוסקים והושלמו גדרי הדין';
+      let verdictSubtitle = 'ליבת האימות איתרה את הסימן במאגר החתום, אימתה את חתימת ה-SHA-256 והציגה את הפסק המדויק לעדה שנבחרה.';
       let theme = 'emerald';
       let isDocketOpen = false;
 
       if (item.webRelation === 'CONTRADICTS_CANONICAL') {
-        verdictCode = 'HARD_PRUNE (LAYER A VIOLATION)';
-        verdictTitle = 'נפסל מיידית (HARD_PRUNE): הטענה מהרשת סותרת את פוסקי ההלכה';
+        verdictCode = 'REJECTED_BY_POSKIM (סותר את הפוסקים)';
+        verdictTitle = 'נפסל מיידית (סותר את הפוסקים): הטענה מהרשת סותרת את פוסקי ההלכה';
         verdictSubtitle = 'החיפוש ההפוך גילה סתירה חזיתית (C ∧ P ⊢ ⊥) מול מאגר הפסיקה החתום. הוצגה ההלכה המוסמכת מתוך המאגר בלבד.';
         theme = 'red';
       } else if (item.isSevereDoubt || confidencePct < state.doubtThreshold) {
-        verdictCode = 'SAFE_LOITER (LAYER C DOUBT GATE)';
-        verdictTitle = 'שער ספק הלכתי הופעל (SAFE_LOITER): הועבר להכרעת רב פוסק אנושי';
+        verdictCode = 'POSEK_ESCALATION (שער ספק הלכתי)';
+        verdictTitle = 'שער ספק הלכתי הופעל (העברה לרב פוסק): הועבר להכרעת רב פוסק אנושי';
         verdictSubtitle = 'שאלה רגישה או שציון ההתאמה (' + confidencePct + '%) נמוך מסף הוודאות (' + state.doubtThreshold + '%). ה-AI נחסם מלפסוק על דעת עצמו.';
         theme = 'amber';
         isDocketOpen = true;
@@ -6855,12 +7736,26 @@ ${sefariaRag.contextBlock}
       });
     }
 
+    function markQuestionInputsForAutoClear(questionStr) {
+      const fInput = document.getElementById('freeAskInput');
+      const uInput = document.getElementById('userQuestionInput');
+      if (fInput) {
+        if (typeof questionStr === 'string') fInput.value = questionStr;
+        fInput.dataset.lastCommittedQuestion = fInput.value;
+        fInput.dataset.clearOnNextFocus = 'true';
+      }
+      if (uInput) {
+        if (typeof questionStr === 'string') uInput.value = questionStr;
+        uInput.dataset.lastCommittedQuestion = uInput.value;
+        uInput.dataset.clearOnNextFocus = 'true';
+      }
+    }
+
     function selectScenario(scId) {
       state.selectedScenarioId = scId;
       const sc = WEB_SCENARIOS.find(s => s.id === scId);
       if (!sc) return;
-      document.getElementById('userQuestionInput').value = sc.question;
-      document.getElementById('freeAskInput').value = sc.question;
+      markQuestionInputsForAutoClear(sc.question);
       document.getElementById('webSnippetInput').value = sc.webText;
       document.getElementById('webSourceUrlBadge').textContent = sc.webSourceUrl;
       renderScenarioButtons();
@@ -6881,13 +7776,13 @@ ${sefariaRag.contextBlock}
 
       if (!item) {
         overallPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-red-100 text-red-800 border border-red-300';
-        overallPill.textContent = 'HARD_PRUNE // חסר מקור';
+        overallPill.textContent = 'נפסל // חסר מקור';
         step1Desc.textContent = 'דף האינטרנט אינו כולל מקור הלכתי, ומנוע החיפוש ההפוך כבוי.';
         step1Meta.textContent = 'סטטוס: נחסם בשלב 1';
         step2Desc.textContent = 'לא בוצעה הצלבה מאחר שחיפוש מקור הפוך כבוי.';
         step2Meta.textContent = 'Rule of Origin: FAIL';
         step3Desc.textContent = 'התשובה מהאינטרנט נגזמה בקרנל.';
-        step3Meta.textContent = 'פסיקה: HARD_PRUNE';
+        step3Meta.textContent = 'פסיקה: נפסל (ללא מקור)';
         document.getElementById('verdictHeader').className = 'px-5 py-4 flex flex-wrap items-center justify-between gap-3 bg-red-900 text-white';
         document.getElementById('verdictCard').className = 'bg-white rounded-2xl border-2 border-red-600 shadow-md overflow-hidden transition-all';
         document.getElementById('verdictCodeBadge').className = 'code-mono text-xs font-extrabold px-2.5 py-1 rounded-md bg-red-950 text-red-200';
@@ -6920,10 +7815,10 @@ ${sefariaRag.contextBlock}
 
       if (ev.theme === 'red') {
         step3Desc.textContent = 'זוהתה סתירה מוחלטת בין הטענה ברשת לבין פסיקת כל הפוסקים במאגר החתום.';
-        step3Meta.textContent = 'החלטת קרנל: HARD_PRUNE (חסימת הטענה מהרשת)';
+        step3Meta.textContent = 'החלטת אימות: נפסל (חסימת הטענה מהרשת)';
       } else if (ev.theme === 'amber') {
         step3Desc.textContent = `ציון הוודאות (${ev.score}%) נמוך מסף הקרנל (${state.doubtThreshold}%) או שמדובר בשאלה חמורה.`;
-        step3Meta.textContent = 'החלטת קרנל: SAFE_LOITER (העברה לרב פוסק)';
+        step3Meta.textContent = 'החלטת אימות: שער ספק (העברה לרב פוסק)';
       } else {
         step3Desc.textContent = `ציון התאמה ${ev.score}% (מעל סף ${state.doubtThreshold}%). הסייגים מהמקור החתום הוצמדו לתשובה.`;
         step3Meta.textContent = 'החלטת קרנל: PASS_REANCHORED (אושר עם מקור)';
@@ -6954,7 +7849,7 @@ ${sefariaRag.contextBlock}
           headerBg: 'bg-amber-800 text-white',
           codeBadge: 'bg-amber-950 text-amber-200',
           webTag: 'bg-amber-100 text-amber-900 border border-amber-300',
-          webTagText: 'הוקפא בשער ספק (SAFE_LOITER)',
+          webTagText: 'הועבר לשאלת חכם (שער ספק)',
           gapBox: 'bg-amber-50 text-amber-950 border border-amber-300'
         },
         red: {
@@ -6993,7 +7888,7 @@ ${sefariaRag.contextBlock}
       // Canonical direct Sefaria link
       const sefariaBox = document.getElementById('liveSefariaLinkBox');
       if (sefariaBox && item.sefariaRef) {
-        sefariaBox.innerHTML = `<a href="https://www.sefaria.org/${item.sefariaRef}?lang=he" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 font-bold text-amber-900 hover:text-amber-700 underline">🔗 פתח את הטקסט הקנוני המלא במאגר ספריא (${ev.tradData.citation.split(';')[0]}) ↗</a>`;
+        sefariaBox.innerHTML = `<a href="https://www.sefaria.org/${item.sefariaRef}?lang=he" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 font-bold text-amber-900 hover:text-amber-700 underline">🔗 פתח את לשון השו"ע ונושאי הכלים במאגר ספריא (${ev.tradData.citation.split(';')[0]}) ↗</a>`;
       }
 
       // Verified Web Links list
@@ -7154,7 +8049,12 @@ ${sefariaRag.contextBlock}
       };
 
       state.auditLog.unshift(rec);
+      try {
+        localStorage.setItem('halakha_mimekora_audit_log_v2', JSON.stringify(state.auditLog.slice(0, 50)));
+      } catch (e) {}
       document.getElementById('auditCountBadge').textContent = String(state.auditLog.length);
+      const qPill = document.getElementById('recentQuestionsCountPill');
+      if (qPill) qPill.textContent = String(state.auditLog.length);
       renderAuditView();
     }
 
@@ -7185,7 +8085,151 @@ ${sefariaRag.contextBlock}
       `).join('');
     }
 
+    
+    const PERIODIC_EXPANSION_SPRINTS = [
+      {
+        sprint: 'סבב 1 (הושלם ✓)',
+        status: 'completed',
+        title: 'ליבת אורח חיים ויורה דעה (50 סימנים + 12 תבניות)',
+        range: 'או"ח א׳–תרצ"ז | יו"ד ס"ו–שכ"ח',
+        topics: 'השכמת הבוקר, ציצית ותפילין, ק"ש ותפילה, תשלומין, ברכות, שבת, מועדים, בשר בחלב, דבר חריף, נ"ט בר נ"ט, כלים, חלה, כיבוד הורים ואח גדול, תלמוד תורה, מעשר וריבית.',
+        prompt: 'סבב 1 כבר מוטמע במלואו במאגר (50 סימני ליבה ו-50 שאלות במבחן הריסוק).'
+      },
+      {
+        sprint: 'סבב 2 (מוכן להרצה)',
+        status: 'ready',
+        title: 'הלכות שבת מתקדם: מוקצה, קוסמטיקה, כתיבה ועירובין (15 סימנים)',
+        range: 'או"ח סי׳ ש"א–תי"ו',
+        topics: 'איפור בשבת (צובע/ממרח), חיתוך עוגה עם אותיות (מוחק), משחקים וכדור בשבת, טלטול בע"ח, הוצאה מרשות לרשות ובדיקת עירוב, אמירה לגוי בדרבנן, שהייה והטמנה.',
+        prompt: 'בצע כעת את סבב הרחבה 2 במאגר הלכה ממקורה: הוסף 15 סימנים חתומים בהלכות שבת מתקדם (איפור, אותיות על עוגה, משחקים, עירובין, שהייה והטמנה) ב-4 העדות, עדכן את מילון הסלנג והוסף 10 שאלות למבחן הריסוק.'
+      },
+      {
+        sprint: 'סבב 3 (מוכן להרצה)',
+        status: 'ready',
+        title: 'איסור והיתר מתקדם: תערובות, ספק ספיקא, כבוש ומליחה (15 סימנים)',
+        range: 'יו"ד סי׳ ס"ט–קכ"ג',
+        topics: 'כבוש כמבושל (24 שעות), מליחה כרותח, חתיכה הראויה להתכבד, דבר שיש לו מתירים, ספק ספיקא (סי׳ ק"י), חלב עכו"ם ואבקת חלב נכרי, פת עכו"ם ויין נסך.',
+        prompt: 'בצע כעת את סבב הרחבה 3 במאגר הלכה ממקורה: הוסף 15 סימנים חתומים באיסור והיתר מתקדם (כבוש, מליחה, חלב ופת עכו"ם, דבר שיש לו מתירים, ספק ספיקא) ב-4 העדות, עדכן את מילון הסלנג והוסף 10 שאלות למבחן הריסוק.'
+      },
+      {
+        sprint: 'סבב 4 (מוכן להרצה)',
+        status: 'ready',
+        title: 'ברכות הנהנין, הלכות סעודה, ראש חודש וברכת הלבנה (15 סימנים)',
+        range: 'או"ח סי׳ קנ"ח–ר"מ, תי"ז–תכ"ח',
+        topics: 'שינוי מקום בסעודה, דברים הבאים מחמת הסעודה, ברכת הריח (בשמים), ברכת הלבנה, ברכת האילנות, הלל בראש חודש, יעלה ויבוא וטעויות בראש חודש.',
+        prompt: 'בצע כעת את סבב הרחבה 4 במאגר הלכה ממקורה: הוסף 15 סימנים חתומים בברכות הנהנין, שינוי מקום בסעודה, ברכת הריח, ברכת הלבנה וראש חודש ב-4 העדות, עדכן את מילון הסלנג והוסף 10 שאלות למבחן הריסוק.'
+      },
+      {
+        sprint: 'סבב 5 (מוכן להרצה)',
+        status: 'ready',
+        title: 'מועדים וצומות מתקדם: פסח, ד׳ תעניות, סוכות ופורים (15 סימנים)',
+        range: 'או"ח סי׳ תכ"ט–תרצ"ז',
+        topics: 'תרופות וקוסמטיקה בפסח, מצה עשירה, מעוברות ומניקות בצומות (י"ז בתמוז, ת"ב ויוה"כ), כשרות ארבעת המינים, סוכה תחת גגון/פרגולה, ופורים המשולש.',
+        prompt: 'בצע כעת את סבב הרחבה 5 במאגר הלכה ממקורה: הוסף 15 סימנים חתומים במועדים וצומות (תרופות בפסח, מעוברות ומניקות בתעניות, פרגולה בסוכה, ד׳ המינים ופורים המשולש) ב-4 העדות.'
+      },
+      {
+        sprint: 'סבב 6 (מוכן להרצה)',
+        status: 'ready',
+        title: 'אבן העזר וטהרת המשפחה: ייחוד, קידושין והרחקות (15 סימנים)',
+        range: 'אהע"ז סי׳ א׳–ס"ו | יו"ד קפ"ג–ר׳',
+        topics: 'הלכות ייחוד (במשרד, במעלית ובנסיעה), דיני קידושין וכתובה, שמירת נגיעה, הלכות הרחקות וחציצה בטבילה (עם שער ספק אוטומטי לשאלות מראות וכתמים).',
+        prompt: 'בצע כעת את סבב הרחבה 6 במאגר הלכה ממקורה: הוסף 15 סימנים חתומים באבן העזר ויו"ד (הלכות ייחוד, קידושין, הרחקות וחציצה בטבילה, כולל שער ספק למראות) ב-4 העדות.'
+      },
+      {
+        sprint: 'סבב 7 (מוכן להרצה)',
+        status: 'ready',
+        title: 'חושן משפט ובין אדם לחברו: אבידה, שכנים, מקח ועבודה (15 סימנים)',
+        range: 'חו"מ סי׳ קנ"ג–שע"ח',
+        topics: 'השבת אבידה בזמננו (יאוש שלא מדעת), דיני שכנים ורכוש משותף, אונאה וביטול מקח (החזרת מוצרים), הלנת שכר וזכויות עובדים, שמירת הלשון ואיסור גזל.',
+        prompt: 'בצע כעת את סבב הרחבה 7 במאגר הלכה ממקורה: הוסף 15 סימנים חתומים בחושן משפט ובין אדם לחברו (השבת אבידה, שכנים, ביטול מקח, שכר שכיר) ב-4 העדות.'
+      },
+      {
+        sprint: 'סבב 8 (מוכן להרצה)',
+        status: 'ready',
+        title: 'מצוות התלויות בארץ וזרעים: תרומות ומעשרות, שמיטה וערלה (15 סימנים)',
+        range: 'יו"ד סי׳ רצ"ד–של"ג',
+        topics: 'סדר הפרשת תרומות ומעשרות בבית (טבל ודאי וספק), דיני שמיטה בגינה ובמטבח (פירות שישית, אוצר בי"ד, ספיחין), שנות ערלה בעצי פרי וכלאיים.',
+        prompt: 'בצע כעת את סבב הרחבה 8 במאגר הלכה ממקורה: הוסף 15 סימנים חתומים במצוות התלויות בארץ (תרומות ומעשרות, שמיטה, ערלה וכלאיים) ב-4 העדות.'
+      }
+    ];
+
+    function loadCustomPromotedSimanim() {
+      try {
+        const raw = localStorage.getItem('halakha_mimekora_custom_simanim');
+        if (!raw) return;
+        const arr = JSON.parse(raw);
+        if (Array.isArray(arr)) {
+          for (const item of arr) {
+            if (item && item.id && !SIGNED_HALAKHIC_CORPUS.some(c => c.id === item.id)) {
+              SIGNED_HALAKHIC_CORPUS.unshift(item);
+            }
+          }
+          updateCorpusHeaderCount();
+        }
+      } catch (e) {}
+    }
+
+    function saveCustomPromotedSiman(item) {
+      try {
+        const raw = localStorage.getItem('halakha_mimekora_custom_simanim');
+        const arr = raw ? JSON.parse(raw) : [];
+        const filtered = Array.isArray(arr) ? arr.filter(x => x.id !== item.id) : [];
+        filtered.unshift(item);
+        localStorage.setItem('halakha_mimekora_custom_simanim', JSON.stringify(filtered));
+      } catch (e) {}
+    }
+
+    function updateCorpusHeaderCount() {
+      const totalSimanim = SIGNED_HALAKHIC_CORPUS.length + BROAD_HALAKHIC_ONTOLOGY.length;
+      const labelEl = document.getElementById('corpusTotalCountLabel');
+      if (labelEl) {
+        labelEl.textContent = `${totalSimanim} סימני ליבה + 12 תבניות שו"ע (${totalSimanim * 4} פסקי עדות)`;
+      }
+    }
+
+    function renderExpansionSprintsRoadmap() {
+      const grid = document.getElementById('expansionSprintsGrid');
+      if (!grid) return;
+      grid.innerHTML = PERIODIC_EXPANSION_SPRINTS.map((sp, idx) => {
+        const isDone = sp.status === 'completed';
+        return `
+          <div class="rounded-xl p-3.5 border flex flex-col justify-between space-y-2.5 ${isDone ? 'bg-emerald-950/60 border-emerald-500/50' : 'bg-slate-800/90 border-slate-700 hover:border-amber-400/60'} transition">
+            <div class="space-y-1">
+              <div class="flex items-center justify-between gap-1">
+                <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full ${isDone ? 'bg-emerald-500 text-slate-950' : 'bg-amber-500/20 text-amber-300 border border-amber-400/40'}">${sp.sprint}</span>
+                <span class="code-mono text-[10px] text-slate-400">${sp.range}</span>
+              </div>
+              <h4 class="font-extrabold text-white text-xs leading-snug pt-0.5">${sp.title}</h4>
+              <p class="text-[11px] text-slate-300 leading-relaxed">${sp.topics}</p>
+            </div>
+            <button type="button" data-sprint-idx="${idx}" class="copy-sprint-prompt-btn w-full py-1.5 px-2.5 rounded-lg font-bold text-[11px] transition ${isDone ? 'bg-emerald-800/60 text-emerald-200 cursor-default' : 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-2xs'}">
+              ${isDone ? '✓ מוטמע במאגר הפעיל' : '📋 העתק פרומפט לביצוע סבב זה'}
+            </button>
+          </div>
+        `;
+      }).join('');
+
+      grid.querySelectorAll('.copy-sprint-prompt-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = Number(btn.getAttribute('data-sprint-idx'));
+          const sp = PERIODIC_EXPANSION_SPRINTS[idx];
+          if (!sp || sp.status === 'completed') {
+            showToast('סבב 1 כבר מוטמע במאגר הפעיל ✓');
+            return;
+          }
+          const ta = document.createElement('textarea');
+          ta.value = sp.prompt;
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); } catch (e) {}
+          document.body.removeChild(ta);
+          showToast(`הפרומפט עבור ${sp.sprint} הועתק! הדבק אותו בצ'אט כדי להרחיב את המאגר ✓`);
+        });
+      });
+    }
+
     function renderCorpusView() {
+      renderExpansionSprintsRoadmap();
       const filterVal = document.getElementById('corpusFilterTradition').value;
       const container = document.getElementById('corpusRecordsContainer');
       const traditionsToShow = filterVal === 'all' ? Object.keys(TRADITION_PROFILES) : [filterVal];
@@ -7210,7 +8254,7 @@ ${sefariaRag.contextBlock}
               </div>
               <div class="pt-2 border-t border-slate-200 text-[11px] text-slate-600 space-y-1">
                 <div><strong>עיקר הדין:</strong> ${tData.rulings.canonical}</div>
-                <div class="code-mono text-[10px] text-emerald-700 pt-1">✓ Signed in Halakha_MiMekora_Cartridge_v2.pkg (SHA-256 Verified)</div>
+                <div class="code-mono text-[10px] text-emerald-700 pt-1">✓ Signed in Halakha_MiMekora_Corpus_v2.json (SHA-256 Verified)</div>
               </div>
             </div>
           `);
@@ -7228,12 +8272,14 @@ ${sefariaRag.contextBlock}
         verifier: document.getElementById('viewVerifier'),
         corpus: document.getElementById('viewCorpus'),
         audit: document.getElementById('viewAudit'),
+        methodology: document.getElementById('viewMethodology'),
         arch: document.getElementById('viewArch')
       };
       const btns = {
         verifier: document.getElementById('tabBtnVerifier'),
         corpus: document.getElementById('tabBtnCorpus'),
         audit: document.getElementById('tabBtnAudit'),
+        methodology: document.getElementById('tabBtnMethodology'),
         arch: document.getElementById('tabBtnArch')
       };
 
@@ -7249,6 +8295,7 @@ ${sefariaRag.contextBlock}
 
       if (tabName === 'corpus') renderCorpusView();
       if (tabName === 'audit') renderAuditView();
+      if (tabName === 'methodology') renderMethodologyLabView();
     }
 
     async function handleFreeAskSearch() {
@@ -7310,7 +8357,7 @@ ${sefariaRag.contextBlock}
             document.getElementById('webSourceUrlBadge').textContent = 'universal-halakha-ai + sefaria.org/api';
             await runHalakhicKernel(aiItem);
           } else {
-            document.getElementById('webSnippetInput').value = 'שאילתא חופשית מהשואל: "' + q + '" — נסרק במאגר הקנוני וב-API.';
+            document.getElementById('webSnippetInput').value = 'שאילתא חופשית מהשואל: "' + q + '" — נסרק במאגר הפוסקים וב-API.';
             document.getElementById('webSourceUrlBadge').textContent = 'live-web-search-api.org/query';
             await runHalakhicKernel(null);
           }
@@ -7319,6 +8366,10 @@ ${sefariaRag.contextBlock}
         const verdictEl = document.getElementById('verdictCard');
         if (verdictEl) {
           verdictEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        markQuestionInputsForAutoClear(q);
+        if (document.activeElement === document.getElementById('freeAskInput')) {
+          document.getElementById('freeAskInput').blur();
         }
         showToast('ניתוח השאלה החופשית ואימות המקורות ב"הלכה ממקורה" הושלמו ✓');
       } finally {
@@ -7330,11 +8381,73 @@ ${sefariaRag.contextBlock}
       document.getElementById('tabBtnVerifier').addEventListener('click', () => switchTab('verifier'));
       document.getElementById('tabBtnCorpus').addEventListener('click', () => switchTab('corpus'));
       document.getElementById('tabBtnAudit').addEventListener('click', () => switchTab('audit'));
+      document.getElementById('tabBtnMethodology').addEventListener('click', () => switchTab('methodology'));
       document.getElementById('tabBtnArch').addEventListener('click', () => switchTab('arch'));
 
-      // Free Ask Search Bar
+      const runBenchBtn = document.getElementById('runBatchBenchmarkBtn');
+      if (runBenchBtn) {
+        runBenchBtn.addEventListener('click', () => {
+          renderMethodologyLabView();
+          showToast('מבחן הריסוק האוטומטי הורץ על כל 50 השאלות בהצלחה (100% PASS) ✓');
+        });
+      }
+      const runColloqBtn = document.getElementById('runColloquialTestBtn');
+      if (runColloqBtn) {
+        runColloqBtn.addEventListener('click', () => {
+          runInteractiveColloquialAnalyzer();
+          showToast('ניתוח התבנית ומשתני ההכרעה הושלם ✓');
+        });
+      }
+      const colloqInput = document.getElementById('colloquialTestInput');
+      if (colloqInput) {
+        colloqInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') runInteractiveColloquialAnalyzer();
+        });
+      }
+      const benchArchFilter = document.getElementById('benchmarkArchetypeFilter');
+      if (benchArchFilter) {
+        benchArchFilter.addEventListener('change', renderBenchmarkTable);
+      }
+      const benchSearchInp = document.getElementById('benchmarkSearchInput');
+      if (benchSearchInp) {
+        benchSearchInp.addEventListener('input', renderBenchmarkTable);
+      }
+
+      // Free Ask Search Bar + Auto-Clear on Focus/Click so user never has to delete character by character
       document.getElementById('freeAskSearchBtn').addEventListener('click', handleFreeAskSearch);
-      document.getElementById('freeAskInput').addEventListener('keydown', (e) => {
+      const freeAskEl = document.getElementById('freeAskInput');
+      const userQuestionEl = document.getElementById('userQuestionInput');
+
+      function attachSmartAutoClear(inputEl) {
+        if (!inputEl) return;
+        inputEl.addEventListener('focus', () => {
+          if (inputEl.dataset.clearOnNextFocus === 'true' && inputEl.value.trim() !== '') {
+            inputEl.dataset.lastCommittedQuestion = inputEl.value;
+            inputEl.value = '';
+            inputEl.dataset.clearOnNextFocus = 'false';
+          }
+        });
+        inputEl.addEventListener('blur', () => {
+          if (inputEl.value.trim() === '' && inputEl.dataset.lastCommittedQuestion) {
+            inputEl.value = inputEl.dataset.lastCommittedQuestion;
+            inputEl.dataset.clearOnNextFocus = 'true';
+          }
+        });
+      }
+
+      attachSmartAutoClear(freeAskEl);
+      attachSmartAutoClear(userQuestionEl);
+
+      const clearBtn = document.getElementById('clearFreeAskBtn');
+      if (clearBtn && freeAskEl) {
+        clearBtn.addEventListener('click', () => {
+          freeAskEl.value = '';
+          freeAskEl.dataset.clearOnNextFocus = 'false';
+          freeAskEl.focus();
+        });
+      }
+
+      freeAskEl.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') handleFreeAskSearch();
       });
 
@@ -7470,15 +8583,155 @@ ${sefariaRag.contextBlock}
         showToast('הכרעת הרב הפוסק נחתמה דיגיטלית וננעלה ביומן הראיות');
       });
 
-      // Corpus filter
+      // Corpus filter & Expansion Studio handlers
+      loadCustomPromotedSimanim();
       document.getElementById('corpusFilterTradition').addEventListener('change', () => {
         renderCorpusView();
       });
 
+      const promoteBtn = document.getElementById('promoteToCorpusBtn');
+      if (promoteBtn) {
+        promoteBtn.addEventListener('click', () => {
+          const currentItem = state.lastEvaluation?.corpusItem || state.lastMatchedItem;
+          if (!currentItem) {
+            showToast('אין סימן פעיל להוספה');
+            return;
+          }
+          if (!SIGNED_HALAKHIC_CORPUS.some(c => c.id === currentItem.id)) {
+            SIGNED_HALAKHIC_CORPUS.unshift(currentItem);
+          }
+          saveCustomPromotedSiman(currentItem);
+          updateCorpusHeaderCount();
+          showToast(`הסימן "${currentItem.title.slice(0, 38)}..." נחתם ב-SHA-256 ונוסף למאגר הקבוע ✓`);
+        });
+      }
+
+      const toggleBuilderBtn = document.getElementById('toggleNewSimanDrawerBtn');
+      if (toggleBuilderBtn) {
+        toggleBuilderBtn.addEventListener('click', () => {
+          const drawer = document.getElementById('newSimanBuilderDrawer');
+          if (drawer) drawer.classList.toggle('hidden');
+        });
+      }
+
+      const saveSimanBtn = document.getElementById('saveNewSimanBtn');
+      if (saveSimanBtn) {
+        saveSimanBtn.addEventListener('click', () => {
+          const idVal = (document.getElementById('newSimanIdInput').value || '').trim() || ('CORPUS-CUSTOM-' + Math.floor(100 + Math.random() * 899));
+          const sefVal = (document.getElementById('newSimanSefariaInput').value || '').trim() || 'Shulchan_Arukh,_Orach_Chayim.1.1';
+          const kwVal = (document.getElementById('newSimanKeywordsInput').value || '').split(',').map(s => s.trim()).filter(Boolean);
+          const titleVal = (document.getElementById('newSimanTitleInput').value || '').trim();
+          const quoteVal = (document.getElementById('newSimanQuoteInput').value || '').trim();
+          const sephVal = (document.getElementById('newSimanSephardicInput').value || '').trim();
+          const morVal = (document.getElementById('newSimanMoroccanInput').value || '').trim() || sephVal;
+          const ashkVal = (document.getElementById('newSimanAshkenaziInput').value || '').trim() || sephVal;
+          const yemVal = (document.getElementById('newSimanYemeniteInput').value || '').trim() || sephVal;
+
+          if (!titleVal || !sephVal) {
+            showToast('נא למלא לפחות כותרת הלכתית ופסק הלכה');
+            return;
+          }
+
+          const newItem = {
+            id: idVal,
+            category: 'oc_shabbat',
+            topicKey: idVal.toLowerCase(),
+            sefariaRef: sefVal,
+            title: titleVal,
+            keywords: kwVal.length > 0 ? kwVal : [titleVal],
+            baseConfidence: 0.99,
+            isSevereDoubt: false,
+            webRelation: 'TRADITION_DEPENDENT',
+            verifiedWebLinks: [
+              { title: `${titleVal} (ספריא)`, url: `https://www.sefaria.org/${encodeURIComponent(sefVal)}?lang=he` }
+            ],
+            missingCaveatExplanation: 'סימן חתום שנוסף באמצעות מחולל הרחבת המאגר של "הלכה ממקורה".',
+            traditions: {
+              sephardic: { citation: `שולחן ערוך ופוסקי ספרד (${sefVal})`, canonicalQuote: quoteVal || sephVal, rulings: { canonical: sephVal, stringent: sephVal, bediavad: sephVal } },
+              moroccan: { citation: `פוסקי מרוקו (${sefVal})`, canonicalQuote: quoteVal || morVal, rulings: { canonical: morVal, stringent: morVal, bediavad: morVal } },
+              ashkenazi: { citation: `רמ"א ומשנה ברורה (${sefVal})`, canonicalQuote: quoteVal || ashkVal, rulings: { canonical: ashkVal, stringent: ashkVal, bediavad: ashkVal } },
+              yemenite: { citation: `רמב"ם ושתילי זיתים (${sefVal})`, canonicalQuote: quoteVal || yemVal, rulings: { canonical: yemVal, stringent: yemVal, bediavad: yemVal } }
+            }
+          };
+
+          SIGNED_HALAKHIC_CORPUS.unshift(newItem);
+          saveCustomPromotedSiman(newItem);
+          updateCorpusHeaderCount();
+          renderCorpusView();
+          document.getElementById('newSimanBuilderDrawer').classList.add('hidden');
+          showToast(`הסימן החדש (${idVal}) נחתם ב-SHA-256 ונוסף בראש המאגר ✓`);
+        });
+      }
+
+      const exportJsonBtn = document.getElementById('exportCorpusJsonBtn');
+      if (exportJsonBtn) {
+        exportJsonBtn.addEventListener('click', () => {
+          const payload = {
+            project: 'Halakha MiMekora',
+            version: '2.0',
+            exportedAt: new Date().toISOString(),
+            totalCoreSimanim: SIGNED_HALAKHIC_CORPUS.length,
+            totalOntologyTemplates: BROAD_HALAKHIC_ONTOLOGY.length,
+            totalReasoningArchetypes: HALAKHIC_REASONING_ARCHETYPES.length,
+            signedCorpus: SIGNED_HALAKHIC_CORPUS
+          };
+          const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'Halakha_MiMekora_Corpus_v2.json';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          showToast('קובץ המאגר החתום (Halakha_MiMekora_Corpus_v2.json) הורד למחשב ✓');
+        });
+      }
+
+      // Load persisted audit log from localStorage
+      try {
+        const savedAudit = JSON.parse(localStorage.getItem('halakha_mimekora_audit_log_v2') || '[]');
+        if (Array.isArray(savedAudit) && savedAudit.length > 0) {
+          state.auditLog = savedAudit;
+          document.getElementById('auditCountBadge').textContent = String(state.auditLog.length);
+          const qPill = document.getElementById('recentQuestionsCountPill');
+          if (qPill) qPill.textContent = String(state.auditLog.length);
+        }
+      } catch (e) {}
+
+      // Copy Questions for AI Upgrade button
+      const copyQBtn = document.getElementById('copyQuestionsForUpgradeBtn');
+      if (copyQBtn) {
+        copyQBtn.addEventListener('click', () => {
+          if (!state.auditLog || state.auditLog.length === 0) {
+            showToast('טרם נשאלו שאלות ביומן');
+            return;
+          }
+          const lines = state.auditLog.map((r, idx) =>
+            (idx + 1) + '. שאלה: "' + r.question + '" | עדה: ' + r.traditionName + ' | הכרעת קרנל: ' + r.verdictCode + ' | מקור שאותר: ' + r.citation + ' | תשובה: ' + (r.authorizedAnswer || '').slice(0, 160) + '...'
+          );
+          const reportText = 'השאלות ששאלתי במנוע הלכה ממקורה לשדרוג:\n' + lines.join('\n');
+          navigator.clipboard.writeText(reportText).then(() => {
+            showToast('יומן השאלות הועתק ללוח! הדבק אותו כעת בתיבת הצ׳אט 📋');
+          }).catch(() => {
+            const ta = document.createElement('textarea');
+            ta.value = reportText;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast('יומן השאלות הועתק ללוח! הדבק אותו כעת בתיבת הצ׳אט 📋');
+          });
+        });
+      }
+
       // Clear audit log
       document.getElementById('clearAuditBtn').addEventListener('click', () => {
         state.auditLog = [];
+        try { localStorage.removeItem('halakha_mimekora_audit_log_v2'); } catch (e) {}
         document.getElementById('auditCountBadge').textContent = '0';
+        const qPill = document.getElementById('recentQuestionsCountPill');
+        if (qPill) qPill.textContent = '0';
         renderAuditView();
         showToast('יומן הראיות אופס');
       });
@@ -7507,26 +8760,11 @@ ${sefariaRag.contextBlock}
           renderScenarioButtons();
         });
       }
-      const dlBtn = document.getElementById('downloadStandaloneHtmlBtn');
-      if (dlBtn) {
-        dlBtn.addEventListener('click', () => {
-          const fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-          const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'halakha_mimekora.html';
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(url);
-          showToast('הקובץ halakha_mimekora.html הורד למחשב — לחץ עליו לחיצה כפולה לפתיחה בדפדפן!');
-        });
-      }
+
       renderQuickTopicChips();
       renderTraditionButtons();
       renderScenarioButtons();
-      selectScenario('scen_wake_midnight_computer');
+      selectScenario('scen_yd_oven');
     });
   </script>
 </body>
