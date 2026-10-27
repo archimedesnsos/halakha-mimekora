@@ -1,47 +1,28 @@
-# פרויקט הלכה ממקורה (Halakha MiMekora) — גרסה 4.0 (Archimedes OS Clean-Slate Kernel)
+# פרויקט הלכה ממקורה (Halakha MiMekora) — גרסה 5.0 (Archimedes OS Clean-Slate Kernel — כיסוי מלא לאו"ח, יו"ד, אהע"ז וחו"מ)
 
 אתר חופשי לבירור ההלכה עם אימות מקורות קנוני מול ספרי הפוסקים ומניעת הזיות AI באמצעות ארכיטקטורת **Archimedes OS (`C ∧ P ⊬ ⊥`)** — מותאם ל-4 מסורות הפסיקה (ספרדי, מרוקאי, אשכנזי ותימני) ב-3 רמות החמרה (עיקר הדין, לכתחילה, שעת הדחק).
 
 * **אתר חי ב-GitHub Pages:** https://archimedesnsos.github.io/halakha-mimekora/
-
 * **מאגר הקוד ב-GitHub:** https://github.com/archimedesnsos/halakha-mimekora
-
 * **תיקיית הפרויקט ב-Google Drive:** https://drive.google.com/drive/folders/1FXiYYfpVvX2k2VMAaW7980j4dMIz8W52
-
 * **תיקיית המסמכים המלווים (DOCS) ב-Google Drive:** https://drive.google.com/drive/folders/1CLMMiLld3EJovdIgdDOcUfrsvMYMvxuO
 
-## מה התחדש בגרסה 4.0 (Archimedes OS Clean-Slate Kernel)?
+---
 
-1. **הפרדת רשויות פורמלית בין מערכת א' (`archimedesSystemAParse`) למערכת ב' (`C ∧ P ⊬ ⊥`):**
+## מה התחדש בגרסה 5.0 (השלמת כל 8 סבבי ההרחבה — 122 סימני ליבה ותבניות שו"ע)?
 
-   * **מערכת א' (Semantic Proposition Parser):** ממירה כל שאלה בשפה חופשית ל**ווקטור לוגי `P`** המפריד בין:
+1. **השלמת כל 8 סבבי ההרחבה של השולחן ערוך (122 סימני ליבה ותבניות אונטולוגיות = 488 פסקי עדות חתומים ב-SHA-256 + 79 תרחישים אינטראקטיביים):**
+   * **אורח חיים מלא (או"ח סי׳ א׳–תרצ"ז):**
+     * **הנהגת הבוקר, ציצית ותפילין (א׳–מ"ה):** נטילת ידיים שחרית וניעור כל הלילה, קימה באמצע הלילה ושנת צהריים (`CORPUS-OC-004-WAKE-MIDNIGHT`), חבישת כיפה ודין כיפה שנפלה (`CORPUS-OC-002-KIPPAH`, `CORPUS-OC-021-KISS-KIPPAH`), טלית קטן וגדול (`CORPUS-OC-008-TZITZIT`), ברכות התפילין, זמן תפילין בלילה ובבין השמשות (`CORPUS-OC-030-TEFILLIN-NIGHT`), ונפילת תפילין או סידור לרצפה (`CORPUS-OC-040-DROPPED-TEFILLIN-SEFER`).
+     * **ברכות התורה, ק"ש, תפילה, בית הכנסת וקריאת התורה (מ"ו–קנ"ו):** ברכות התורה וגזירת שינה (`CORPUS-OC-047-BIRKAT-HATORAH`), מניין עשרה וקדיש (`CORPUS-OC-055-KADDISH-KEDUSHAH-MINYAN`), זמני ק"ש (מג"א/גר"א), קדימות ותיקין מול מניין (`CORPUS-OC-058-NETZ-VS-MINYAN`), הלכות בית הכסא וקריאת חול בשירותים (`CORPUS-OC-085-SHIRUTIM-SECULAR-HOLY`), חיוב תפילה במניין (`CORPUS-OC-090-MINYAN`), תפילה בנסיעה ובישיבה (`CORPUS-OC-094-PRAYER-TRAVEL-SITTING`), תפילת תשלומין (`CORPUS-OC-108-TASHLUMIN`), דיני הפסק בתפילה (`CORPUS-OC-109-HEFSEK-TEFILLAH`), הזכרת ושאלת גשמים (`CORPUS-TEFILLAH-114-TAL`, `CORPUS-OC-117-VETEEN-TAL-UMATAR`), ברכת כהנים ותחנון (`CORPUS-OC-128-KOHANIM`), קריאת התורה וטעות בס"ת (`CORPUS-OC-135-KRIAT-HATORAH`), וקדושת בית הכנסת (`CORPUS-OC-151-SYNAGOGUE-KEDUSHAH`).
+     * **סעודה, ברכת המזון וברכות הנהנין והראייה (קנ"ז–רמ"א):** נטילת ידיים ופת הבאה בכיסנין/פיצה (`CORPUS-OC-158-SEUDAH`), דברים הבאים בתוך הסעודה ושינוי מקום (`CORPUS-OC-174-WINE-MEZUGA-SHINUI-MAKOM`), שכחת רצה/יעלה ויבוא וספק בירך בבהמ"ז (`CORPUS-OC-184-BIRKAT-HAMAZON`), הלכות זימון (`CORPUS-OC-192-ZIMUN-BIRKAT-HAMAZON`), לוח ברכות הנהנין ועיקר וטפל (`CORPUS-OC-202-BERACHOT-FOODS`), ברכת האורז ופריכיות (`CORPUS-BERACHOT-208-RICE`), קדימויות בברכות (מג"ע א"ש – `CORPUS-OC-211-KADIMUYOT-MAGA-ESH`), ברכות הריח, הלבנה והאילנות (`CORPUS-OC-216-BESAMIM-REJUVENATION-BERACHOT`), וברכת הגומל (`CORPUS-OC-219-HAGOMEL`).
+     * **הלכות שבת ועירובין (רמ"ב–תי"ו):** הכנות ערב שבת ושניים מקרא (`CORPUS-OC-242-EREV-SHABBAT-PREPARATION`), שעון שבת ומעלית שבת (`CORPUS-SHABBAT-252-TIMER`, `CORPUS-OC-252-SHABBAT-ELEVATOR`), שהייה וחזרה לפלטה וחימום מרק/יבש (`CORPUS-OC-253-PLATA-CHAZARAH`, `CORPUS-SHABBAT-318-04`), גזיזת ציפורניים (`CORPUS-OC-260-NAILS`), הדלקת נרות שבת (`CORPUS-OC-263-CANDLES`), קידוש במקום סעודה (`CORPUS-OC-271-KIDDUSH`), סעודה שלישית ומלווה מלכה (`CORPUS-OC-291-SEUDAH-SHLISHIT-MELAVEH-MALKAH`), הבדלה במוצ"ש (`CORPUS-OC-296-HAVDALAH`), ניקוי כתמים ומלבן (`CORPUS-OC-302-MELABEN-STAIN-SHABBAT`), איפור, קרם ידיים וחיתוך עוגה עם אותיות (`CORPUS-OC-303-COSMETICS-CAKE-LETTERS-SHABBAT`), אמירה לגוי וקריאת ספרי חול (`CORPUS-OC-307-AMIRA-LEAKUM`, `CORPUS-OC-307-SECULAR-BOOKS`), מוקצה ובורר (`CORPUS-OC-308-MUKTZEH`), פתיחת אריזות, שימורים ובקבוקים (`CORPUS-SHABBAT-314-01`, `CORPUS-OC-314-CANS-BOTTLES`), הכנת קפה ותה (`CORPUS-SHABBAT-318-COFFEE`), סחיטת לימון ופירות (`CORPUS-OC-320-SQUEEZING-LEMON-SHABBAT`), חיתוך סלט דק (`CORPUS-OC-321-SALAD-SHABBAT`), דוד שמש, הדחת כלים, צחצוח שיניים ומגבונים (`CORPUS-OC-326-HOT-WATER-SHABBAT`, `CORPUS-OC-326-TOOTHBRUSH-WIPES`), תרופות וחולה בשבת (`CORPUS-OC-328-MEDICINE-SHABBAT`), עציצים ופרחים בשבת (`CORPUS-OC-336-PLANTS-FLOWERS-FIRE-SHABBAT`), עירובין והוצאה (`CORPUS-OC-345-ERUV-CARRYING-SHABBAT`), ותחום שבת (`CORPUS-OC-397-TECHUMIN-SHABBAT`).
+     * **ראש חודש, מועדים, צומות וימים נוראים (תי"ז–תרצ"ז):** הלל בראש חודש (`CORPUS-OC-422-ROSH-CHODESH-HALLEL`), בדיקת ומכירת חמץ (`CORPUS-OC-431-CHAMETZ`), תרופות בפסח וערב פסח שחל בשבת (`CORPUS-OC-444-PESACH-SHABBAT-MEDICINE`), הגעלת כלים (`CORPUS-OC-451-HAGALAT-KELIM`), קטניות ושמן קנולה בפסח (`CORPUS-PESACH-453-01`, `CORPUS-OC-453-CANOLA-OIL`), ליל הסדר וד׳ כוסות (`CORPUS-OC-472-SEDER`), ספירת העומר ושבועות (`CORPUS-OMER-493-01`, `CORPUS-OC-494-SHAVUOT-DAIRY-TORAH`), מלאכת יו"ט ועירוב תבשילין (`CORPUS-OC-527-YOMTOV`), חול המועד (`CORPUS-OC-530-CHOL-HAMOED-WORK-WRITING`), בין המצרים ומעוברות בצומות (`CORPUS-OC-551-NINE-DAYS`, `CORPUS-OC-554-FASTS-PREGNANT-NURSING`), סליחות, ראש השנה ויוה"כ (`CORPUS-OC-581-ROSH-HASHANAH`), סוכה, פרגולה וד׳ המינים (`CORPUS-OC-639-SUKKAH`, `CORPUS-OC-626-SUKKAH-PERGOLA-ARBA-MINIM`), חנוכה (`CORPUS-OC-671-CHANUKAH`), ופורים ופורים המשולש (`CORPUS-OC-686-PURIM`, `CORPUS-OC-688-PURIM-MESHULASH-MUKAFIN`).
+   * **יורה דעה, אבן העזר וחושן משפט מלא (יו"ד סי׳ א׳–ת"ג, אהע"ז וחו"מ):**
+     * **שחיטה, טריפות, מליחה, תולעים ובשר בחלב (יו"ד א׳–ק"י):** בשר חלק (גלאט) וסימני דגים (`CORPUS-YD-028-SHECHITAH-GLATT-FISH-SIGNS`), ניקור חלב וגיד הנשה (`CORPUS-YD-064-CHELEV-GID-HANASHEH-NIKKUR`), דם בביצים (`CORPUS-YD-066-EGG-BLOOD`), מליחת בשר, צליית כבד וכבוש כמבושל (`CORPUS-YD-069-MELICHAH-KAVUSH`), בדיקת ירקות מתולעים (`CORPUS-YD-084-WORMS`), דג עם חלב ודג עם בשר (`CORPUS-YD-087-FISH-MILK-MEAT`), המתנה בין בשר לחלב ובין חלב לבשר (`CORPUS-YOREH-DEAH-89-01`, `CORPUS-YD-089-MEAT-AFTER-MILK`), תערובת כף בסיר וביטול בשישים (`CORPUS-YD-092-SPOON-MIX`), חיתוך דבר צונן שאינו חריף בסכין בשרית/חלבית (`CORPUS-YD-094-NON-SHARP-COLD-KNIFE`), נ"ט בר נ"ט דהיתרא (`CORPUS-YD-095-NAT-BAR-NAT`), דבר חריף ודוחקא דסכינא (`CORPUS-YD-096-SHARP-KNIFE`), חתיכה הראויה להתכבד ודבר שיש לו מתירים (`CORPUS-YD-100-CHATICHAH-DAVAR-MATIRIM`), תנור, תבנית ומיקרוגל (`CORPUS-YD-103-OVEN-MICROWAVE`), וכללי ספק ספיקא (`CORPUS-YD-110-SFEK-SFEIKA`).
+     * **מאכלי גויים, טבילת כלים, ריבית, נדרים ומצוות (יו"ד קי"ב–ת"ג):** פת עכו"ם ואבקת חלב נכרי (`CORPUS-YD-112-PAS-CHALAV-AKUM`), בישולי גויים (`CORPUS-KASHRUT-112-BISHUL`), טבילת כלים (`CORPUS-YD-120-TEVILAT-KELIM`), סתם יינם ויין מבושל (`CORPUS-YD-123-YAYIN-NESECH-MEVUSHAL`), ריבית והיתר עיסקא (`CORPUS-YD-160-RIBBIT`), חוקות הגויים וכתובת קעקע (`CORPUS-YD-178-AVODAH-ZARAH-CHUKOT-TATTOO`), הרחקות וחציצה בטבילה (`CORPUS-YD-195-HARChAKOT-MIKVEH-CHATZITZAH`), נדרים, שבועות והתרתם (`CORPUS-YD-203-NEDARIM-SHVUOT-HATARAT`), כיבוד הורים ואח גדול (`CORPUS-YD-240-KIBBUD-AV`), כבוד רבו ותלמיד חכם (`CORPUS-YD-242-KAVOD-RABBO-TALMID-CHACHAM`), תלמוד תורה (`CORPUS-YD-246-TALMUD-TORAH`), מעשר כספים וקדימויות בצדקה (`CORPUS-TZEDAKAH-249-MAASER`, `CORPUS-YD-251-TZEDAKAH-PRIORITIES`), ברית מילה וצהבת (`CORPUS-YD-260-BRIT-MILAH-SHABBAT-JAUNDICE`), גניזת שמות וספרי קודש (`CORPUS-YD-276-SEFER-TORAH-SHMOT-GENIZAH`), מזוזה (`CORPUS-YD-285-MEZUZAH`), תרומות ומעשרות, ערלה ושמיטה (`CORPUS-YD-294-ORLAH-TERUMOT-SHMITTAH`), שעטנז (`CORPUS-YD-298-SHAATNEZ-KILAYIM`), פדיון הבן (`CORPUS-YD-305-PIDYON-HABEN`), הפרשת חלה (`CORPUS-YD-322-CHALLAH`), וביקור חולים ואבלות (`CORPUS-YD-335-BIKKUR-CHOLIM-AVEILUT`).
+     * **אבן העזר וחושן משפט:** הלכות ייחוד במשרד, במעלית וברכב (`CORPUS-EH-022-YICHUD`), השבת אבידה ויאוש שלא מדעת (`CORPUS-CM-259-HASHAVAT-AVEIDAH`), הלנת שכר, אונאה ומקח טעות (`CORPUS-CM-339-SCHAR-SACHIR-MEkach`), גניבת דעת בהנחת סטודנט (`CORPUS-CM-228-STUDENT-DISCOUNT`), ומינוי נציגי ציבור (`CORPUS-CM-002-PUBLIC-REPRESENTATIVES`).
 
-     * **רשימת שלילה מפורשת (`P.negatedTerms` — `¬Negated`):** מזהה ביטויי שלילה והחרגה כגון *"חתכתי מלפפון (**לא בצל**) בסכין בשרית בת יומה"* ומסירה את הישות השלולה מהטקסט החיובי (`P.positiveText`), כך שהמילה `"בצל"` לעולם לא תפעיל בטעות את דין "דבר חריף".
-
-     * **חומת אש למשתני הקשר משני-דין (`P.unhandledModifiers`):** מזהה משתנים הלכתיים משני-דין (`בשירותים / בית הכסא`, `בלילה`, `נפל לרצפה / האם צריך לצום`, `הוצאה מרשות לרשות בשבת`) וחוסמת שליפה שגויה של סימן רגיל (`UNHANDLED_MODIFIER_CONFLICT` ➔ `GATE 2: SAFE_LOITER`).
-
-     * **שער סינון היסטורי/עובדתי (`P.isMetaHistorical`):** מזהה שאלות היסטוריות או ביוגרפיות (כגון *"מתי נכתב השולחן ערוך ומי כתב אותו?"*) ועוצר אותן ב-`GATE 1: OUT_OF_SCOPE` ללא הצגת כרטיס פסק הלכה.
-
-   * **משקף מצב פורמלי חי (`Archimedes OS Live Formal State Vector Inspector`):** פאנל שקוף בראש המאמת המציג בזמן אמת את 4 רכיבי הווקטור הלוגי `P` ואת תוצאת בדיקת אי-הסתירה `C ∧ P ⊬ ⊥`.
-
-2. **הרחבת מאגר הפוסקים החתום (`Halakha_MiMekora_Corpus`):**
-
-   * **72 סימני ליבה ותבניות אונטולוגיות חתומות (288 פסקי עדות חתומים ב-SHA-256)** באורח חיים, יורה דעה וחושן משפט.
-
-   * **חדש בגרסה 4.0:** סימן חתום ייעודי ל**חיתוך ירק או מאכל צונן שאינו חריף (מלפפון, עגבנייה, גזר, תפוח) בסכין בשרית או חלבית (`CORPUS-YD-094-NON-SHARP-COLD-KNIFE` — שו"ע יו"ד סי' צ"ד סעיף ז' וסי' צ"ו סעיף ה')**, המבחין בין "דבר חריף" (בצל/שום) לבין "דבר צונן שאינו חריף" שבו די בהדחה במים או קליפה דקה ממקום החתך כדי לאוכלו עם גבינה/בשר.
-
-   * **הפרדת גבולות מילה קשיחה (`ONTOLOGICAL_SIMAN_GUARDS`):** הבחנה מילונית מדויקת בין `"כדור לבליעה / כדורים"` (תרופות בשבת – או"ח שכ"ח) לבין `"כדורגל / כדורסל"`, ובין `"מחילה על חוב"` לבין `"מחלה בשבת"`.
-
-3. **שתי חבילות מבחני ריסוק ואימות אוטומטיות (100% PASS):**
-
-   * **🛡️ מבחן הפרכה עוין (`Adversarial Red-Team Torture Suite — 15/15 PASSED`):** 15 מלכודות ריסוק אכזריות הבודקות שלילה (`"מלפפון לא בצל"`), משתני הקשר חוסמים (`"ספר חול בשירותים"`, `"תפילין בלילה"`, `"תפילין שנפלו לרצפה — צום"`), שאלות היסטוריות, הומונימים וטענות רפורמיות הסותרות את הפוסקים (`0% False-Positive Rulings`).
-
-   * **⚡ מבחן ריסוק ליבה (`50/50 Core Halakhic Benchmark — 100% PASS`):** 50 שאלות הלכתיות מאתגרות מהרשת המכסות את כל 12 תבניות החשיבה הלמדניות, רב-חפצים במטבח, זיכרון שיחה ושאלות המשך.
-
-## תוכנית עבודה להרחבה תקופתית של המאגר ("מידי פעם")
-
-1. **מסלול א' — קידום בלחיצה אחת מתוך שאלות אמת (Bottom-Up):** לחיצה על **"📌 חתום והוסף למאגר הקבוע"** בכרטיס התשובה.
-
-2. **מסלול ב' — סבבי הרחבה יזומים של 15 סימנים (Top-Down Sprints):** שימוש במפת 8 סבבי ההרחבה בלשונית **"מאגר הפוסקים החתום"**.
-
-3. **מסלול ג' — בדיקת רגרסיה כפולה (50 שאלות ליבה + 15 מלכודות Red-Team) ופרסום ל-GitHub Pages:** הרצת מבחני הריסוק בלשונית **"🧪 איפיון מראש ומבחן ריסוק"** והרצת `publish_to_github.bat`.
+2. **שתי חבילות מבחני ריסוק ואימות אוטומטיות (105/105 — 100% PASS):**
+   * **⚡ מבחן ריסוק ליבה מורחב (`90/90 Core Halakhic Benchmark — 100% PASS`):** 90 שאלות הלכתיות מאתגרות מהרשת המכסות את כל שערי אורח חיים, יורה דעה, אבן העזר וחושן משפט.
+   * **🛡️ מבחן הפרכה עוין (`Adversarial Red-Team Torture Suite — 15/15 PASSED`):** 15 מלכודות ריסוק אכזריות הבודקות שלילה (`"מלפפון לא בצל"`), משני-הקשר (`"ספר חול בשירותים"`, `"תפילין בלילה"`, `"תפילין שנפלו לרצפה"`), שאלות היסטוריות, הומונימים וטענות הסותרות את הפוסקים (`0% False-Positive Rulings`).
