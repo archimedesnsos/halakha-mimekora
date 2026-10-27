@@ -1,7 +1,11 @@
 *.gdoc
 *.gsheet
 *.gslides
-_backup_archive/
+*archive*/
+client/
+server/
+DOCS/
+*.bat
 __pycache__/
 *.pyc
 *.bak
