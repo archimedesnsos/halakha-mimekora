@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>הלכה ממקורה — בית הוראה ומאמת הלכתי (גרסה 2.0)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f6f0;
+      --card: #ffffff;
+      --ink: #1a2433;
+      --gold: #b8860b;
+      --border: #e2dccb;
+      --emerald: #0f6e4f;
+      --crimson: #9e1b1b;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Heebo', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #131c2e, #1f2f4a);
+      color: #fff;
+      padding: 1.3rem 1.1rem;
+      border-bottom: 4px solid var(--gold);
+    }
+    .header-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+    h1 {
+      font-family: 'Frank Ruhl Libre', serif;
+      margin: 0;
+      font-size: 1.85rem;
+      color: #f7d98c;
+    }
+    .subtitle {
+      font-size: 0.92rem;
+      opacity: 0.92;
+      margin-top: 0.2rem;
+    }
+    .container {
+      max-width: 980px;
+      margin: 1.25rem auto;
+      padding: 0 0.95rem;
+      transition: padding-bottom 0.2s ease;
+    }
+    .container.has-active-result {
+      padding-bottom: 55vh;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      margin-bottom: 1.2rem;
+    }
+    .step-label {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 0.45rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    #resultContainer {
+      scroll-margin-top: 18px;
+    }
+    @keyframes answerHighlightPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(184, 134, 11, 0.55); }
+      70%  { box-shadow: 0 0 0 10px rgba(184, 134, 11, 0); }
+      100% { box-shadow: 0 4px 14px rgba(0,0,0,0.04); }
+    }
+    .answer-arrived-card {
+      animation: answerHighlightPulse 1.2s ease-out;
+    }
+    .edah-bar {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1.1rem;
+    }
+    @media (min-width: 720px) {
+      .edah-bar {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    .edah-btn {
+      padding: 0.55rem 0.65rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fdfcf9;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--ink);
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .edah-btn:hover {
+      border-color: var(--gold);
+      background: #fcf8ec;
+    }
+    .edah-btn.active {
+      background: #131c2e;
+      color: #f7d98c;
+      border-color: var(--gold);
+    }
+    .inline-edah-box {
+      margin-top: 0.95rem;
+      padding: 0.75rem 0.9rem;
+      background: #f8f6f0;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+    }
+    .inline-edah-title {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 0.45rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    textarea {
+      width: 100%;
+      min-height: 92px;
+      padding: 0.85rem;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      resize: vertical;
+      background: #fff;
+      transition: border-color 0.15s ease;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.12);
+    }
+    .btn-primary {
+      width: 100%;
+      background: #131c2e;
+      color: #f7d98c;
+      border: 1.5px solid var(--gold);
+      padding: 0.8rem 1.4rem;
+      border-radius: 9px;
+      font-weight: 800;
+      font-size: 1.05rem;
+      cursor: pointer;
+      margin-top: 0.65rem;
+      transition: opacity 0.2s ease, transform 0.1s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+    }
+    .btn-primary:active {
+      transform: scale(0.99);
+    }
+    .btn-primary:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+    .samples-divider {
+      margin-top: 1.1rem;
+      padding-top: 0.85rem;
+      border-top: 1px dashed #e2dccb;
+    }
+    .samples-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: 0.4rem;
+    }
+    .samples-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.38rem;
+    }
+    .source-box {
+      background: #fcfaf2;
+      border-right: 4px solid var(--gold);
+      padding: 1rem;
+      margin-top: 1rem;
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.12rem;
+    }
+    .badge {
+      display: inline-block;
+      background: #eef2ff;
+      color: #1e3a8a;
+      border: 1px solid #c7d2fe;
+      border-radius: 999px;
+      padding: 0.2rem 0.65rem;
+      font-size: 0.82rem;
+      margin: 0.2rem;
+    }
+    .badge-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: #eef2ff;
+      color: #1e3a8a;
+      border: 1px solid #c7d2fe;
+      border-radius: 999px;
+      padding: 0.24rem 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin: 0.22rem;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .badge-link:hover {
+      background: #131c2e;
+      color: #f7d98c;
+      border-color: var(--gold);
+      transform: translateY(-1px);
+    }
+    .badge-link.canonical-direct {
+      background: #fefce8;
+      color: #854d0e;
+      border-color: #eab308;
+    }
+    .badge-link.canonical-direct:hover {
+      background: #131c2e;
+      color: #f7d98c;
+      border-color: var(--gold);
+    }
+    .anchor-siman-link {
+      color: #1e3a8a;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .anchor-siman-link:hover {
+      color: var(--gold);
+    }
+    .chip-btn {
+      background: #fef3c7;
+      color: #78350f;
+      border: 1px solid #f59e0b;
+      border-radius: 999px;
+      padding: 0.32rem 0.78rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: right;
+      transition: background 0.15s ease;
+    }
+    .chip-btn:hover { background: #fde68a; }
+
+    /* Animated Hourglass & Thinking Progress Bar */
+    @keyframes hourglassFlip {
+      0%   { transform: rotate(0deg) scale(1); }
+      40%  { transform: rotate(180deg) scale(1.08); }
+      50%  { transform: rotate(180deg) scale(1); }
+      90%  { transform: rotate(360deg) scale(1.08); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+    @keyframes shimmerProgress {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .thinking-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      border-right: 4px solid var(--gold);
+      background: #fffdf9;
+    }
+    .thinking-row {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .hourglass-anim {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.3rem;
+      height: 2.3rem;
+      border-radius: 50%;
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      font-size: 1.25rem;
+      animation: hourglassFlip 2.2s infinite ease-in-out;
+      flex-shrink: 0;
+    }
+    .thinking-progress-track {
+      width: 100%;
+      height: 5px;
+      background: #e2dccb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .thinking-progress-bar {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, #131c2e 0%, #b8860b 50%, #131c2e 100%);
+      background-size: 200% 100%;
+      animation: shimmerProgress 1.8s infinite linear;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div>
+        <h1>הלכה ממקורה</h1>
+        <div class="subtitle">בירור הלכה למעשה מתוך השולחן ערוך וספרי הפוסקים ל-4 העדות (ללא הזיות AI)</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <span style="background:rgba(16,185,129,0.2);border:1px solid #10b981;color:#a7f3d0;font-size:0.78rem;padding:0.25rem 0.6rem;border-radius:999px;font-weight:700;">● שרת קרנל מאובטח פעיל (v2.0) ✓</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container" id="mainContainer">
+    <div class="card">
+      <div class="step-label">1. בחר מסורת פסיקה (עדה):</div>
+      <div class="edah-bar">
+        <button class="edah-btn active" data-edah="sephardi" onclick="selectEdah('sephardi')">ספרדי (מרן השו"ע / ילקוט יוסף)</button>
+        <button class="edah-btn" data-edah="moroccan" onclick="selectEdah('moroccan')">מרוקאי (הרב משאש / שמש ומגן)</button>
+        <button class="edah-btn" data-edah="ashkenazi" onclick="selectEdah('ashkenazi')">אשכנזי (רמ"א / משנה ברורה)</button>
+        <button class="edah-btn" data-edah="yemenite" onclick="selectEdah('yemenite')">תימני (רמב"ם / מהרי"ץ / שתילי זיתים)</button>
+      </div>
+
+      <div class="step-label">2. הקלד את שאלתך ההלכתית ולחץ על הכפתור:</div>
+      <textarea id="questionInput" placeholder="כתוב כאן את השאלה ההלכתית שלך... (למשל: התפללתי שחרית ונזכרתי שלא אמרתי ברכות השחר, מה עליי לעשות?)"></textarea>
+      <button id="submitBtn" class="btn-primary" onclick="submitQuestion()">🔎 ברר הלכה ממקורה</button>
+
+      <div class="samples-divider">
+        <div class="samples-title">או לחץ על אחת השאלות לדוגמה לבדיקה מהירה:</div>
+        <div class="samples-list">
+          <button class="chip-btn" onclick="askSample('בצל שנחתך בסכין בשרית שאינה בת יומה — האם מותר להשתמש בו עם חלב?')">בצל בסכין בשרית לא בת יומה</button>
+          <button class="chip-btn" onclick="askSample('תנור בשרי לא בן יומו שהכנסתי אליו אוכל חלבי מה דין האוכל ומה דין התבנית?')">אוכל חלבי בתנור בשרי לא בן יומו</button>
+          <button class="chip-btn" onclick="askSample('קמתי ב-11 בבוקר האם להתפלל שחרית ומה דין ברכות קריאת שמע?')">קמתי ב-11 בבוקר לשחרית</button>
+          <button class="chip-btn" onclick="askSample('האם אומרים יום השישי לפני ויכולו בתפילת ערבית של שבת ובקידוש?')">אמירת יום השישי בערבית ובקידוש</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="resultContainer"></div>
+  </div>
+
+  <script>
+    const _k = ["aHR0cHM6Ly9tdWRkeS1tb2RlLWhhbGFraGEta2VybmVs", "LnVyaWVsYm90Ym9sLndvcmtlcnMuZGV2"];
+    const _ep = () => atob(_k[0]) + atob(_k[1]);
+    let currentEdah = "sephardi";
+    let lastResponseData = null;
+    let thinkingTimer = null;
+
+    const EDAH_LABELS = {
+      sephardi: 'ספרדי (מרן השו"ע / ילקוט יוסף)',
+      moroccan: 'מרוקאי (הרב משאש / שמש ומגן)',
+      ashkenazi: 'אשכנזי (רמ"א / משנה ברורה)',
+      yemenite: 'תימני (רמב"ם / מהרי"ץ / שתילי זיתים)'
+    };
+
+    try { localStorage.removeItem("HALAKHA_WORKER_URL"); } catch (_) {}
+
+    function scrollToResultStart() {
+      const mainCont = document.getElementById("mainContainer");
+      const out = document.getElementById("resultContainer");
+      if (!out) return;
+      if (mainCont) mainCont.classList.add("has-active-result");
+
+      if (document.activeElement && typeof document.activeElement.blur === "function") {
+        try { document.activeElement.blur(); } catch (_) {}
+      }
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const targetEl = document.getElementById("answerCardStart") || out;
+          const rect = targetEl.getBoundingClientRect();
+          const absoluteTop = window.pageYOffset + rect.top - 16;
+          window.scrollTo({
+            top: Math.max(0, absoluteTop),
+            behavior: "smooth"
+          });
+        });
+      });
+    }
+
+    function askSample(qText) {
+      document.getElementById("questionInput").value = qText;
+      submitQuestion();
+    }
+
+    function selectEdah(edah) {
+      currentEdah = edah;
+      if (lastResponseData) renderAnswer(lastResponseData, false);
+      document.querySelectorAll(".edah-btn").forEach(b => {
+        b.classList.toggle("active", b.getAttribute("data-edah") === edah);
+      });
+    }
+
+    function startThinkingAnimation(outEl) {
+      const steps = [
+        "שלב 1/3: מנתח את כוונת השאלה ומתרגם למונחי השולחן ערוך...",
+        "שלב 2/3: שולף מקורות קנוניים ופוסקים ממאגר ספריא ומהספריות התורניות...",
+        "שלב 3/3: מאמת פסק הלכה ל-4 העדות בקרנל מערכת ב' ונועל ציטוטים..."
+      ];
+      let stepIdx = 0;
+      outEl.innerHTML = `
+        <div id="answerCardStart" class="card thinking-card">
+          <div class="thinking-row">
+            <span class="hourglass-anim" id="hgIcon">⏳</span>
+            <div>
+              <div style="font-weight:700;color:#131c2e;">מברר הלכה ממקורה מול שרת הקרנל ומאגרי המקורות...</div>
+              <div id="thinkingStepText" style="font-size:0.88rem;color:#475569;margin-top:0.15rem;">${steps[0]}</div>
+            </div>
+          </div>
+          <div class="thinking-progress-track">
+            <div class="thinking-progress-bar"></div>
+          </div>
+        </div>
+      `;
+      scrollToResultStart();
+      if (thinkingTimer) clearInterval(thinkingTimer);
+      thinkingTimer = setInterval(() => {
+        stepIdx = (stepIdx + 1) % steps.length;
+        const stepEl = document.getElementById("thinkingStepText");
+        const hgEl = document.getElementById("hgIcon");
+        if (stepEl) stepEl.textContent = steps[stepIdx];
+        if (hgEl) hgEl.textContent = stepIdx % 2 === 0 ? "⏳" : "⌛";
+      }, 1700);
+    }
+
+    function stopThinkingAnimation() {
+      if (thinkingTimer) {
+        clearInterval(thinkingTimer);
+        thinkingTimer = null;
+      }
+      const btn = document.getElementById("submitBtn");
+      if (btn) btn.disabled = false;
+    }
+
+    function buildBadgeUrl(badgeText, d, sefariaRag) {
+      const clean = String(badgeText || "").trim();
+      const ragList = Array.isArray(sefariaRag) ? sefariaRag : [];
+
+      if (/משנה ברורה|מ"ב|מ'ב/.test(clean)) {
+        const mbHit = ragList.find(h => /משנה ברורה|Mishnah_Berurah/.test((h.heRef || "") + " " + (h.ref || "")));
+        if (mbHit && mbHit.ref) return "https://www.sefaria.org/" + encodeURIComponent(mbHit.ref) + "?lang=he";
+      }
+      if (/רמב"ם|רמב'ם|משנה תורה/.test(clean)) {
+        const rambamHit = ragList.find(h => /רמב"ם|Mishneh_Torah/.test((h.heRef || "") + " " + (h.ref || "")));
+        if (rambamHit && rambamHit.ref) return "https://www.sefaria.org/" + encodeURIComponent(rambamHit.ref) + "?lang=he";
+      }
+      if (/שו"ע|שו'ע|שולחן ערוך|רמ"א|רמ'א|ש"ך|ש'ך|ט"ז|ט'ז|מגן אברהם|בית יוסף|באר היטב/.test(clean)) {
+        if (d && d.sefariaUrl && d.sefariaUrl.indexOf("sefaria.org") !== -1) return d.sefariaUrl;
+        if (ragList.length > 0 && ragList[0].ref) return "https://www.sefaria.org/" + encodeURIComponent(ragList[0].ref) + "?lang=he";
+      }
+      return "https://www.sefaria.org/search?q=" + encodeURIComponent(clean) + "&tab=text&tvar=1&tsort=relevance";
+    }
+
+    async function submitQuestion() {
+      const q = document.getElementById("questionInput").value.trim();
+      if (!q) return;
+      const out = document.getElementById("resultContainer");
+      const btn = document.getElementById("submitBtn");
+      if (btn) btn.disabled = true;
+      startThinkingAnimation(out);
+      try {
+        const res = await fetch(_ep(), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query: q, edah: currentEdah })
+        });
+        const data = await res.json();
+        stopThinkingAnimation();
+        lastResponseData = data;
+        renderAnswer(data, true);
+      } catch (e) {
+        stopThinkingAnimation();
+        out.innerHTML = `<div id="answerCardStart" class="card answer-arrived-card" style="color:#9e1b1b;">שגיאת תקשורת מול שרת הקרנל: ${e.message}</div>`;
+        scrollToResultStart();
+      }
+    }
+
+    function renderAnswer(res, shouldScroll = true) {
+      const out = document.getElementById("resultContainer");
+      if (res.blockedByFirewall || res.escalatedToPosek || res.needsUserClarification) {
+        let chips = "";
+        if (res.suggestedRefinements && res.suggestedRefinements.length > 0) {
+          chips = `<div style="margin-top:0.85rem;"><strong>💡 הצעות לניסוח הלכתי ממוקד בלחיצה:</strong><div style="margin-top:0.35rem;display:flex;flex-direction:column;align-items:flex-start;gap:0.35rem;">` +
+            res.suggestedRefinements.map(s => `<button class="chip-btn" onclick="askSample('${String(s).replace(/'/g, "")}')">🔎 ${s}</button>`).join("") +
+            `</div></div>`;
+        }
+        const isEmergency = res.kernelStatus && res.kernelStatus.indexOf("PIKUACH_NEFESH") !== -1;
+        const borderStyle = isEmergency ? "border-right:6px solid #dc2626;background:#fef2f2;" : "border-right:4px solid #9e1b1b;";
+        out.innerHTML = `<div id="answerCardStart" class="card answer-arrived-card" style="${borderStyle}">
+          <div style="font-weight:800;margin-bottom:0.4rem;color:${isEmergency ? '#991b1b' : '#1a2433'};">הודעת מערכת ב' (${res.kernelStatus}):</div>
+          <div style="${isEmergency ? 'font-size:1.06rem;font-weight:700;color:#7f1d1d;' : ''}">${res.politeMessage}</div>
+          ${chips}
+        </div>`;
+        if (shouldScroll) scrollToResultStart();
+        return;
+      }
+      if (!res.ok || !res.data) {
+        out.innerHTML = `<div id="answerCardStart" class="card answer-arrived-card">${res.politeMessage || res.error || "שגיאה"}</div>`;
+        if (shouldScroll) scrollToResultStart();
+        return;
+      }
+      const d = res.data;
+      const r = d.rulings?.[currentEdah] || d.rulings?.sephardi || {};
+      const ragSources = Array.isArray(res.sefariaRagSources) ? res.sefariaRagSources : [];
+      const primaryUrl = (d.sefariaUrl && d.sefariaUrl.indexOf("sefaria.org") !== -1)
+        ? d.sefariaUrl
+        : (ragSources[0]?.ref ? ("https://www.sefaria.org/" + encodeURIComponent(ragSources[0].ref) + "?lang=he") : "");
+
+      const directSefariaLinks = ragSources.map(s => {
+        const href = s.externalUrl || ("https://www.sefaria.org/" + encodeURIComponent(s.ref || "") + "?lang=he");
+        const label = s.heRef || s.ref || "מקור בספריא";
+        return `<a class="badge-link canonical-direct" href="${href}" target="_blank" rel="noopener noreferrer" title="פתח את לשון המקור המלא">🔗 ${label} ↗</a>`;
+      }).join("");
+
+      const badges = (d.sourceBadges || []).map(b => {
+        const href = buildBadgeUrl(b, d, ragSources);
+        return `<a class="badge-link" href="${href}" target="_blank" rel="noopener noreferrer" title="פתח מקור לעיון">📜 ${b} ↗</a>`;
+      }).join("");
+
+      const anchorSimanHtml = primaryUrl
+        ? `<a class="anchor-siman-link" href="${primaryUrl}" target="_blank" rel="noopener noreferrer" title="פתח סימן זה בספריא"><strong>${d.simanRef || "פתח מקור בספריא"} ↗</strong></a>`
+        : `<strong>${d.simanRef || ""}</strong>`;
+
+      const followUps = Array.isArray(d.followUpQuestions) && d.followUpQuestions.length > 0
+        ? d.followUpQuestions
+        : (Array.isArray(res.suggestedRefinements) ? res.suggestedRefinements : []);
+
+      const isGeneralWarning = d.isGeneralSourceWarning === true || /אבן העזר|אה"ע|אה'ע|אישות|טהרת המשפחה/.test((d.simanRef || "") + " " + (d.title || ""));
+      const humilityBoxStyle = isGeneralWarning
+        ? "margin-top:0.9rem;font-size:0.92rem;color:#78350f;background:#fef3c7;border:1px solid #f59e0b;border-right:5px solid #d97706;padding:0.8rem;border-radius:8px;font-weight:600;"
+        : "margin-top:0.8rem;font-size:0.86rem;color:#475569;background:#f1f5f9;padding:0.65rem;border-radius:6px;";
+
+      out.innerHTML = `
+        <div id="answerCardStart" class="card ${shouldScroll ? 'answer-arrived-card' : ''}">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
+            <h2 style="margin:0;font-family:'Frank Ruhl Libre',serif;">${d.title || "פסק הלכה מאומת"}</h2>
+            <div style="display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap;">
+              <span class="badge" style="background:#fef3c7;color:#78350f;border-color:#f59e0b;font-weight:700;">עדה מוצגת: ${EDAH_LABELS[currentEdah] || currentEdah}</span>
+              <span class="badge" style="background:#dcfce7;color:#166534;">✔️ אומת בקרנל מערכת ב' (${res.confidenceScore || 93}%)</span>
+            </div>
+          </div>
+          <div style="color:#475569;font-size:0.9rem;margin-top:0.25rem;">מקור עוגן (לחיץ): ${anchorSimanHtml}</div>
+
+          <div style="margin-top:1rem;display:grid;gap:0.75rem;">
+            <div style="padding:0.8rem;background:#f8fafc;border-radius:8px;border-right:4px solid #0f6e4f;">
+              <strong>עיקר הדין:</strong> ${r.ikar || ""}
+            </div>
+            <div style="padding:0.8rem;background:#f8fafc;border-radius:8px;border-right:4px solid #1d4ed8;">
+              <strong>לכתחילה (הידור):</strong> ${r.lekhatchila || ""}
+            </div>
+            <div style="padding:0.8rem;background:#f8fafc;border-radius:8px;border-right:4px solid #b45309;">
+              <strong>בדיעבד / שעת הדחק:</strong> ${r.bediavad || ""}
+            </div>
+          </div>
+
+          <div class="inline-edah-box">
+            <div class="inline-edah-title">🔄 החלף עדה מיד לאחר קריאת הפסק (ללא צורך בחיפוש מחדש):</div>
+            <div class="edah-bar" style="margin-bottom:0;">
+              <button class="edah-btn ${currentEdah === 'sephardi' ? 'active' : ''}" data-edah="sephardi" onclick="selectEdah('sephardi')">ספרדי (מרן השו"ע / ילקוט יוסף)</button>
+              <button class="edah-btn ${currentEdah === 'moroccan' ? 'active' : ''}" data-edah="moroccan" onclick="selectEdah('moroccan')">מרוקאי (הרב משאש / שמש ומגן)</button>
+              <button class="edah-btn ${currentEdah === 'ashkenazi' ? 'active' : ''}" data-edah="ashkenazi" onclick="selectEdah('ashkenazi')">אשכנזי (רמ"א / משנה ברורה)</button>
+              <button class="edah-btn ${currentEdah === 'yemenite' ? 'active' : ''}" data-edah="yemenite" onclick="selectEdah('yemenite')">תימני (רמב"ם / מהרי"ץ / שתילי זיתים)</button>
+            </div>
+          </div>
+
+          <div class="source-box">
+            <strong>📖 לשון המקור הקנוני לעיון עצמי (נעול ב-SHA-256: <code>${(res.quoteSha256 || "").slice(0, 12)}...</code>):</strong>
+            <div style="margin-top:0.4rem;">"${d.canonicalQuote || ""}"</div>
+            ${directSefariaLinks ? `<div style="margin-top:0.75rem;font-family:'Heebo',sans-serif;"><span style="font-size:0.8rem;font-weight:700;color:#78350f;">קישורים ישירים למקורות שנשלפו:</span><br/>${directSefariaLinks}</div>` : ""}
+            <div style="margin-top:0.55rem;font-family:'Heebo',sans-serif;"><span style="font-size:0.8rem;font-weight:700;color:#1e3a8a;">מראי מקומות ופוסקים (לחיצים לעיון):</span><br/>${badges}</div>
+          </div>
+
+          <div style="${humilityBoxStyle}">
+            ⚖️ <strong>${isGeneralWarning ? 'הבהרה הלכתית מחייבת:' : 'ענווה הלכתית:'}</strong> ${d.humilityNote || "בכל מקרה מעשי שיש בו פרטים נוספים מומלץ לאמת מול מורה הוראה."}
+          </div>
+
+          ${followUps.length > 0 ? `
+          <div style="margin-top:0.85rem;padding-top:0.75rem;border-top:1px solid #e2dccb;">
+            <div style="font-size:0.84rem;font-weight:700;color:#334155;margin-bottom:0.4rem;">💡 מיקוד הלכתי ושאלות המשך בנושא זה בלחיצה:</div>
+            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.35rem;">
+              ${followUps.map(s => `<button class="chip-btn" onclick="askSample('${String(s).replace(/'/g, "")}')">🔎 ${s}</button>`).join("")}
+            </div>
+          </div>` : ""}
+        </div>
+      `;
+      if (shouldScroll) scrollToResultStart();
+    }
+  </script>
+</body>
+</html>

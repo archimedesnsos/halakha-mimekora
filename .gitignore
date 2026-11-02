@@ -1,0 +1,12 @@
+*.gdoc
+*.gsheet
+*.gslides
+*archive*/
+client/
+server/
+DOCS/
+*.bat
+__pycache__/
+*.pyc
+*.bak
+*.tmp
