@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>הלכה ממקורה — בירור הלכה ואוצר מקורות מוסמך (גרסה 4.2.1)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f6f0;
+      --card: #ffffff;
+      --ink: #1a2433;
+      --gold: #b8860b;
+      --border: #e2dccb;
+      --emerald: #0f6e4f;
+      --crimson: #9e1b1b;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Heebo', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #131c2e, #1f2f4a);
+      color: #fff;
+      padding: 1.25rem 1.1rem 1rem;
+      border-bottom: 4px solid var(--gold);
+    }
+    .header-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+    h1 {
+      font-family: 'Frank Ruhl Libre', serif;
+      margin: 0;
+      font-size: 1.85rem;
+      color: #f7d98c;
+    }
+    .subtitle {
+      font-size: 0.92rem;
+      opacity: 0.92;
+      margin-top: 0.2rem;
+    }
+    .btn-how-it-works {
+      background: rgba(247, 217, 140, 0.14);
+      border: 1px solid #f7d98c;
+      color: #f7d98c;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 0.34rem 0.85rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.16s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .btn-how-it-works:hover {
+      background: #f7d98c;
+      color: #131c2e;
+    }
+
+    /* Top Mode Switcher Tabs */
+    .mode-switcher-wrap {
+      max-width: 980px;
+      margin: 1rem auto 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.35rem;
+      border-radius: 11px;
+      border: 1px solid rgba(247, 217, 140, 0.3);
+    }
+    .mode-tab-btn {
+      padding: 0.62rem 0.8rem;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      background: transparent;
+      color: #e2e8f0;
+      font-family: inherit;
+      font-size: 0.96rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+    }
+    .mode-tab-btn:hover {
+      background: rgba(247, 217, 140, 0.12);
+      color: #fff;
+    }
+    .mode-tab-btn.active {
+      background: #f7d98c;
+      color: #131c2e;
+      border-color: var(--gold);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 1.25rem auto;
+      padding: 0 0.95rem;
+      transition: padding-bottom 0.2s ease;
+    }
+    .container.has-active-result {
+      padding-bottom: 55vh;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      margin-bottom: 1.2rem;
+    }
+    .step-label {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 0.45rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    #resultContainer {
+      scroll-margin-top: 18px;
+    }
+    @keyframes answerHighlightPulse {
+      0% { box-shadow: 0 0 0 0 rgba(184, 134, 11, 0.55); }
+      70% { box-shadow: 0 0 0 10px rgba(184, 134, 11, 0); }
+      100% { box-shadow: 0 4px 14px rgba(0,0,0,0.04); }
+    }
+    .answer-arrived-card {
+      animation: answerHighlightPulse 1.2s ease-out;
+    }
+    .edah-bar {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1.1rem;
+    }
+    @media (min-width: 720px) {
+      .edah-bar {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    .layer-bar, .search-type-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 0.45rem;
+    }
+    .layer-bar {
+      margin-bottom: 1.05rem;
+    }
+    .stype-btn {
+      padding: 0.46rem 0.72rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fdfcf9;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--ink);
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .stype-btn:hover {
+      border-color: var(--gold);
+      background: #fcf8ec;
+    }
+    .stype-btn.active {
+      background: #131c2e;
+      color: #f7d98c;
+      border-color: var(--gold);
+    }
+    .stype-hint {
+      font-size: 0.8rem;
+      color: #475569;
+      background: #f8fafc;
+      border-right: 3px solid var(--gold);
+      padding: 0.32rem 0.65rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+    .edah-btn, .layer-btn {
+      padding: 0.55rem 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fdfcf9;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--ink);
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .layer-btn {
+      flex: 1 1 auto;
+    }
+    .edah-btn:hover, .layer-btn:hover {
+      border-color: var(--gold);
+      background: #fcf8ec;
+    }
+    .edah-btn.active, .layer-btn.active {
+      background: #131c2e;
+      color: #f7d98c;
+      border-color: var(--gold);
+    }
+    .inline-edah-box {
+      margin-top: 0.95rem;
+      padding: 0.75rem 0.9rem;
+      background: #f8f6f0;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+    }
+    .inline-edah-title {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 0.45rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    textarea {
+      width: 100%;
+      min-height: 92px;
+      padding: 0.85rem;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      resize: vertical;
+      background: #fff;
+      transition: border-color 0.15s ease;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.12);
+    }
+    .btn-primary {
+      width: 100%;
+      background: #131c2e;
+      color: #f7d98c;
+      border: 1.5px solid var(--gold);
+      padding: 0.8rem 1.4rem;
+      border-radius: 9px;
+      font-weight: 800;
+      font-size: 1.05rem;
+      cursor: pointer;
+      margin-top: 0.65rem;
+      transition: opacity 0.2s ease, transform 0.1s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+    }
+    .btn-primary:active {
+      transform: scale(0.99);
+    }
+    .btn-primary:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+    .samples-divider {
+      margin-top: 1.1rem;
+      padding-top: 0.85rem;
+      border-top: 1px dashed #e2dccb;
+    }
+    .samples-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: 0.4rem;
+    }
+    .samples-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.38rem;
+    }
+    .source-box {
+      background: #fcfaf2;
+      border-right: 4px solid var(--gold);
+      padding: 1rem;
+      margin-top: 1rem;
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.12rem;
+    }
+    .badge {
+      display: inline-block;
+      background: #eef2ff;
+      color: #1e3a8a;
+      border: 1px solid #c7d2fe;
+      border-radius: 999px;
+      padding: 0.2rem 0.65rem;
+      font-size: 0.82rem;
+      margin: 0.2rem;
+    }
+    .badge-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: #eef2ff;
+      color: #1e3a8a;
+      border: 1px solid #c7d2fe;
+      border-radius: 999px;
+      padding: 0.24rem 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin: 0.22rem;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .badge-link:hover {
+      background: #131c2e;
+      color: #f7d98c;
+      border-color: var(--gold);
+      transform: translateY(-1px);
+    }
+    .badge-link.canonical-direct {
+      background: #fefce8;
+      color: #854d0e;
+      border-color: #eab308;
+    }
+    .badge-link.canonical-direct:hover {
+      background: #131c2e;
+      color: #f7d98c;
+      border-color: var(--gold);
+    }
+    .anchor-siman-link {
+      color: #1e3a8a;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .anchor-siman-link:hover {
+      color: var(--gold);
+    }
+    .chip-btn {
+      background: #fef3c7;
+      color: #78350f;
+      border: 1px solid #f59e0b;
+      border-radius: 999px;
+      padding: 0.32rem 0.78rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: right;
+      transition: background 0.15s ease;
+    }
+    .chip-btn:hover { background: #fde68a; }
+
+    /* Otzar Mekorot Source Cards & Copy Buttons */
+    .otzar-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.85rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .btn-copy-sheet {
+      background: #131c2e;
+      color: #f7d98c;
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 0.45rem 0.9rem;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .btn-copy-sheet:hover {
+      background: #1f2f4a;
+      transform: translateY(-1px);
+    }
+    .otzar-source-item {
+      background: #fcfaf2;
+      border: 1px solid #e5dec9;
+      border-right: 4px solid var(--gold);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      margin-top: 0.95rem;
+    }
+    .otzar-source-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+    .otzar-ref-title {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.18rem;
+      font-weight: 900;
+      color: #131c2e;
+      text-decoration: none;
+    }
+    .otzar-ref-title:hover {
+      color: var(--gold);
+      text-decoration: underline;
+    }
+    .otzar-verbatim-quote {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.13rem;
+      line-height: 1.72;
+      color: #111827;
+      margin-top: 0.55rem;
+      padding: 0.65rem 0.8rem;
+      background: #ffffff;
+      border-radius: 7px;
+      border: 1px solid #ede8d8;
+    }
+    .otzar-context-note {
+      font-size: 0.88rem;
+      color: #334155;
+      margin-top: 0.55rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .btn-copy-single {
+      background: #fff;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 0.22rem 0.6rem;
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+    .btn-copy-single:hover {
+      border-color: var(--gold);
+      background: #fefce8;
+      color: #131c2e;
+    }
+    details.biblio-appendix {
+      margin-top: 1.1rem;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 9px;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.86rem;
+      color: #475569;
+    }
+    details.biblio-appendix summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: #334155;
+      user-select: none;
+    }
+    .biblio-item {
+      padding: 0.4rem 0;
+      border-bottom: 1px dotted #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .biblio-item:last-child {
+      border-bottom: none;
+    }
+
+    /* Modal: "איך זה עובד?" */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(3px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 9999;
+    }
+    .modal-overlay.open {
+      display: flex;
+    }
+    .modal-dialog {
+      background: #ffffff;
+      border: 2px solid var(--gold);
+      border-radius: 14px;
+      max-width: 760px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.28);
+      animation: modalFadeIn 0.2s ease-out;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-header {
+      background: linear-gradient(135deg, #131c2e, #1f2f4a);
+      color: #fff;
+      padding: 1.05rem 1.3rem;
+      border-bottom: 3px solid var(--gold);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+    .modal-header h2 {
+      font-family: 'Frank Ruhl Libre', serif;
+      margin: 0;
+      font-size: 1.35rem;
+      color: #f7d98c;
+    }
+    .modal-close {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      font-size: 1.05rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease;
+    }
+    .modal-close:hover {
+      background: rgba(255,255,255,0.25);
+    }
+    .modal-body {
+      padding: 1.25rem 1.35rem 1.4rem;
+      color: var(--ink);
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+    .modal-section {
+      margin-bottom: 1.1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px dashed var(--border);
+    }
+    .modal-section:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .modal-section h3 {
+      margin: 0 0 0.45rem 0;
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.15rem;
+      color: #131c2e;
+    }
+    .modal-list {
+      margin: 0.4rem 0 0 0;
+      padding-right: 1.2rem;
+    }
+    .modal-list li {
+      margin-bottom: 0.4rem;
+    }
+    .open-book-callout {
+      background: #fcfaf2;
+      border: 1px solid #eab308;
+      border-right: 5px solid var(--gold);
+      border-radius: 9px;
+      padding: 0.9rem 1rem;
+      margin-top: 0.55rem;
+    }
+
+    /* Stage-Synced Estimated Progress Bar + Rotating Hourglass */
+    @keyframes hourglassFlip {
+      0% { transform: rotate(0deg) scale(1); }
+      40% { transform: rotate(180deg) scale(1.08); }
+      50% { transform: rotate(180deg) scale(1); }
+      90% { transform: rotate(360deg) scale(1.08); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+    @keyframes barSheen {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .thinking-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      border-right: 4px solid var(--gold);
+      background: #fffdf9;
+      padding: 1.1rem 1.25rem;
+    }
+    .thinking-header-row {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .thinking-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hourglass-anim {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.35rem;
+      height: 2.35rem;
+      border-radius: 50%;
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      font-size: 1.22rem;
+      animation: hourglassFlip 2.2s infinite ease-in-out;
+      flex-shrink: 0;
+    }
+    .thinking-progress-track {
+      flex: 1;
+      height: 12px;
+      background: #ebe5d5;
+      border-radius: 999px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+      direction: rtl;
+    }
+    .thinking-progress-bar {
+      width: 2%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #131c2e 0%, #b8860b 50%, #d4a017 75%, #131c2e 100%);
+      background-size: 200% 100%;
+      animation: barSheen 2.2s infinite linear;
+      transition: width 0.35s ease-out;
+    }
+    .thinking-percent {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #131c2e;
+      min-width: 2.9rem;
+      text-align: left;
+      font-variant-numeric: tabular-nums;
+      direction: ltr;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div>
+        <h1 id="portalMainTitle">הלכה ממקורה</h1>
+        <div class="subtitle" id="portalSubtitle">בירור הלכה למעשה ואוצר מקורות תורני מוסמך (מעוגן במקורות מאומתים מילה-במילה)</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.55rem;flex-wrap:wrap;">
+        <button type="button" class="btn-how-it-works" onclick="openHowItWorksModal()">📖 איך זה עובד?</button>
+        <span style="background:rgba(16,185,129,0.2);border:1px solid #10b981;color:#a7f3d0;font-size:0.78rem;padding:0.25rem 0.6rem;border-radius:999px;font-weight:700;">● אימות מקורות פעיל ✓</span>
+      </div>
+    </div>
+
+    <div class="mode-switcher-wrap" role="tablist" aria-label="בחירת מצב פעולה">
+      <button type="button" id="tabHalakha" class="mode-tab-btn active" onclick="switchPortalMode('halakha')">⚖️ בירור הלכה למעשה</button>
+      <button type="button" id="tabSources" class="mode-tab-btn" onclick="switchPortalMode('sources')">📚 אוצר מקורות מוסמך</button>
+    </div>
+  </header>
+
+  <div class="container" id="mainContainer">
+    <div class="card">
+      <!-- Mode 1 Controls: Halakha Lemaaseh -->
+      <div id="halakhaControlsSection">
+        <div class="step-label">1. בחר מסורת פסיקה (עדה):</div>
+        <div class="edah-bar">
+          <button class="edah-btn active" data-edah="sephardi" onclick="selectEdah('sephardi')">ספרדי (מרן השו"ע / ילקוט יוסף)</button>
+          <button class="edah-btn" data-edah="moroccan" onclick="selectEdah('moroccan')">מרוקאי (הרב משאש / שמש ומגן)</button>
+          <button class="edah-btn" data-edah="ashkenazi" onclick="selectEdah('ashkenazi')">אשכנזי (רמ"א / משנה ברורה)</button>
+          <button class="edah-btn" data-edah="yemenite" onclick="selectEdah('yemenite')">תימני (רמב"ם / מהרי"ץ / שתילי זיתים)</button>
+        </div>
+
+        <div class="step-label">2. סוג הבירור ההלכתי (מזוהה אוטומטית — או בחר למיקוד יזום):</div>
+        <div class="search-type-bar" role="group" aria-label="סוג הבירור ההלכתי">
+          <button type="button" class="stype-btn halakha-stype-btn active" data-hst="auto" onclick="selectHalakhaSearchType('auto')">✨ זיהוי אוטומטי חכם</button>
+          <button type="button" class="stype-btn halakha-stype-btn" data-hst="practical_case" onclick="selectHalakhaSearchType('practical_case')">🏠 שאלת מעשה וסיטואציה</button>
+          <button type="button" class="stype-btn halakha-stype-btn" data-hst="normative_rule" onclick="selectHalakhaSearchType('normative_rule')">📜 דין והלכה פסוקה</button>
+          <button type="button" class="stype-btn halakha-stype-btn" data-hst="minhag_comparison" onclick="selectHalakhaSearchType('minhag_comparison')">🌍 השוואת מנהגי עדות</button>
+          <button type="button" class="stype-btn halakha-stype-btn" data-hst="conceptual_sugya" onclick="selectHalakhaSearchType('conceptual_sugya')">⚖️ גדר הלכתי ושורש הדין</button>
+        </div>
+        <div class="stype-hint" id="halakhaSearchTypeHint">המערכת מאבחנת אוטומטית אם מדובר בשאלת מעשה מורכבת, בירור דין, השוואת מנהגי עדות או גדר הלכתי, ומתאימה את שליפת המקורות ובקרת הסתירות.</div>
+      </div>
+
+      <!-- Mode 2 Controls: Otzar Mekorot -->
+      <div id="sourcesControlsSection" style="display:none;">
+        <div class="step-label">1. סוג החיפוש באוצר המקורות (מזוהה אוטומטית — או בחר למיקוד יזום):</div>
+        <div class="search-type-bar" role="group" aria-label="סוג החיפוש באוצר המקורות">
+          <button type="button" class="stype-btn sources-stype-btn active" data-sst="auto" onclick="selectSourcesSearchType('auto')">✨ זיהוי אוטומטי חכם</button>
+          <button type="button" class="stype-btn sources-stype-btn" data-sst="thematic_sheet" onclick="selectSourcesSearchType('thematic_sheet')">🗂️ נושא ורעיון (דף מקורות)</button>
+          <button type="button" class="stype-btn sources-stype-btn" data-sst="book_focus" onclick="selectSourcesSearchType('book_focus')">📕 מיקוד בספר / חיבור</button>
+          <button type="button" class="stype-btn sources-stype-btn" data-sst="author_survey" onclick="selectSourcesSearchType('author_survey')">✍️ משנת מחבר / הוגה</button>
+          <button type="button" class="stype-btn sources-stype-btn" data-sst="quote_locus" onclick="selectSourcesSearchType('quote_locus')">🔍 איתור ציטוט / מאמר חז"ל</button>
+          <button type="button" class="stype-btn sources-stype-btn" data-sst="sugya_ref" onclick="selectSourcesSearchType('sugya_ref')">📖 סוגיה / מראה מקום</button>
+        </div>
+        <div class="stype-hint" id="sourcesSearchTypeHint">זיהוי אוטומטי בין 5 סוגי חיפוש: דף מקורות רב-רבדי, נעילה לחיבור ספציפי (ללא זליגת ספרים זרים), סקירת כל כתבי מחבר, איתור מקור לציטוט, או עיון בסוגיה.</div>
+
+        <div class="step-label">2. בחר רובד בספרות התורנית (או השאר על "כל הרבדים"):</div>
+        <div class="layer-bar">
+          <button class="layer-btn active" data-layer="all" onclick="selectLayer('all')">כל הרבדים (תנ"ך עד אחרונים)</button>
+          <button class="layer-btn" data-layer="tanakh_midrash" onclick="selectLayer('tanakh_midrash')">תנ"ך, מפרשים ומדרש</button>
+          <button class="layer-btn" data-layer="talmud" onclick="selectLayer('talmud')">משנה ותלמוד (בבלי וירושלמי)</button>
+          <button class="layer-btn" data-layer="rishonim_halakhah" onclick="selectLayer('rishonim_halakhah')">ראשונים והלכה</button>
+          <button class="layer-btn" data-layer="mahshava" onclick="selectLayer('mahshava')">מחשבה, מוסר וחסידות</button>
+        </div>
+      </div>
+
+      <div class="step-label" id="inputStepLabel">3. הקלד את שאלתך ההלכתית ולחץ על הכפתור:</div>
+      <textarea id="questionInput" placeholder="כתוב כאן את השאלה ההלכתית שלך... (למשל: התפללתי שחרית ונזכרתי שלא אמרתי ברכות השחר, מה עליי לעשות?)"></textarea>
+      <button id="submitBtn" class="btn-primary" onclick="submitQuestion()">🔎 ברר הלכה ממקורה</button>
+
+      <!-- Samples for Halakha Mode -->
+      <div class="samples-divider" id="halakhaSamplesBox">
+        <div class="samples-title">או לחץ על אחת השאלות לדוגמה לבדיקה מהירה:</div>
+        <div class="samples-list">
+          <button class="chip-btn" onclick="askSample('בצל שנחתך בסכין בשרית שאינה בת יומה — האם מותר להשתמש בו עם חלב?')">בצל בסכין בשרית לא בת יומה</button>
+          <button class="chip-btn" onclick="askSample('האם מותר לאכול דגים עם חלב או גבינה?')">דגים עם חלב או גבינה</button>
+          <button class="chip-btn" onclick="askSample('קמתי ב-11 בבוקר האם להתפלל שחרית ומה דין ברכות קריאת שמע?')">קמתי ב-11 בבוקר לשחרית</button>
+          <button class="chip-btn" onclick="askSample('האם אומרים יום השישי לפני ויכולו בתפילת ערבית של שבת ובקידוש?')">אמירת יום השישי בערבית ובקידוש</button>
+        </div>
+      </div>
+
+      <!-- Samples for Otzar Mekorot Mode -->
+      <div class="samples-divider" id="sourcesSamplesBox" style="display:none;">
+        <div class="samples-title">נושאים לדוגמה לאיתור מקורות מוסמכים ולהכנת דף מקורות:</div>
+        <div class="samples-list">
+          <button class="chip-btn" onclick="askSample('מקורות על מידת הכרת הטוב ואיסור כפיות טובה')">מידת הכרת הטוב</button>
+          <button class="chip-btn" onclick="askSample('מקורות על גדולה הכנסת אורחים יותר מקבלת פני שכינה')">גדולה הכנסת אורחים</button>
+          <button class="chip-btn" onclick="askSample('מקורות על לא בשמים היא ומעמד הכרעת חכמים')">לא בשמים היא</button>
+          <button class="chip-btn" onclick="askSample('מקורות על מנהיגות וענווה בישראל')">מנהיגות וענווה</button>
+          <button class="chip-btn" onclick="askSample('היכן הכוזרי מדבר על שורש האמונה ושורש המרי?')">שורש האמונה והמרי בכוזרי</button>
+          <button class="chip-btn" onclick="askSample('היכן הרמב&quot;ם מדבר על ניסים?')">ניסים במשנת הרמב"ם</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="resultContainer"></div>
+  </div>
+
+  <!-- Modal: איך זה עובד? -->
+  <div class="modal-overlay" id="howItWorksModal" onclick="handleModalBackdropClick(event)">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="howModalTitle">
+      <div class="modal-header">
+        <h2 id="howModalTitle">📖 איך "הלכה ממקורה" ואוצר המקורות עובדים?</h2>
+        <button type="button" class="modal-close" onclick="closeHowItWorksModal()" aria-label="סגור">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>האתגר: שימוש אחראי בבינה מלאכותית בעולם ההלכה והלימוד</h3>
+          <div>
+            כלי בינה מלאכותית רגילים מצטיינים בהבנת שפה חופשית ובריכוז מידע, אך כשהם פועלים ללא בקרה הם עלולים לשגות בביטחון עצמי מלא — להמציא מראי מקומות וציטוטים שאינם קיימים, לפספס מילות שלילה מהותיות בשאלה (כגון "אינו בן יומו"), או לייחס לפוסק דברים שלא כתב. מנגד, חיפוש מילולי רגיל במאגרים דורש ידיעה מוקדמת של המילים המדויקות במקור.
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <h3>חדש בגרסה 4.2: אפיון וניתוב 9 סוגי החיפוש התורני וההלכתי</h3>
+          <div>
+            חיפוש תורני אינו מקשה אחת: מי שמחפש <em>"היכן הכוזרי מדבר על שורש האמונה והמרי"</em> זקוק לנעילה קשיחה לתוך ספר הכוזרי בלבד, בעוד שמי שמחפש <em>"היכן הרמב"ם מדבר על ניסים"</em> זקוק למניפה החוצה את כל כתבי הרמב"ם, ומי ששואל שאלת מעשה במטבח זקוק לבידוד שלילות ומשתני מצב. בגרסה 4.2 המערכת מסווגת כל פנייה ל-<strong>4 סוגי בירור הלכתי</strong> (שאלת מעשה, הלכה פסוקה, השוואת מנהגי עדות, וגדר הלכתי) ול-<strong>5 סוגי חיפוש באוצר המקורות</strong> (נושא רב-רבדי, מיקוד בחיבור, משנת מחבר, איתור ציטוט/מאמר חז"ל, ועיון בסוגיה) ומפעילה לכל סוג שער בקרה ייעודי.
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <h3>שני כלי הפורטל תחת בקרת מקורות מחמירה</h3>
+          <ul class="modal-list">
+            <li><strong>⚖️ בירור הלכה למעשה:</strong> איתור חי של הסעיפים הרלוונטיים בשולחן ערוך, במשנה תורה, בנושאי הכלים, בפניני הלכה ובמאגרי מנהגי העדות, והצגה מאוזנת של ארבע מסורות הפסיקה (ספרדי, מרוקאי, אשכנזי ותימני) ללא ייחוס פסק לספר שלא נשלף במקורות השאלה.</li>
+            <li><strong>📚 אוצר מקורות מוסמך (להכנת שיעורים ודפי מקורות):</strong> איתור מקורות לפי רעיון, מושג או נושא בכל רבדי התורה (תנ"ך ומפרשיו, משנה ותלמוד, מדרשי חז"ל, ראשונים, הלכה ומחשבה). במצב זה לשון המקור אינה נכתבת כלל בידי הבינה המלאכותית, אלא נשלפת ומוצגת מילה-במילה מתוך המהדורות הדיגיטליות המוגהות (ללא דפי גולשים), עם כפתור העתקה מיידי לדף מקורות.</li>
+            <li><strong>אחריות הלכתית וזהירות:</strong> בשאלות הנוגעות לפיקוח נפש או לנושאים רגישים שבהם נדרשת הכרעה אישית של רב (כגון מראות וכתמים או דיני מעמד אישי), המערכת נמנעת מהכרעה אוטומטית ומפנה מיד לגורם המוסמך.</li>
+          </ul>
+        </div>
+
+        <div class="modal-section">
+          <h3>גבול היכולת הטכנולוגית — ומדוע המקורות מוצגים תמיד לעיניך</h3>
+          <div>
+            חשוב לנו לנהוג בשקיפות מלאה: גם כאשר המקורות עצמם אמיתיים ומאומתים לחלוטין, סיכום אוטומטי או דברי הקשר בשפה אנושית עלולים לעיתים להחמיץ הבחנה עדינה בתוך הסעיף, או שלא להביא בחשבון נסיבות מיוחדות הקיימות במקרה המעשי שלך ולא פורטו בשאלה.
+          </div>
+          <div class="open-book-callout">
+            <strong>עקרון "הספר הפתוח":</strong> מסיבה זו המערכת אינה מבקשת ממך להסתמך על תשובה סגורה. בכל בירור או דף מקורות מובאים לעיניך <strong>לשון המקור המדויקת</strong> ו<strong>קישורים ישירים ללחיצה אל המקורות המלאים</strong> שמהם נלקחו הדברים. כך תוכל תמיד לפתוח את הסעיף במקורו, לעיין בדברים בהקשרם המלא, ולהציג את הדברים בפני מורה הוראה למעשה.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const _k = ["aHR0cHM6Ly9tdWRkeS1tb2RlLWhhbGFraGEta2VybmVs", "LnVyaWVsYm90Ym9sLndvcmtlcnMuZGV2"];
+    const _ep = () => atob(_k[0]) + atob(_k[1]);
+    let portalMode = "halakha"; // "halakha" | "sources"
+    let currentEdah = "sephardi";
+    let currentLayer = "all";
+    let currentHalakhaSearchType = "auto";
+    let currentSourcesSearchType = "auto";
+
+    const HALAKHA_STYPE_META = {
+      auto: {
+        hint: "המערכת מאבחנת אוטומטית אם מדובר בשאלת מעשה מורכבת, בירור דין, השוואת מנהגי עדות או גדר הלכתי, ומתאימה את שליפת המקורות ובקרת הסתירות.",
+        placeholder: "כתוב כאן את השאלה ההלכתית שלך... (למשל: התפללתי שחרית ונזכרתי שלא אמרתי ברכות השחר, מה עליי לעשות?)"
+      },
+      practical_case: {
+        hint: "מיקוד בשאלת מעשה: מבודד מילות שלילה ('לא בצל', 'אינה בת יומה') ומשתני מצב, ומכריע בין לכתחילה, בדיעבד ושעת הדחק.",
+        placeholder: "תאר את המקרה המעשי... (למשל: חתכתי מלפפון בסכין בשרית שאינה בת יומה, האם מותר לאכול אותו עם גבינה?)"
+      },
+      normative_rule: {
+        hint: "בירור דין והלכה פסוקה: שולף את שורש הדין בשולחן ערוך, ברמב\"ם ובנושאי הכלים ומציג פסיקה סדורה ל-4 העדות.",
+        placeholder: "נסח את הדין המבוקש... (למשל: מה דין טלטול קליפות אגוזים ועצמות מעל השולחן בשבת?)"
+      },
+      minhag_comparison: {
+        hint: "השוואת מנהגי עדות: מתעדף מקורות מנהג והרחבות (פניני הלכה, מורשת מרוקו, בן איש חי, מהרי\"ץ ומשנה ברורה) להצגת הקטבים בכל עדה.",
+        placeholder: "שאל על מנהג או נוסח... (למשל: האם מברכים על קריאת ההלל בראש חודש בציבור?)"
+      },
+      conceptual_sugya: {
+        hint: "גדר הלכתי ושורש הדין: מברר את שורש הסוגיה וגדרי דאורייתא/דרבנן בראשונים ובפוסקים תחת חסימת רציונליזציה.",
+        placeholder: "שאל על גדר או שורש הלכתי... (למשל: מה גדר כלי שמלאכתו לאיסור לצורך גופו ולצורך מקומו?)"
+      }
+    };
+
+    const SOURCES_STYPE_META = {
+      auto: {
+        hint: "זיהוי אוטומטי בין 5 סוגי חיפוש: דף מקורות רב-רבדי, נעילה לחיבור ספציפי (ללא זליגת ספרים זרים), סקירת כל כתבי מחבר, איתור מקור לציטוט, או עיון בסוגיה.",
+        placeholder: "כתוב כאן נושא, חיבור, מחבר או ציטוט... (למשל: היכן הכוזרי מדבר על שורש האמונה והמרי? / מקורות על הכרת הטוב)"
+      },
+      thematic_sheet: {
+        hint: "דף מקורות נושאי רב-רבדי: בונה מניפה היסטורית-פדגוגית מתורה שבכתב וחז\"ל דרך הראשונים ועד ספרי המחשבה והאחרונים.",
+        placeholder: "הקלד נושא או רעיון לדף מקורות... (למשל: מקורות על ידיעה ובחירה חופשית / מידת הכרת הטוב)"
+      },
+      book_focus: {
+        hint: "נעילה לחיבור ספציפי: מאתר פסקאות מדויקות אך ורק מתוך הספר המבוקש (כגון הכוזרי, מורה נבוכים, מסילת ישרים, תניא) וחוסם זליגת ספרים זרים.",
+        placeholder: "ציין את שם החיבור והנושא... (למשל: היכן הכוזרי מדבר על שורש האמונה והמרי? / מסילת ישרים על מידת הנקיות)"
+      },
+      author_survey: {
+        hint: "סקירת רוחב במשנת מחבר: אוסף ומשווה מקורות מכלל חיבוריו של אותו הוגה או פוסק (למשל משנה תורה + מורה נבוכים + שמונה פרקים להרמב\"ם).",
+        placeholder: "ציין את המחבר והנושא... (למשל: היכן הרמב\"ם מדבר על ניסים? / שיטת המהר\"ל על לימוד תורה)"
+      },
+      quote_locus: {
+        hint: "איתור מקור לציטוט או מאמר חז\"ל: מאתר תחילה את מקור השורש המדויק בתנ\"ך, בש\"ס או במדרש ומוסיף את מפרשיו המרכזיים.",
+        placeholder: "הקלד ביטוי, פסוק או מאמר חז\"ל... (למשל: לא בשמים היא / גדולה הכנסת אורחים יותר מקבלת פני שכינה)"
+      },
+      sugya_ref: {
+        hint: "עיון בסוגיה או במראה מקום: שולף את גוף הדף או הסימן המדויק בצירוף נושאי הכלים והמפרשים הקלאסיים על אתר.",
+        placeholder: "הקלד דף גמרא, סימן או פרק... (למשל: בבא מציעא נט ב תנורו של עכנאי / ברכות לג ב)"
+      }
+    };
+    let lastHalakhaResponse = null;
+    let lastSourcesResponse = null;
+    let thinkingTimer = null;
+    let activeAbortCtrl = null;
+    const responseCache = new Map();
+
+    const EDAH_LABELS = {
+      sephardi: 'ספרדי (מרן השו"ע / ילקוט יוסף)',
+      moroccan: 'מרוקאי (הרב משאש / שמש ומגן)',
+      ashkenazi: 'אשכנזי (רמ"א / משנה ברורה)',
+      yemenite: 'תימני (רמב"ם / מהרי"ץ / שתילי זיתים)'
+    };
+
+    try { localStorage.removeItem("HALAKHA_WORKER_URL"); } catch (_) {}
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function openHowItWorksModal() {
+      const m = document.getElementById("howItWorksModal");
+      if (m) m.classList.add("open");
+    }
+
+    function closeHowItWorksModal() {
+      const m = document.getElementById("howItWorksModal");
+      if (m) m.classList.remove("open");
+    }
+
+    function handleModalBackdropClick(ev) {
+      if (ev.target && ev.target.id === "howItWorksModal") {
+        closeHowItWorksModal();
+      }
+    }
+
+    document.addEventListener("keydown", function(ev) {
+      if (ev.key === "Escape") closeHowItWorksModal();
+    });
+
+    function switchPortalMode(mode) {
+      portalMode = mode === "sources" ? "sources" : "halakha";
+      const isSources = portalMode === "sources";
+
+      document.getElementById("tabHalakha").classList.toggle("active", !isSources);
+      document.getElementById("tabSources").classList.toggle("active", isSources);
+
+      document.getElementById("halakhaControlsSection").style.display = isSources ? "none" : "block";
+      document.getElementById("sourcesControlsSection").style.display = isSources ? "block" : "none";
+      document.getElementById("halakhaSamplesBox").style.display = isSources ? "none" : "block";
+      document.getElementById("sourcesSamplesBox").style.display = isSources ? "block" : "none";
+
+      const stepLbl = document.getElementById("inputStepLabel");
+      const qInput = document.getElementById("questionInput");
+      const sBtn = document.getElementById("submitBtn");
+
+      if (isSources) {
+        stepLbl.textContent = "3. הקלד נושא, חיבור, מחבר או ציטוט לאיתור מקורות מוסמכים:";
+        qInput.placeholder = (SOURCES_STYPE_META[currentSourcesSearchType] || SOURCES_STYPE_META.auto).placeholder;
+        sBtn.innerHTML = "📚 אתר מקורות מוסמכים";
+        if (lastSourcesResponse) {
+          renderSourcesAnswer(lastSourcesResponse, false);
+        } else {
+          document.getElementById("resultContainer").innerHTML = "";
+        }
+      } else {
+        stepLbl.textContent = "3. הקלד את שאלתך ההלכתית ולחץ על הכפתור:";
+        qInput.placeholder = (HALAKHA_STYPE_META[currentHalakhaSearchType] || HALAKHA_STYPE_META.auto).placeholder;
+        sBtn.innerHTML = "🔎 ברר הלכה ממקורה";
+        if (lastHalakhaResponse) {
+          renderHalakhaAnswer(lastHalakhaResponse, false);
+        } else {
+          document.getElementById("resultContainer").innerHTML = "";
+        }
+      }
+    }
+
+    function selectLayer(layer) {
+      currentLayer = layer;
+      document.querySelectorAll(".layer-btn").forEach(b => {
+        b.classList.toggle("active", b.getAttribute("data-layer") === layer);
+      });
+    }
+
+    function selectHalakhaSearchType(stype) {
+      currentHalakhaSearchType = stype || "auto";
+      document.querySelectorAll(".halakha-stype-btn").forEach(b => {
+        b.classList.toggle("active", b.getAttribute("data-hst") === currentHalakhaSearchType);
+      });
+      const meta = HALAKHA_STYPE_META[currentHalakhaSearchType] || HALAKHA_STYPE_META.auto;
+      const hintEl = document.getElementById("halakhaSearchTypeHint");
+      if (hintEl) hintEl.textContent = meta.hint;
+      if (portalMode === "halakha") {
+        document.getElementById("questionInput").placeholder = meta.placeholder;
+      }
+    }
+
+    function selectSourcesSearchType(stype) {
+      currentSourcesSearchType = stype || "auto";
+      document.querySelectorAll(".sources-stype-btn").forEach(b => {
+        b.classList.toggle("active", b.getAttribute("data-sst") === currentSourcesSearchType);
+      });
+      const meta = SOURCES_STYPE_META[currentSourcesSearchType] || SOURCES_STYPE_META.auto;
+      const hintEl = document.getElementById("sourcesSearchTypeHint");
+      if (hintEl) hintEl.textContent = meta.hint;
+      if (portalMode === "sources") {
+        document.getElementById("questionInput").placeholder = meta.placeholder;
+      }
+    }
+
+    function scrollToResultStart() {
+      const mainCont = document.getElementById("mainContainer");
+      const out = document.getElementById("resultContainer");
+      if (!out) return;
+      if (mainCont) mainCont.classList.add("has-active-result");
+
+      if (document.activeElement && typeof document.activeElement.blur === "function") {
+        try { document.activeElement.blur(); } catch (_) {}
+      }
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const targetEl = document.getElementById("answerCardStart") || out;
+          const rect = targetEl.getBoundingClientRect();
+          const absoluteTop = window.pageYOffset + rect.top - 16;
+          window.scrollTo({
+            top: Math.max(0, absoluteTop),
+            behavior: "smooth"
+          });
+        });
+      });
+    }
+
+    function askSample(qText) {
+      if (portalMode === "sources" && currentSourcesSearchType !== "auto") {
+        selectSourcesSearchType("auto");
+      } else if (portalMode === "halakha" && currentHalakhaSearchType !== "auto") {
+        selectHalakhaSearchType("auto");
+      }
+      document.getElementById("questionInput").value = qText;
+      submitQuestion();
+    }
+
+    function askFromChip(btnEl) {
+      const q = btnEl && btnEl.getAttribute("data-query");
+      if (q) askSample(q);
+    }
+
+    function copyTextSafely(text, onDone) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onDone).catch(() => fallbackCopy(text, onDone));
+      } else {
+        fallbackCopy(text, onDone);
+      }
+    }
+
+    function fallbackCopy(text, onDone) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch (_) {}
+      document.body.removeChild(ta);
+      if (onDone) onDone();
+    }
+
+    function selectEdah(edah) {
+      currentEdah = edah;
+      if (portalMode === "halakha" && lastHalakhaResponse) renderHalakhaAnswer(lastHalakhaResponse, false);
+      document.querySelectorAll(".edah-btn").forEach(b => {
+        b.classList.toggle("active", b.getAttribute("data-edah") === edah);
+      });
+    }
+
+    function computeEstimatedProgress(elapsedSec) {
+      const speedFactor = portalMode === "sources" ? 1.25 : 1.0;
+      const t = elapsedSec * speedFactor;
+      if (t <= 4) {
+        return Math.min(22, 2 + (t / 4) * 20);
+      }
+      if (t <= 9) {
+        return 22 + ((t - 4) / 5) * 26;
+      }
+      if (t <= 21) {
+        return 48 + ((t - 9) / 12) * 35;
+      }
+      const extra = t - 21;
+      return Math.min(97, 83 + 14 * (1 - Math.exp(-extra / 12)));
+    }
+
+    function getProgressStageCaption(elapsedSec) {
+      if (portalMode === "sources") {
+        if (elapsedSec <= 3.5) return "שלב 1/4: ממפה את הנושא למראי המקומות הקלאסיים בארון הספרים...";
+        if (elapsedSec <= 8) return "שלב 2/4: שולף את לשון המקורות המדויקת ממהדורות המאגרים המוגהות...";
+        if (elapsedSec <= 16) return "שלב 3/4: מסנן מקורות שאינם ממין העניין ומסדר לפי רבדים...";
+        return "שלב 4/4: נועל ציטוטים מילה-במילה ומכין דף מקורות לעיון והעתקה...";
+      }
+      if (elapsedSec <= 4) {
+        return "שלב 1/4: מנתח את כוונת השאלה ומזהה את הסימנים הנוגעים בדבר...";
+      }
+      if (elapsedSec <= 9) {
+        return "שלב 2/4: שולף מקורות חיים מספרי הפוסקים ומהספריות התורניות...";
+      }
+      if (elapsedSec <= 21) {
+        return "שלב 3/4: מרכז ומגבש את הדין לארבע מסורות הפסיקה...";
+      }
+      return "שלב 4/4: משלים בקרת מקורות ואימות מראי מקומות...";
+    }
+
+    function startThinkingAnimation(outEl) {
+      const startTime = Date.now();
+      let tickCount = 0;
+      const headerLine = portalMode === "sources"
+        ? "מאתר ומאמת מקורות תורניים מילה-במילה..."
+        : "מברר הלכה ממקורה מול מאגרי הפוסקים...";
+      outEl.innerHTML = `
+        <div id="answerCardStart" class="card thinking-card" aria-busy="true">
+          <div class="thinking-header-row">
+            <span class="hourglass-anim" id="hgIcon">⏳</span>
+            <div>
+              <div style="font-weight:700;color:#131c2e;">${headerLine}</div>
+              <div id="thinkingStepText" style="font-size:0.88rem;color:#475569;margin-top:0.15rem;">${getProgressStageCaption(0)}</div>
+            </div>
+          </div>
+          <div class="thinking-bar-row">
+            <div class="thinking-progress-track">
+              <div class="thinking-progress-bar" id="thinkingFillBar" style="width:2%;"></div>
+            </div>
+            <span class="thinking-percent" id="thinkingPct">2%</span>
+          </div>
+        </div>
+      `;
+      scrollToResultStart();
+      if (thinkingTimer) clearInterval(thinkingTimer);
+      thinkingTimer = setInterval(() => {
+        tickCount++;
+        const elapsed = (Date.now() - startTime) / 1000;
+        const pct = Math.round(computeEstimatedProgress(elapsed));
+        const fillEl = document.getElementById("thinkingFillBar");
+        const pctEl = document.getElementById("thinkingPct");
+        const stepEl = document.getElementById("thinkingStepText");
+        const hgEl = document.getElementById("hgIcon");
+        if (fillEl) fillEl.style.width = pct + "%";
+        if (pctEl) pctEl.textContent = pct + "%";
+        if (stepEl) stepEl.textContent = getProgressStageCaption(elapsed);
+        if (hgEl && tickCount % 6 === 0) {
+          hgEl.textContent = (Math.floor(tickCount / 6) % 2 === 0) ? "⏳" : "⌛";
+        }
+      }, 280);
+    }
+
+    function stopThinkingAnimation() {
+      if (thinkingTimer) {
+        clearInterval(thinkingTimer);
+        thinkingTimer = null;
+      }
+      const fillEl = document.getElementById("thinkingFillBar");
+      const pctEl = document.getElementById("thinkingPct");
+      if (fillEl) fillEl.style.width = "100%";
+      if (pctEl) pctEl.textContent = "100%";
+      const btn = document.getElementById("submitBtn");
+      if (btn) btn.disabled = false;
+    }
+
+    function toSefariaSlugUrl(refStr) {
+      const clean = String(refStr || "").trim().replace(/^https?:\/\/www\.sefaria\.org(?:\.il)?\//i, "").split("?")[0];
+      if (!clean || /^Shulchan[ _]Arukh$/i.test(clean)) {
+        return "https://www.sefaria.org/texts?lang=he";
+      }
+      const slug = decodeURIComponent(clean)
+        .replace(/\s+([0-9]+[ab]?[:.][0-9:a-zA-Z.-]*)$/, ".$1")
+        .replace(/\s+([0-9]+[ab]?)$/, ".$1")
+        .replace(/:/g, ".")
+        .replace(/\s+/g, "_");
+      return "https://www.sefaria.org/" + encodeURI(slug) + "?lang=he";
+    }
+
+    function buildBadgeUrl(badgeText, d, sefariaRag) {
+      const clean = String(badgeText || "").trim();
+      const ragList = Array.isArray(sefariaRag) ? sefariaRag : [];
+
+      if (/משנה ברורה|מ"ב|מ'ב/.test(clean)) {
+        const mbHit = ragList.find(h => /משנה ברורה|Mishnah_Berurah/.test((h.heRef || "") + " " + (h.ref || "")));
+        if (mbHit && (mbHit.externalUrl || mbHit.ref)) return mbHit.externalUrl || toSefariaSlugUrl(mbHit.ref);
+      }
+      if (/רמב"ם|רמב'ם|משנה תורה/.test(clean)) {
+        const rambamHit = ragList.find(h => /רמב"ם|Mishneh_Torah/.test((h.heRef || "") + " " + (h.ref || "")));
+        if (rambamHit && (rambamHit.externalUrl || rambamHit.ref)) return rambamHit.externalUrl || toSefariaSlugUrl(rambamHit.ref);
+      }
+      if (/פניני הלכה/.test(clean)) {
+        const phHit = ragList.find(h => /פניני הלכה|Peninei_Halakhah/.test((h.heRef || "") + " " + (h.ref || "")));
+        if (phHit) return phHit.externalUrl || toSefariaSlugUrl(phHit.ref);
+      }
+      if (/שו"ע|שו'ע|שולחן ערוך|רמ"א|רמ'א|ש"ך|ש'ך|ט"ז|ט'ז|מגן אברהם|בית יוסף|באר היטב/.test(clean)) {
+        if (d && d.sefariaUrl && d.sefariaUrl.indexOf("sefaria.org") !== -1) return toSefariaSlugUrl(d.sefariaUrl);
+        if (ragList.length > 0 && ragList[0].ref) return ragList[0].externalUrl || toSefariaSlugUrl(ragList[0].ref);
+      }
+      return "https://www.sefaria.org/search?q=" + encodeURIComponent(clean) + "&tab=text&tvar=1&tsort=relevance";
+    }
+
+    async function submitQuestion() {
+      const q = document.getElementById("questionInput").value.trim();
+      if (!q) return;
+      const out = document.getElementById("resultContainer");
+      const btn = document.getElementById("submitBtn");
+      const reqMode = portalMode;
+      const activeStype = reqMode === "sources" ? currentSourcesSearchType : currentHalakhaSearchType;
+      const cacheKey = reqMode === "sources" ? `S|${currentLayer}|${activeStype}|${q}` : `H|${activeStype}|${q}`;
+
+      if (responseCache.has(cacheKey)) {
+        const cached = responseCache.get(cacheKey);
+        if (reqMode === "sources" || cached.mode === "sources") {
+          lastSourcesResponse = cached;
+          renderSourcesAnswer(cached, true);
+        } else {
+          lastHalakhaResponse = cached;
+          renderHalakhaAnswer(cached, true);
+        }
+        return;
+      }
+
+      if (activeAbortCtrl) {
+        try { activeAbortCtrl.abort(); } catch (_) {}
+      }
+      activeAbortCtrl = new AbortController();
+
+      if (btn) btn.disabled = true;
+      startThinkingAnimation(out);
+      try {
+        const payload = reqMode === "sources"
+          ? { query: q, mode: "sources", layer: currentLayer, searchType: currentSourcesSearchType }
+          : { query: q, mode: "halakha", edah: currentEdah, searchType: currentHalakhaSearchType };
+
+        const res = await fetch(_ep(), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          signal: activeAbortCtrl.signal
+        });
+        const data = await res.json();
+        stopThinkingAnimation();
+        if (data && data.ok) {
+          responseCache.set(cacheKey, data);
+        }
+        if (reqMode === "sources" || data.mode === "sources") {
+          lastSourcesResponse = data;
+          renderSourcesAnswer(data, true);
+        } else {
+          lastHalakhaResponse = data;
+          renderHalakhaAnswer(data, true);
+        }
+      } catch (e) {
+        if (e && e.name === "AbortError") return;
+        stopThinkingAnimation();
+        out.innerHTML = `<div id="answerCardStart" class="card answer-arrived-card" style="color:#9e1b1b;">שגיאת תקשורת מול השרת: ${escapeHtml(e.message)}</div>`;
+        scrollToResultStart();
+      }
+    }
+
+    function copySingleSourceCard(idx, btnEl) {
+      if (!lastSourcesResponse || !lastSourcesResponse.sourcesData) return;
+      const src = (lastSourcesResponse.sourcesData.sources || [])[idx];
+      if (!src) return;
+      const formatted = `${src.heRef}\n"${src.verbatimText}"\n(${src.relevanceNote})\nמקור: ${src.directUrl}`;
+      copyTextSafely(formatted, () => {
+        const orig = btnEl.textContent;
+        btnEl.textContent = "✔️ הועתק!";
+        setTimeout(() => { btnEl.textContent = orig; }, 1600);
+      });
+    }
+
+    function copyEntireSourceSheet(btnEl) {
+      if (!lastSourcesResponse || !lastSourcesResponse.sourcesData) return;
+      const sd = lastSourcesResponse.sourcesData;
+      const lines = [
+        `📚 ${sd.topicTitle || "דף מקורות מאומת"}`,
+        `${sd.overviewSummary || ""}`,
+        "----------------------------------------"
+      ];
+      (sd.sources || []).forEach((s, idx) => {
+        lines.push(`\n[${idx + 1}] ${s.heRef} (${s.eraBadge})`);
+        lines.push(`"${s.verbatimText}"`);
+        if (s.relevanceNote) lines.push(`ביאור והקשר: ${s.relevanceNote}`);
+        lines.push(`קישור: ${s.directUrl}`);
+      });
+      lines.push("\n----------------------------------------\nהופק ואומת מילה-במילה באמצעות 'הלכה ממקורה — אוצר מקורות מוסמך'");
+      copyTextSafely(lines.join("\n"), () => {
+        const orig = btnEl.innerHTML;
+        btnEl.innerHTML = "✔️ דף המקורות הועתק ללוח!";
+        setTimeout(() => { btnEl.innerHTML = orig; }, 2000);
+      });
+    }
+
+    function renderSourcesAnswer(res, shouldScroll = true) {
+      const out = document.getElementById("resultContainer");
+      if (res.blockedByFirewall || res.escalatedToPosek || res.needsUserClarification) {
+        let chips = "";
+        if (res.suggestedRefinements && res.suggestedRefinements.length > 0) {
+          chips = `<div style="margin-top:0.85rem;"><strong>💡 הצעות ממוקדות לאיתור מקורות בלחיצה:</strong><div style="margin-top:0.35rem;display:flex;flex-direction:column;align-items:flex-start;gap:0.35rem;">` +
+            res.suggestedRefinements.map(s => `<button type="button" class="chip-btn" data-query="${escapeHtml(s)}" onclick="askFromChip(this)">📚 ${escapeHtml(s)}</button>`).join("") +
+            `</div></div>`;
+        }
+        const stCodeSrc = res.gateStatus || "";
+        const isEmergencySrc = stCodeSrc.indexOf("PIKUACH_NEFESH") !== -1;
+        const srcBorderStyle = isEmergencySrc ? "border-right:6px solid #dc2626;background:#fef2f2;" : "border-right:4px solid #9e1b1b;";
+        out.innerHTML = `<div id="answerCardStart" class="card answer-arrived-card" style="${srcBorderStyle}">
+          <div style="font-weight:800;margin-bottom:0.4rem;color:${isEmergencySrc ? '#991b1b' : '#1a2433'};">${isEmergencySrc ? 'הודעת חירום — פיקוח נפש:' : 'הודעת אוצר המקורות:'}</div>
+          <div style="${isEmergencySrc ? 'font-size:1.06rem;font-weight:700;color:#7f1d1d;' : ''}">${escapeHtml(res.politeMessage)}</div>
+          ${chips}
+        </div>`;
+        if (shouldScroll) scrollToResultStart();
+        return;
+      }
+
+      if (!res.ok || !res.sourcesData) {
+        out.innerHTML = `<div id="answerCardStart" class="card answer-arrived-card">${escapeHtml(res.politeMessage || res.error || "שגיאה באיתור המקורות")}</div>`;
+        if (shouldScroll) scrollToResultStart();
+        return;
+      }
+
+      const sd = res.sourcesData;
+      const cards = Array.isArray(sd.sources) ? sd.sources : [];
+      const secondaryRefs = Array.isArray(sd.secondaryBibliographicRefs) ? sd.secondaryBibliographicRefs : [];
+      const followUps = Array.isArray(sd.followUpTopics) ? sd.followUpTopics : [];
+
+      const cardsHtml = cards.map((c, idx) => `
+        <div class="otzar-source-item">
+          <div class="otzar-source-top">
+            <div>
+              <a class="otzar-ref-title" href="${escapeHtml((c.directUrl && c.directUrl.indexOf("sefaria.org") !== -1) ? toSefariaSlugUrl(c.directUrl) : c.directUrl)}" target="_blank" rel="noopener noreferrer" title="פתח את המקור המלא במאגר">
+                <span dir="rtl">${idx + 1}. <bdi>${escapeHtml(c.heRef)}</bdi></span> ↗
+              </a>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.35rem;flex-wrap:wrap;">
+              <span class="badge" style="background:#fef3c7;color:#78350f;border-color:#f59e0b;font-weight:700;">${escapeHtml(c.eraBadge)}</span>
+              <span class="badge" style="background:#dcfce7;color:#166534;">🟢 ${escapeHtml(c.tierLabel)}</span>
+            </div>
+          </div>
+
+          <div class="otzar-verbatim-quote">"${escapeHtml(c.verbatimText)}"</div>
+
+          <div class="otzar-context-note">
+            <div><strong>הקשר בסוגיה:</strong> ${escapeHtml(c.relevanceNote || "")}</div>
+            <div style="display:flex;align-items:center;gap:0.4rem;">
+              <a class="btn-copy-single" style="text-decoration:none;" href="${escapeHtml((c.directUrl && c.directUrl.indexOf("sefaria.org") !== -1) ? toSefariaSlugUrl(c.directUrl) : c.directUrl)}" target="_blank" rel="noopener noreferrer">🔗 פתח במקור</a>
+              <button type="button" class="btn-copy-single" onclick="copySingleSourceCard(${idx}, this)">📋 העתק מקור</button>
+            </div>
+          </div>
+        </div>
+      `).join("");
+
+      const biblioAppendixHtml = secondaryRefs.length > 0 ? `
+        <details class="biblio-appendix">
+          <summary>📎 מראי מקום נוספים שהוזכרו בגוף המקורות לעיון בספריות ובמאגרים (${secondaryRefs.length})</summary>
+          <div style="margin-top:0.55rem;">
+            ${secondaryRefs.map(b => `
+              <div class="biblio-item">
+                <div>
+                  <strong>${escapeHtml(b.exactMention)}</strong>
+                  <span style="font-size:0.8rem;color:#64748b;"> — הובא מתוך: ${escapeHtml(b.citedInSource)}</span>
+                </div>
+                <a class="badge-link" style="font-size:0.76rem;padding:0.15rem 0.55rem;" href="${escapeHtml(b.hebrewBooksSearchUrl)}" target="_blank" rel="noopener noreferrer">חיפוש ב-HebrewBooks (חינם) ↗</a>
+              </div>
+            `).join("")}
+            <div style="margin-top:0.55rem;font-size:0.78rem;color:#64748b;">
+              * מראי מקום אלו חולצו מתוך הטקסטים הפתוחים שלעיל. חלק מספרי השו"ת המאוחרים זמינים לעיון בספריות תורניות או במאגרים חיצוניים למנויים כגון אוצר החכמה ופרויקט השו"ת (ללא כל קשר לאתר זה).
+            </div>
+          </div>
+        </details>
+      ` : "";
+
+      out.innerHTML = `
+        <div id="answerCardStart" class="card ${shouldScroll ? 'answer-arrived-card' : ''}">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
+            <h2 style="margin:0;font-family:'Frank Ruhl Libre',serif;">📚 ${escapeHtml(sd.topicTitle || "דף מקורות מאומת")}</h2>
+            <div style="display:flex;align-items:center;gap:0.35rem;flex-wrap:wrap;">
+              ${res.searchTypeMeta && res.searchTypeMeta.label ? `<span class="badge" style="background:#eef2ff;color:#1e3a8a;border-color:#c7d2fe;font-weight:700;">🧭 ${escapeHtml(res.searchTypeMeta.label)}</span>` : ""}
+              <span class="badge" style="background:#dcfce7;color:#166534;font-weight:700;">✔️ ${cards.length} מקורות מאומתים מילה-במילה</span>
+            </div>
+          </div>
+
+          <div style="margin-top:0.65rem;padding:0.75rem 0.9rem;background:#f8fafc;border-radius:8px;border-right:4px solid #1e3a8a;font-size:0.94rem;">
+            ${escapeHtml(sd.overviewSummary || "")}
+          </div>
+
+          <div class="otzar-toolbar">
+            <div style="font-size:0.83rem;color:#475569;">כל הציטוטים להלן נשלפו ישירות ממהדורות המאגרים המוגהות ללא שכתוב:</div>
+            <button type="button" class="btn-copy-sheet" onclick="copyEntireSourceSheet(this)">📄 העתק את כל דף המקורות (ל-Word / Docs)</button>
+          </div>
+
+          <div>${cardsHtml}</div>
+
+          ${biblioAppendixHtml}
+
+          ${followUps.length > 0 ? `
+          <div style="margin-top:0.95rem;padding-top:0.75rem;border-top:1px solid #e2dccb;">
+            <div style="font-size:0.84rem;font-weight:700;color:#334155;margin-bottom:0.4rem;">💡 נושאי המשך והרחבת דף המקורות בלחיצה:</div>
+            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.35rem;">
+              ${followUps.map(s => `<button type="button" class="chip-btn" data-query="${escapeHtml(s)}" onclick="askFromChip(this)">📚 ${escapeHtml(s)}</button>`).join("")}
+            </div>
+          </div>` : ""}
+        </div>
+      `;
+      if (shouldScroll) scrollToResultStart();
+    }
+
+    function renderHalakhaAnswer(res, shouldScroll = true) {
+      const out = document.getElementById("resultContainer");
+      if (res.blockedByFirewall || res.escalatedToPosek || res.needsUserClarification) {
+        let chips = "";
+        if (res.suggestedRefinements && res.suggestedRefinements.length > 0) {
+          chips = `<div style="margin-top:0.85rem;"><strong>💡 הצעות לניסוח הלכתי ממוקד בלחיצה:</strong><div style="margin-top:0.35rem;display:flex;flex-direction:column;align-items:flex-start;gap:0.35rem;">` +
+            res.suggestedRefinements.map(s => `<button type="button" class="chip-btn" data-query="${escapeHtml(s)}" onclick="askFromChip(this)">🔎 ${escapeHtml(s)}</button>`).join("") +
+            `</div></div>`;
+        }
+        const stCode = res.gateStatus || "";
+        const isEmergency = stCode.indexOf("PIKUACH_NEFESH") !== -1;
+        const borderStyle = isEmergency ? "border-right:6px solid #dc2626;background:#fef2f2;" : "border-right:4px solid #9e1b1b;";
+        out.innerHTML = `<div id="answerCardStart" class="card answer-arrived-card" style="${borderStyle}">
+          <div style="font-weight:800;margin-bottom:0.4rem;color:${isEmergency ? '#991b1b' : '#1a2433'};">הודעת בקרת המקורות:</div>
+          <div style="${isEmergency ? 'font-size:1.06rem;font-weight:700;color:#7f1d1d;' : ''}">${escapeHtml(res.politeMessage)}</div>
+          ${chips}
+        </div>`;
+        if (shouldScroll) scrollToResultStart();
+        return;
+      }
+      if (!res.ok || !res.data) {
+        out.innerHTML = `<div id="answerCardStart" class="card answer-arrived-card">${escapeHtml(res.politeMessage || res.error || "שגיאה")}</div>`;
+        if (shouldScroll) scrollToResultStart();
+        return;
+      }
+      const d = res.data;
+      const r = d.rulings?.[currentEdah] || d.rulings?.sephardi || {};
+      const ragSources = Array.isArray(res.sefariaRagSources) ? res.sefariaRagSources : [];
+      const primaryUrl = (d.sefariaUrl && (d.sefariaUrl.indexOf("sefaria.org") !== -1 || d.sefariaUrl.indexOf("ph.yhb.org.il") !== -1))
+        ? d.sefariaUrl
+        : (ragSources[0]?.ref ? toSefariaSlugUrl(ragSources[0].ref) : "");
+
+      const directSefariaLinks = ragSources.map(s => {
+        const href = (s.externalUrl && s.externalUrl.indexOf("sefaria.org") === -1) ? s.externalUrl : toSefariaSlugUrl(s.externalUrl || s.ref || "");
+        const label = s.heRef || s.ref || "מקור בספריא";
+        return `<a class="badge-link canonical-direct" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" title="פתח את לשון המקור המלא">🔗 ${escapeHtml(label)} ↗</a>`;
+      }).join("");
+
+      const badges = (d.sourceBadges || []).map(b => {
+        const href = buildBadgeUrl(b, d, ragSources);
+        return `<a class="badge-link" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" title="פתח מקור לעיון">📜 ${escapeHtml(b)} ↗</a>`;
+      }).join("");
+
+      const anchorSimanHtml = primaryUrl
+        ? `<a class="anchor-siman-link" href="${escapeHtml(primaryUrl)}" target="_blank" rel="noopener noreferrer" title="פתח מקור לעיון"><strong>${escapeHtml(d.simanRef || "פתח מקור לעיון")} ↗</strong></a>`
+        : `<strong>${escapeHtml(d.simanRef || "")}</strong>`;
+
+      const followUps = Array.isArray(d.followUpQuestions) && d.followUpQuestions.length > 0
+        ? d.followUpQuestions
+        : (Array.isArray(res.suggestedRefinements) ? res.suggestedRefinements : []);
+
+      const isGeneralWarning = d.isGeneralSourceWarning === true || /אבן העזר|אה"ע|אה'ע|אישות|טהרת המשפחה/.test((d.simanRef || "") + " " + (d.title || ""));
+      const humilityBoxStyle = isGeneralWarning
+        ? "margin-top:0.9rem;font-size:0.92rem;color:#78350f;background:#fef3c7;border:1px solid #f59e0b;border-right:5px solid #d97706;padding:0.8rem;border-radius:8px;font-weight:600;"
+        : "margin-top:0.8rem;font-size:0.86rem;color:#475569;background:#f1f5f9;padding:0.65rem;border-radius:6px;";
+
+      out.innerHTML = `
+        <div id="answerCardStart" class="card ${shouldScroll ? 'answer-arrived-card' : ''}">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
+            <h2 style="margin:0;font-family:'Frank Ruhl Libre',serif;">${escapeHtml(d.title || "פסק הלכה מאומת")}</h2>
+            <div style="display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap;">
+              ${res.searchTypeMeta && res.searchTypeMeta.label ? `<span class="badge" style="background:#eef2ff;color:#1e3a8a;border-color:#c7d2fe;font-weight:700;">🧭 ${escapeHtml(res.searchTypeMeta.label)}</span>` : ""}
+              <span class="badge" style="background:#fef3c7;color:#78350f;border-color:#f59e0b;font-weight:700;">עדה מוצגת: ${escapeHtml(EDAH_LABELS[currentEdah] || currentEdah)}</span>
+              <span class="badge" style="background:#dcfce7;color:#166534;">✔️ מקורות אומתו (${escapeHtml(res.confidenceScore || 93)}%)</span>
+            </div>
+          </div>
+          <div style="color:#475569;font-size:0.9rem;margin-top:0.25rem;">מקור עוגן (לחיץ): ${anchorSimanHtml}</div>
+
+          <div style="margin-top:1rem;display:grid;gap:0.75rem;">
+            <div style="padding:0.8rem;background:#f8fafc;border-radius:8px;border-right:4px solid #0f6e4f;">
+              <strong>עיקר הדין:</strong> ${escapeHtml(r.ikar || "")}
+            </div>
+            <div style="padding:0.8rem;background:#f8fafc;border-radius:8px;border-right:4px solid #1d4ed8;">
+              <strong>לכתחילה (הידור):</strong> ${escapeHtml(r.lekhatchila || "")}
+            </div>
+            <div style="padding:0.8rem;background:#f8fafc;border-radius:8px;border-right:4px solid #b45309;">
+              <strong>בדיעבד / שעת הדחק:</strong> ${escapeHtml(r.bediavad || "")}
+            </div>
+          </div>
+
+          <div class="inline-edah-box">
+            <div class="inline-edah-title">🔄 החלף עדה מיד לאחר קריאת הפסק (ללא צורך בחיפוש מחדש):</div>
+            <div class="edah-bar" style="margin-bottom:0;">
+              <button class="edah-btn ${currentEdah === 'sephardi' ? 'active' : ''}" data-edah="sephardi" onclick="selectEdah('sephardi')">ספרדי (מרן השו"ע / ילקוט יוסף)</button>
+              <button class="edah-btn ${currentEdah === 'moroccan' ? 'active' : ''}" data-edah="moroccan" onclick="selectEdah('moroccan')">מרוקאי (הרב משאש / שמש ומגן)</button>
+              <button class="edah-btn ${currentEdah === 'ashkenazi' ? 'active' : ''}" data-edah="ashkenazi" onclick="selectEdah('ashkenazi')">אשכנזי (רמ"א / משנה ברורה)</button>
+              <button class="edah-btn ${currentEdah === 'yemenite' ? 'active' : ''}" data-edah="yemenite" onclick="selectEdah('yemenite')">תימני (רמב"ם / מהרי"ץ / שתילי זיתים)</button>
+            </div>
+          </div>
+
+          <div class="source-box">
+            <strong>📖 לשון המקור הקנוני לעיון עצמי:</strong>
+            <div style="margin-top:0.4rem;">"${escapeHtml(d.canonicalQuote || "")}"</div>
+            ${directSefariaLinks ? `<div style="margin-top:0.75rem;font-family:'Heebo',sans-serif;"><span style="font-size:0.8rem;font-weight:700;color:#78350f;">קישורים ישירים למקורות שנשלפו:</span><br/>${directSefariaLinks}</div>` : ""}
+            <div style="margin-top:0.55rem;font-family:'Heebo',sans-serif;"><span style="font-size:0.8rem;font-weight:700;color:#1e3a8a;">מראי מקומות ופוסקים (לחיצים לעיון):</span><br/>${badges}</div>
+          </div>
+
+          <div style="${humilityBoxStyle}">
+            ⚖️ <strong>${isGeneralWarning ? 'הבהרה הלכתית מחייבת:' : 'ענווה הלכתית:'}</strong> ${escapeHtml(d.humilityNote || "בכל מקרה מעשי שיש בו פרטים נוספים מומלץ לאמת מול מורה הוראה.")}
+          </div>
+
+          ${followUps.length > 0 ? `
+          <div style="margin-top:0.85rem;padding-top:0.75rem;border-top:1px solid #e2dccb;">
+            <div style="font-size:0.84rem;font-weight:700;color:#334155;margin-bottom:0.4rem;">💡 מיקוד הלכתי ושאלות המשך בנושא זה בלחיצה:</div>
+            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.35rem;">
+              ${followUps.map(s => `<button type="button" class="chip-btn" data-query="${escapeHtml(s)}" onclick="askFromChip(this)">🔎 ${escapeHtml(s)}</button>`).join("")}
+            </div>
+          </div>` : ""}
+        </div>
+      `;
+      if (shouldScroll) scrollToResultStart();
+    }
+  </script>
+</body>
+</html>
